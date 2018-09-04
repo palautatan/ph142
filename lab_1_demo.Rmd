@@ -1,0 +1,143 @@
+---
+title: "Lab 1 Demo"
+output: html_notebook
+---
+
+# Opening Remarks
+When you're learning how to code... Don't take notes. I know some people who handwrite their code, but that's because they already know how to code. Try your best to listen. To learn how to code, you ought to watch coding being done and practice coding for yourself.
+
+# Elements of RMarkdown File
+This is regular text.
+
+Here's a code block.
+```{r}
+# CODE BLOCK
+```
+
+```{r}
+"This is a string, but do not try and write your code in quotes like this!"
+```
+
+# Assignment Operators
+```{r}
+hi = 4
+hi <- 4 # MORE "R-LIKE"
+hi<-4
+hi=4
+```
+
+
+# Logical Values
+```{r}
+a <- 1
+b <- 2
+
+# TRUE OR FALSE?
+a < b
+a > b
+a <= b
+a >= b
+a == b
+```
+
+# Libraries
+```{r}
+library(dplyr)
+library(ggplot2)
+```
+
+# How to Run Your Chunks
+You can run using the green arrow, the run dropdown above, or control/command+enter.
+```{r}
+CS_data <- read.csv("Data/Cesarean.csv")
+```
+
+# Your Environment
+You need to check whether an object is in your environment or not before you call upon it. It should be instinctual for you to load in your data (i.e. tell your computer what you want to act upon) before you start telling R to use it.
+
+# Dataframes
+A dataframe in R is how you would expect a "table" to be. (Be careful, don't call them tables!)
+
+```{r}
+class(CS_data)
+View(CS_data)
+```
+
+To easily manage dataframes in R, we can use a library called `dplyr`. A library in R is what you would expect of an app on your phone. Your phone has a the capability of being extremely useful in many cases. A phone app unlocks its ability to manage your weight loss or track your menstrual period, making your life easier. Likewise, a library in R was written by a developer for the community to use and make computing in R easier.
+
+```{r}
+# EXAMPLE FROM LAB
+CS_data %>% mutate(CS_rate_100 = CS_rate * 100)
+CS_data <- CS_data %>% mutate(CS_rate_100 = CS_rate * 100)
+
+# ANOTHER HELPFUL(?) EXAMPLE
+CS_data_new <- CS_data %>% mutate(CS_logical_check = CS_rate < median(CS_rate))
+CS_data <- CS_data %>% mutate(CS_logical_check = CS_rate < median(CS_rate))
+
+# ANOTHA ONE
+CS_data <- CS_data %>% rename(CS_rate_below_median = CS_logical_check)
+```
+
+# Data Visualization
+We can totally plot stuff in base R. Check this out.
+
+```{r}
+# BASE R PLOT
+plot(CS_data$Births_Per_1000, CS_data$CS_rate)
+
+# TRYING TO MAKE IT PRETTY
+plot(CS_data$Births_Per_1000, CS_data$CS_rate, xlab="Births Per 1000", ylab="Cesarian Section Rate", main="Cesarian Rates vs. Births Per 1000", pch=19, col="blue")
+```
+
+You can sure visualize data like this. Up to you. We're opting for `ggplot2` in this class though. We're going to start with ...
+
+# Help
+```{r}
+?ggplot
+```
+
+# Remaking the Scatterplot
+We're going to make the same scatterplot above... Recall that you're plotting two different numeric variables.
+```{r}
+this_plot = ggplot(data=CS_data, aes(x=Births_Per_1000, y=CS_rate))
+this_plot
+```
+
+All you need ...
+```{r}
+this_plot + geom_point()
+```
+
+But let's add some fun...
+```{r}
+this_plot = ggplot(CS_data, aes(x=Births_Per_1000, y=CS_rate)) +
+  geom_point(col=alpha("pink2", 0.6)) +
+  ggtitle("Here's my title") +
+  xlab("X-Lab") +
+  ylab("Y-lab")
+this_plot
+```
+
+# How About A Barplot?
+Let's start basic.
+
+```{r}
+ggplot(CS_data, aes(x=Income_Group)) + geom_bar()
+```
+
+But what do you think is the reason we visualize data?
+
+```{r}
+ggplot(CS_data, aes(x=Income_Group)) + geom_bar(aes(fill=Region)) + xlab("Income Group") + ggtitle("Income Groups per Country") + theme(axis.text.x = element_text(angle = 20, hjust = 1))
+```
+
+
+
+```{r}
+ggplot(CS_data, aes(x=Region)) + geom_bar(aes(fill=Income_Group)) + xlab("Income Group") + ggtitle("Income Groups per Country") + theme(axis.text.x = element_text(angle = 20, hjust = 1))
+```
+
+You don't want to confuse your audience. You want to educate. You want to tell the best story you can. Use color. Label your axes. Think wisely about how to organize your data. It all makes a difference.
+
+# Recap
+You are learning `dplyr` and `ggplot2`! One is for manipulating data. The other is for data viz.
