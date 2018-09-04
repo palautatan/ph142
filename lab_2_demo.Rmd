@@ -1,0 +1,152 @@
+---
+title: "Lab 2 Demo"
+output: html_document
+---
+
+# Resources
+I urge you to create a cheatsheet of all the functions you have seen and are responsible for in lecture. Dr. Riddell is very thorough in telling you which ones you need. Those are the only notes you need to really take when it comes to coding.
+
+This is all you need for `dplyr`.
+https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf
+
+This is all you need for `ggplot2`.
+https://www.rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf
+
+
+# Data
+We are going to use some data that is always available in `R`. Notice that it's not in our environment. Let's take a look at the data.
+
+```{r}
+#View(iris)
+head(iris)
+```
+
+What class is iris? Let's use `class()`, an `R` function, to figure it out!
+```{r}
+class(iris)
+```
+
+How can we explore our data? We learned functions in lecture and from our previous assignment.
+```{r}
+# * WHAT ELSE CAN WE USE ON IRIS TO LEARN ABOUT IT?
+dim(iris)
+summary(iris)
+head(iris)
+names(iris)
+```
+
+Right now, say I only want some of this dataframe. How do I use `dplyr` functions to cut down the information?
+```{r}
+# * WHAT IF I ONLY WANT INFORMATION ABOUT THE SETOSA SPECIES?
+# * HOW DO I NARROW DOWN MY DATAFRAME?
+library(dplyr)
+iris %>% filter(Species=="setosa")
+iris_subset <- iris %>% filter(Species=="setosa")
+```
+
+
+# Scatterplots
+In Lab 1, we made a bunch of barplots. Now, you're making scatterplots. We did this in my Lab 1 Demo, but for review (see the Lab 1 Demo on YouTube or on my Git if you didn't see this already), we only need a few things.
+
+```{r}
+# * WHAT IS THE LIBRARY WE NEED?
+library(ggplot2)
+
+# * HOW DO WE START UP OUR "CANVAS"?
+ggplot(iris_subset, aes(x=Sepal.Length, y=Sepal.Width))
+
+# * WHAT FUNCTION DO WE USE TO ADD IN THE POINTS?
+ggplot(iris_subset, aes(x=Sepal.Length, y=Sepal.Width)) + geom_point()
+```
+
+
+# Regression
+How would you define regression? I'm not going to focus on regression because there are only two functions that she goes over that you need in this portion. This should be an incentive to look over your lecture slides.
+
+In our scatterplot, where do you suspect our line of best fit to appear?
+
+What is the formula for a straight line?
+
+What do you run a regression on: "Y on X" or "X on Y"?
+
+
+# Simulation
+We can run "simulations" in R. The simulations we're doing is telling R that we have a distribution and that we want it to randomly choose values within that distribution for us. This is sampling from a known distribution.
+
+```{r}
+# * RUNIF
+# * HOW DO WE FIGURE OUT WHAT PARAMETERS A FUNCTION WANTS FROM US?
+?runif
+
+# * LET'S GO AND WRITE IT OUT THEN
+our_sample <- runif(n = 100, min = 0, max = 10)
+
+# * HOW DO WE PRINT WHAT IS IN THE SAMPLE?
+our_sample
+```
+
+We can also visualize this...
+```{r}
+# * MAKE SURE OUR LIBRARY IS LOADED
+# * YOU ONLY REALLY NEED TO DO THIS ONCE
+library(ggplot2)
+
+# * MAKE A DATAFRAME
+# * YOU DON'T NEED THIS RN, BUT GGPLOT DOES
+our_sim_data <- data.frame(cbind(rep(0,100), our_sample))
+names(our_sim_data)
+
+# * A BASIC PLOT OF OUR SAMPLE
+ggplot(our_sim_data, aes(x=our_sample, y=V1)) + geom_point()
+
+# * SEE THE DISTRIBUTION A BIT BETTER
+ggplot(our_sim_data, aes(x=our_sample, y=V1)) +
+  geom_point(col=alpha("darkred", 0.3)) +
+  xlab("Sampled Values") +
+  ylab("") +
+  ggtitle("Our Uniform Sample on [0,10]")
+
+```
+
+In your lab assignment, you're going to be simulating "real" data. therefore, you'll have to simulate some error. Start off with:
+
+```{r}
+?rnorm
+```
+
+# Vector Addition
+Important for your assignemnt: when you simulate vectors of the same size, you can add them! Vectors are what you would expect them to be from your high school math courses. Let's make a vector.
+
+```{r}
+# * LET'S START UP OUR VECTORS
+vector_1 <- c(1,1,1)
+vector_2 <- c(2,2,0)
+```
+
+What do we expect our third vector to be if we add these two vectors together?
+
+```{r}
+vector_1 + vector_2
+vector_3 <- vector_1 + vector_2
+```
+
+These were small vectors. Don't be intimidated when your vectors are huge! The principle remains the same. Let's go back to `iris`!
+
+```{r}
+# * REMEMBER WHAT WE HAVE
+names(iris_subset)
+
+# * CHECK THAT THEY ARE THE SAME LENGTH
+length(iris_subset$Sepal.Length)
+length(iris_subset$Sepal.Width)
+
+# * ADD THEM UP
+iris_subset$Sepal.Length + iris_subset$Sepal.Width
+
+# * SAVE TO A NEW VARIABLE FOR LATER USE
+sepal_sum = iris_subset$Sepal.Length + iris_subset$Sepal.Width
+
+# * IN DPLYR
+iris_subset %>% mutate(sepal_sum = Sepal.Length + Sepal.Width)
+iris_subset <- iris_subset %>% mutate(sepal_sum = Sepal.Length + Sepal.Width)
+```

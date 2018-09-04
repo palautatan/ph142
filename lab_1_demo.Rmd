@@ -1,6 +1,6 @@
 ---
 title: "Lab 1 Demo"
-output: html_notebook
+output: html_document
 ---
 
 # Opening Remarks
@@ -60,7 +60,7 @@ A dataframe in R is how you would expect a "table" to be. (Be careful, don't cal
 
 ```{r}
 class(CS_data)
-View(CS_data)
+#View(CS_data)
 ```
 
 To easily manage dataframes in R, we can use a library called `dplyr`. A library in R is what you would expect of an app on your phone. Your phone has a the capability of being extremely useful in many cases. A phone app unlocks its ability to manage your weight loss or track your menstrual period, making your life easier. Likewise, a library in R was written by a developer for the community to use and make computing in R easier.
