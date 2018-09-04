@@ -150,3 +150,8 @@ sepal_sum = iris_subset$Sepal.Length + iris_subset$Sepal.Width
 iris_subset %>% mutate(sepal_sum = Sepal.Length + Sepal.Width)
 iris_subset <- iris_subset %>% mutate(sepal_sum = Sepal.Length + Sepal.Width)
 ```
+
+# Recap
+You should know now how to make scatterplots (even though we did this last week), use runif and rnorm to simulate random numbers, and add up vectors.
+
+We also know what linear regression is. It's now up to you to put these tools together and to do linear regressions in R.
