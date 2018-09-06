@@ -4,7 +4,7 @@ output: html_document
 ---
 
 # Resources
-I urge you to create a cheatsheet of all the functions you have seen and are responsible for in lecture. Dr. Riddell is very thorough in telling you which ones you need. Those are the only notes you need to really take when it comes to coding.
+I urge you to create a cheat sheet of all the functions you have seen and are responsible for in lecture. Dr. Riddell is very thorough in telling you which ones you need. Those are the only notes you need to really take when it comes to coding.
 
 This is all you need for `dplyr`.
 https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf
@@ -17,7 +17,7 @@ https://www.rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf
 We are going to use some data that is always available in `R`. Notice that it's not in our environment. Let's take a look at the data.
 
 ```{r}
-#View(iris)
+View(iris)
 head(iris)
 ```
 
@@ -36,6 +36,9 @@ names(iris)
 ```
 
 Right now, say I only want some of this dataframe. How do I use `dplyr` functions to cut down the information?
+
+Notice: We are using `%>%` here because we are using `dplyr`.
+
 ```{r}
 # * WHAT IF I ONLY WANT INFORMATION ABOUT THE SETOSA SPECIES?
 # * HOW DO I NARROW DOWN MY DATAFRAME?
@@ -48,12 +51,14 @@ iris_subset <- iris %>% filter(Species=="setosa")
 # Scatterplots
 In Lab 1, we made a bunch of barplots. Now, you're making scatterplots. We did this in my Lab 1 Demo, but for review (see the Lab 1 Demo on YouTube or on my Git if you didn't see this already), we only need a few things.
 
+Notice: We are using `=` within functions to denote the values of our arguments. Why do we only sometimes put `x=`, `y=`, or `data=`? Because `R` assumes you're entering values of the arguments in the same order as you would see under the help `?` pane.
+
 ```{r}
 # * WHAT IS THE LIBRARY WE NEED?
 library(ggplot2)
 
 # * HOW DO WE START UP OUR "CANVAS"?
-ggplot(iris_subset, aes(x=Sepal.Length, y=Sepal.Width))
+ggplot(data=iris_subset, mapping=aes(x=Sepal.Length, y=Sepal.Width))
 
 # * WHAT FUNCTION DO WE USE TO ADD IN THE POINTS?
 ggplot(iris_subset, aes(x=Sepal.Length, y=Sepal.Width)) + geom_point()
@@ -61,13 +66,19 @@ ggplot(iris_subset, aes(x=Sepal.Length, y=Sepal.Width)) + geom_point()
 
 
 # Regression
-How would you define regression? I'm not going to focus on regression because there are only two functions that she goes over that you need in this portion. This should be an incentive to look over your lecture slides.
+I'm not going to write any code on regression because there are only two functions that your professor goes over that you need in this portion. This should be an incentive to look over your lecture slides.
+
+How would you define regression (layman's terms)?
 
 In our scatterplot, where do you suspect our line of best fit to appear?
 
-What is the formula for a straight line?
+What is the formula for a straight line? Do we always have to have a straight line?
 
-What do you run a regression on: "Y on X" or "X on Y"?
+Correlation does not imply ___________________.
+Example: Ice cream sales and sunblock sales
+
+How do you interpret a regression line?
+For every +1 increase in X, we expect _____ in Y.
 
 
 # Simulation
@@ -83,6 +94,7 @@ our_sample <- runif(n = 100, min = 0, max = 10)
 
 # * HOW DO WE PRINT WHAT IS IN THE SAMPLE?
 our_sample
+print(our_sample)
 ```
 
 We can also visualize this...
@@ -144,7 +156,7 @@ length(iris_subset$Sepal.Width)
 iris_subset$Sepal.Length + iris_subset$Sepal.Width
 
 # * SAVE TO A NEW VARIABLE FOR LATER USE
-sepal_sum = iris_subset$Sepal.Length + iris_subset$Sepal.Width
+sepal_sum <- iris_subset$Sepal.Length + iris_subset$Sepal.Width
 
 # * IN DPLYR
 iris_subset %>% mutate(sepal_sum = Sepal.Length + Sepal.Width)
