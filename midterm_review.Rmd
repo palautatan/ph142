@@ -1,0 +1,329 @@
+---
+title: "Rappers with R"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=TRUE)
+```
+
+# Goals
+We're going to go over three important tools in R by exploring a dataset of rappers. I made this dataset based on rappers I enjoy, therefore as we go through this whole exploration together, be wary that I am a Bay Area hip hop fan and we have a dataset full of more internationally-famed rappers and more "local" artists.
+
+1. Dataset Manipulation with `library(dplyr)`
+2. Plots with `library(ggplot2)`
+3. Making a Linear Model
+
+In this exploration, we're going to start with dataset manipulation, although when you start exploring datasets yourself, you may want to even begin with plots, then manipulating dataframes as necessary. There's no one right way to explore, but the point is... you should explore!
+
+
+# Part 1: Dataset Manipulation
+Let's load in our library.
+```{r, message=FALSE}
+library(dplyr)
+```
+
+### The Rappers Dataset
+We will be using a dataset with information about rappers. Here's a preview of our dataset.
+
+```{r, echo=FALSE, include=FALSE}
+# *                          #
+#      COLUMN BY COLUMN      #
+#                          * #
+
+names = c("Nicki Minaj",
+          "Jay Z",
+          "Eminem",
+          "Kendrick Lamar",
+          "Logic",
+          "E-40",
+          "Nas",
+          "Jadakiss",
+          "Chance the Rapper",
+          "Childish Gambino",
+          "Kanye West",
+          "Cardi B"
+          )
+
+real_names = c("Onika Maraj",
+               "Shawn Carter",
+               "Marshall Mathers",
+               "Kendrick Duckworth",
+               "Robert Hall",
+               "Earl Stevens",
+               "Nasir Jones",
+               "Jason Phillips",
+               "Chancelor Bennett",
+               "Donald Glover",
+               "Kanye West",
+               "Belcalis Almanzar"
+               )
+
+age = c(35, 48, 45, 31, 28, 50, 45, 43, 25, 34, 41, 25)
+
+state = c("New York",
+          "New York",
+          "Missouri",
+          "California",
+          "Maryland",
+          "California",
+          "New York",
+          "New York",
+          "Illinois",
+          "California",
+          "Georgia",
+          "New York"
+          )
+
+worth = c(75, 900, 190, 45, 10, 10, 50, 6, 33, 12, 160, 8)
+
+start = c(2004, 1986, 1988, 2003, 2009, 1986, 1991, 1991, 2011, 2002, 1996, 2015)
+
+rapper_df = data.frame(artist_name=names, legal_name=real_names, age=age, origin=state, net_worth=worth, start_year=start)
+
+
+
+# *                     #
+#      ROW BY ROW       #
+#                     * #
+
+adds = rbind(
+      c("G-Eazy", "Gerald Gillum", 29, "California", 9, 2008),
+      c("2Pac", "Tupac Shakur", 49, "California", 40, 1987),
+      c("YG", "Keenon Jackson", 28, "California", 3, 2009),
+      c("ScHoolboy Q", "Quincy Hanley", 31, "California", 4, 2008),
+      c("Lupe Fiasco", "Wasalu Jaco", 36, "Chicago", 14, 2000),
+      c("Drake", "Aubrey Graham", 31, "International", 100, 2001),
+      c("Joey BadA$$", "Jo-Vaughn Scott", 23, "New York", 4, 2010),
+      c("Snoop Dogg", "Calvin Broadus", 46, "California", 135, 1991),
+      c("Iamsu!", "Sudan Williams", 28, "California", 1, 2007),
+      c("J. Cole", "Jermaine Cole", 33, "New York", 15, 2007),
+      c("Gucci Mane", "Radric Davis", 38, "Georgia", 12, 2001),
+      c("Rich Brian", "Brian Imanuel", 19, "International", 0.3, 2015),
+      c("Too $hort", "Todd Shaw", 52, "California", 15, 1984),
+      c("Mac Dre", "Andre Hicks", 48, "California", 1.5, 1984),
+      c("Missy Elliott", "Melissa Elliott", 47, "Virginia", 50, 1989),
+      c("Notorious B.I.G.", "Christopher Wallace", 46, "New York", 160, 1992)
+      )
+
+adds_df = data.frame(adds)
+names(adds_df) = names(rapper_df)
+rapper_df = rbind(rapper_df, adds_df)
+
+rapper_df$age = as.numeric(rapper_df$age)
+rapper_df$net_worth = as.numeric(rapper_df$net_worth)
+rapper_df$start_year = as.numeric(rapper_df$start_year)
+```
+
+```{r, echo=FALSE}
+head(rapper_df)
+```
+
+The entire dataset has size `28x6` and include information on the following rappers.
+
+```{r, echo=FALSE}
+rapper_df %>% pull(artist_name)
+```
+
+In the following cell blocks, we're going to apply several different `dplyr` functions on the dataset and see what we can find out.
+
+### arrange()
+Use `arrange()` to sort based on a column (or columns) in your dataframe.
+
+```{r, eval=FALSE}
+rapper_df %>% arrange(artist_name)
+rapper_df %>% arrange(start_year)
+rapper_df %>% arrange(age)
+
+# * WITHIN THE AGE BRACKETS
+rapper_df %>% arrange(age, net_worth)
+```
+
+### summarize()
+Use `summarize()` to "use a function" on a column in your dataframe. This function will return a new dataframe (aka not `rapper_df`) with the results from your calculations.
+
+```{r, eval=FALSE}
+rapper_df %>% summarize(mean_age=mean(age),
+              mean_net=mean(net_worth))
+```
+
+### group_by()
+Use `group_by()` as an intermediate function to tell your next function you want it to calculate a statistics based on rows that share a common column value.
+
+```{r, eval=FALSE}
+rapper_df %>% group_by(origin) %>%
+  summarize(mean_age=mean(age),
+            mean_net=mean(net_worth))
+```
+
+### select()
+Use `select` to ask for the columns you want. This will return to you the same amount of rows as the original dataframe and (as long as you don't ask for all the columns) less columns.
+
+```{r, eval=FALSE}
+rapper_df %>% select(artist_name, origin, net_worth)
+```
+
+### mutate()
+Use `mutate` to add a new column in your dataset based on previously existing columns. Notice that we're updating our original dataframe by assigning the dataframe we generated through all the code to the right of the `<-` to `rapper_df`. This will make `rapper_df` have two more columns than it used to.
+
+```{r, eval=FALSE}
+rapper_df <- rapper_df %>% mutate(years_active=2018-start_year,
+                     worth_per_year=net_worth/years_active)
+rapper_df
+```
+
+### rename()
+Use `rename` when you want to change one of your column names. Sometimes, you may want to do this just because you prefer a name over the existing one.
+
+```{r, eval=FALSE}
+rapper_df %>% rename(just_a_number=age,
+                     cash=net_worth)
+```
+
+### filter()
+Use `filter()` to create useful subsets or to simply explore your data. This function will check that for each row that some column value matches your specified criteria. It will return only the rows that have that specified criteria, therefore the amount of columns in your generated dataframe will have the same amount of columns and potentially less rows.
+
+In our case, our dataframe is pretty small, but imagine that if we had 500 entries on different rappers, we wouldn't be able to spot certain criteria just by eye.
+
+```{r, eval=FALSE}
+rapper_df %>% filter(age>35)
+
+rapper_df %>% filter(origin=="New York")
+
+rapper_df %>% filter(age<median(age),
+                     net_worth>median(net_worth))
+
+rapper_df %>% filter(age>35 | !(origin=="New York"))
+rapper_df %>% filter(age>35 & !(origin=="New York"))
+
+rapper_df %>% filter(age>35 & age<35)
+```
+
+# Part 2: Data Visualization
+In our next block, we're going to talk about making plots of our data with `ggplot2`. Let's load in the library.
+
+```{r}
+library(ggplot2)
+```
+
+### Scatterplots
+Scatterplots are how we visualize a potential relationship between two numeric variables. We use `geom_point()` to throw the points onto our `ggplot()` canvas.
+
+```{r}
+ggplot(rapper_df, aes(x=age, y=net_worth))
+
+# * BASIC
+ggplot(rapper_df, aes(x=age, y=net_worth)) + geom_point()
+
+# * SPECIAL
+ggplot(rapper_df[-2,], aes(x=age, y=net_worth)) +
+  geom_point(col="#00BFC4") +
+  xlab("Age") +
+  ylab("Net Worth") +
+  ggtitle("Rappers' Net Worth versus Age")
+```
+
+```{r}
+subset <- rapper_df %>% filter(origin %in% c("California", "New York"))
+ggplot(subset, aes(x=age, y=net_worth)) +
+  geom_point(aes(col=origin)) +
+  facet_wrap(~origin) +
+  xlab("Age") +
+  ylab("Net Worth")
+```
+
+
+### Barplots
+Barplots are used to visualize categorical variables. Let's see what we can find when we plot about these artists' origins.
+
+```{r}
+# * BASIC
+ggplot(rapper_df, aes(x=origin)) + geom_bar()
+
+# * SPECIAL
+ggplot(rapper_df, aes(x=origin)) +
+  geom_bar(aes(fill=origin)) +
+  theme(axis.text.x=element_text(angle=45, hjust=1))
+```
+
+Instead of counting up how many rappers are from which origin, we can also provide a different amount of counts for `ggplot2` to visualize. Here, I'm telling `ggplot` that I want the mean ages of each of the origins to be plotted in a bar graph. The difference here is that we provide `y` in `aes()` and `stat="identity"` in `geom_bar()`.
+
+```{r}
+subset_2 <- rapper_df %>% group_by(origin) %>%
+  summarize(mean_age=mean(age))
+
+ggplot(subset_2, aes(x=origin, y=mean_age)) +
+  geom_bar(stat="identity", aes(fill=origin)) +
+  ylab("mean age") +
+  theme(axis.text.x=element_text(angle=45, hjust=1))
+```
+
+
+# Part 3: Linear Models
+Modeling and prediction are important to statistics. Linear models are one of the simplest if not the simplest. Our dataset has some numeric variables, and I already suspect age and amount of years active has a positive relationship.
+
+But to be sure, let's check if a linear relationship might explain our data.
+
+```{r, echo=FALSE}
+rapper_df <- rapper_df %>% mutate(years_active=2018-start_year,
+                     worth_per_year=net_worth/years_active)
+
+ggplot(rapper_df, aes(y=years_active, x=age)) +
+  geom_point(aes(col=origin)) +
+  ggtitle("Rapper's Age and Years Active") +
+  ylab("Years Active") +
+  xlab("Age")
+```
+
+From the looks of it, a linear model is appropriate for these data. We can make one by using the base R `lm()` function.
+
+```{r}
+linear_model <- lm(years_active ~ age, data=rapper_df)
+
+library(broom)
+tidy(linear_model)
+```
+
+It's standard to plot our linear model onto our data! We use `geom_abline()` to do this. Notice that I'm plotting the `geom_abline()` before `geom_point()` because I want the data points to be plotted on top of the line instead of below the line. Switch the order of these functions to see what happens.
+
+```{r}
+slope <- 1.023801
+intercept <- -18.914662
+```
+
+```{r}
+ggplot(rapper_df, aes(y=years_active, x=age)) +
+  geom_abline(slope=slope, intercept=intercept, col="darkgrey") +
+  geom_point(aes(col=origin)) +
+  ggtitle("Rapper's Age and Years Active") +
+  ylab("Years Active") +
+  xlab("Age")
+```
+
+We can calculate the $R^2$ value, the coefficient of determination.
+
+```{r}
+rapper_df %>% summarize(r=cor(age, years_active),
+                        r_2=r^2)
+```
+
+Our $R^2$ tells us how much of the data's average distance from the mean is predictable by our variables. (How much of our data's position on the plot is explainable by the relationship we're looking at?) When $R^2$ is closer to 1, which in this case it is, we can more confidently use the line to predict for age values that range from the minimum value of our age and maximum value of our ages. (But never forget: correlation does not imply causation!)
+
+```{r}
+rapper_df %>% summarize(min_age=min(age),
+                        max_age=max(age))
+```
+
+From a little Google search, I found out that Lil Wayne is 35 years old which is well within this range of ages. I also found out that Travis Scott is 26.
+```{r}
+
+years_active_predicted <- slope*c(35, 26) + intercept
+years_active_predicted
+```
+
+On Wikipedia, it says that Lil Wayne has been active since 1991, i.e. for 27 years. Similarly, it says that Travis Scott has been active since 2008 which is 10 active years. Our estimates are not so great based on our line. There are plenty of reasons why this can happen, but one reason I can think of is very common.
+
+We don't have enough data!
+
+# Summary
+We looked at a dataset that I made on rappers that I like. We used `dplyr` to see different subsets of our data and to calculate summary statistics. We then used `ggplot2` to see if we could spot any patterns in our data by eye. Because we saw a positive linear association, we thought to make a linear model and used it to predict a famous rapper's amount of years active.
