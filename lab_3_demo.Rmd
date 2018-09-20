@@ -1,0 +1,280 @@
+---
+title: "Lab 3 Demo"
+output: html_notebook
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r dataframe-creation, include=FALSE}
+# * IGNORE THIS BLOCK!
+
+# * CREATE MATRIX BY MANIACAL COPY AND PASTE
+edm_df = rbind(
+  
+  c("Alesso", "Alessandro Lindblad", "7 July 1991", "Swedish",
+    "Progressive house,electro house[1],pop[2]", "piano,keyboards,mixset,synthesizers", "2010–present",
+    30),
+  
+  c("Zedd", "Anton Zaslavski", "2 September 1989", "Russian-German",
+    "EDM[3][4], house[5], electro house[6], dubstep, complextro, progressive house, brostep",
+    "Keyboards, synthesizers, piano, guitar, drums, percussion, digital audio workstation", "2002–present",
+    35),
+  
+  c("Martin Garrix", "Martijn Gerard Garritsen", "14 May 1996", "Dutch",
+    "Progressive house[3],big room house[4],Dutch houseelectro house[5],future bass[6]",
+    "Digital audio workstation,guitar", "2012–present",
+    22),
+  
+  c("Illenium", "Nicholas D. Miller", "December 26, 1990", "American",
+    "Future Bass,Trap,Dubstep", "Digital audio workstation,guitar,Ableton Live", "2014–present",
+    0.45),
+  
+  c("Avicii", "Tim Bergling", "8 September 1989", "Swedish",
+    "Guitar, piano, keyboards, synthesizers",
+    "EDM, progressive house, electro house", "2006–2018",
+    85),
+  
+  c("Seven Lions", "Jeff Montalvo", "March 31, 1987", "American",
+    "Drums, D.A.W. (FL Studio), turntables, synthesizer, Guitar",
+    "Melodic dubstep, electro house, progressive house, trance", "2010–present",
+    5),
+  
+  c("Tiesto", "Tijs Michiel Verwest", "17 January 1969", "Dutch",
+    NA, "Progressive house,future house,electro house,big room house[1],trance,deep house[2]", "1994–present",
+    150),
+  
+  c("Skrillex", "Sonny John Moore", "January 15, 1988", "American",
+    "Vocals, guitar, bass, CDJs, drum machine, synthesizer, sampler, sequencer, Ableton live",
+    "EDM[1], dubstep, electro house, trap, moombahton, post-hardcore", "2004–present",
+    45),
+  
+  c("David Guetta", "Pierre David Guetta", "7 November 1967", "French",
+    "Piano,digital audio workstation",
+    "EDM,house,progressive house,electro house,dance-pop", "1984–present",
+    75),
+  
+  c("Axwell", "Axel Christofer Hedfors", "18 December 1977", "Swedish",
+    "Music sequencer,synthesizers,drum machine",
+    "Progressive house,electro house,funky house", "1995–present",
+    30),
+  
+  c("Calvin Harris", "Adam Richard Wiles", "17 January 1984", "Scottish",
+    "Vocals,piano,keyboards,synthesiser,guitar,bass guitar,sampler",
+    "EDM[1],electro house[2],electropop[3],Eurodance[4],dance-pop[5],nu-disco[2]", "2002–present",
+    220),
+  
+  c("Hardwell", "Robbert van de Corput", "7 January 1988", "Dutch",
+    "Digital audio workstation,Keyboards,mixer,piano",
+    "Progressive house,big room house,electro house,Dutch house,hardstyle,future bass,trap,tech house",
+    "2005–present",
+    23),
+  
+  c("Afrojack", "Nick van de Wall", "9 September 1987", "Dutch",
+    NA, "Dutch house, Minimal house, Electro house, trap, Future bass, Moombahton",
+    "2003–present",
+    60),
+  
+  c("Marshmello", "Christopher Comstock", "May 19, 1992", "American",
+    "Digital audio workstation,synthesizer,guitar",
+    "Future bass,electronic,progressive house,trap", "2013–present",
+    21),
+  
+  c("Slushii", "Julian Scanlan", "May 1, 1997", "American",
+    "Digital audio workstation,guitar,piano,drums,vocals",
+    "Dubstep,future bass,electro house,progressive housetrap[2]", "2016–present",
+    0.5),
+  
+  c("Armin Van Buuren", "Armin Van Buuren", "25 December 1976", "Dutch",
+    "Synthesizer,drum machine",
+    "Uplifting trance,progressive trance,house[2],progressive house[3][4],electro house[5][6],psytrance[7]",
+    "1996–present",
+    50),
+  
+  c("KSHMR", "Niles Hollowell-Dhar", "6 October 1988", "American",
+    "Synthesizer,digital audio workstation",
+    "Electro house[1],big room house[2],psytrance[3]", "2006–present",
+    2)
+
+)
+
+
+# * RENAME COLUMNS / CONVERT TO DF / ADJUST DATA TYPE
+these_columns    = c("artist", "legal", "birth", "ethnicity", "instruments",
+                     "genres", "active", "net_worth")
+colnames(edm_df) = these_columns
+
+edm_df = data.frame(edm_df)
+edm_df$net_worth = as.numeric(as.character(edm_df$net_worth))
+
+
+# * PARSE THE BIRTHDAYS
+birthdays = do.call(rbind, strsplit(gsub(",", "", as.character(edm_df$birth)), " "))
+ix = which(!(birthdays[,1] %in% as.character(1:31)))
+birthdays[ix,1:2] = birthdays[ix,c(2,1)]
+
+edm_df = edm_df[,-3]
+edm_df = cbind(birthdays, edm_df)
+colnames(edm_df)[1:3] = c("day", "month", "year")
+
+rm(birthdays)
+
+
+# * CLEAN INSTRUMENTS
+instruments = lapply(strsplit(as.character(edm_df$instruments),","),
+                     function(x) gsub("\\[[0-9]\\]", "", x))
+edm_df$instruments = instruments
+rm(instruments)
+
+
+# * CLEAN GENRES
+genres = lapply(strsplit(as.character(edm_df$genres),","),
+                     function(x) gsub("\\[[0-9]\\]", "", x))
+edm_df$genres = genres
+rm(genres)
+
+
+# * CLEAN ACTIVE
+active = do.call(rbind, strsplit(as.character(edm_df$active), "–", fixed=TRUE))
+start_year = active[,1]
+edm_df = edm_df[,-9]
+edm_df = cbind(edm_df, as.numeric(start_year))
+colnames(edm_df)[ncol(edm_df)] = "start"
+
+status = ifelse(active[,2]=="present", TRUE, FALSE)
+edm_df = cbind(edm_df, status)
+colnames(edm_df)[ncol(edm_df)] = "active"
+rm(active)
+```
+
+## Note: Packages in R
+We have been using `dplyr` and `ggplot2`. We've been loading them in by using `library(dplyr)` and `library(ggplot2)`. For other packages that we're going to be using for the first time, we have to use the function `install.packages()`. For our lab this week, you're asked to download the libraries `tidyverse` and `RCurl`.
+
+Think of `R` libraries like apps on your phone. You download your app once, and you can access it when you open it. For our case, install the packages using the following lines once, then call upon it using `library()`
+
+**Run these only once within the console** (*not your markdown!*):
+```{r, eval=FALSE}
+# * RUN THESE ONCE
+install.packages("tidyverse")
+install.packages("RCurl")
+```
+
+And run these always within your markdown:
+```{r, eval=FALSE}
+# * RUN THESE ALWAYS
+library(tidyverse)
+library(RCurl)
+```
+
+Notice the usage of quotes. When you install a package, use quotes! When you load in a package, do not. And lastly, make sure they're really " " " quotes. Some text editors will give you a fancier looking version of quotes, and `R` does not work with stylized text. Work with plain text editors only.
+
+
+## A little EDM in R
+Electronic Dance Music has become super popular in today's music! Imagine that you wanted to explore some information about some of the most popular EDM DJ's through data. Here's your process:
+
+1. You (a) go onto Google to search up "Top EDM DJ's", (b) look at Spotify and see recommendations, and (c) then remember that information
+2. You check the Wikipedia page for each of the DJ's and keep variables of interest
+3. You do a separate Google search for estimates of their net worth
+4. You store all of your findings in `R` into a dataframe called `edm_df`
+
+### Loading in Libraries
+We are going to load in `dplyr`. We need to make sure that we've run `install.packages("dplyr")` in the past or before we run `library()` on it.
+
+```{r, message=FALSE}
+library(dplyr)
+```
+
+### How does the data look like?
+It has `r nrow(edm_df)` rows and `r ncol(edm_df)` columns. Each row corresponds to a DJ and each column corresponds to something interesting about them.
+
+```{r}
+head(edm_df)
+```
+
+### Data Types
+If we take a closer look at the columns, we can see the class/type of R object the columns contain. This dataset is not perfect for analysis. Take a look at `day` and `year`. We would probably prefer those to be in numeric format.
+
+I'm going to use the `mutate_each_` function, so we can go ahead and make these two variables numeric using the function `as.numeric()`. These are both useful functions, but they're off the table for testing for now.
+
+```{r}
+edm_df %>% mutate(day=as.numeric(as.character(day)),
+                  year=as.numeric(as.character(year)))
+```
+
+Now, we are going to overwrite our existing dataframe `edm_df` with the one we just produced above. We do this because we want to be able to access the changes we made (changing factors into numbers) to the columns.
+
+```{r}
+edm_df <- edm_df %>% mutate(day=as.numeric(as.character(day)),
+                  year=as.numeric(as.character(year)))
+```
+
+**Note**: You can name your dataframes and variables however you like so long as you stay consistent. If you are going to create a new dataframe, have a reason why. For example, I may want to create a new dataframe because I don't want to lose my copy of the original for future purposes. However, if I am confident in my work and not going to use the original version of the dataframe, then I can overwrite it just as I did in the cell block above.
+
+### Logical Operators
+Now that you're a capable coder, you're going to hear often about "binary" or "logical" or "boolean" data. What this means is that your data is just a whole bunch of `TRUE`s and `FALSE`s!
+
+#### An Example from Our Dataframe
+We have an example of this in our dataframe. Take a look at the column called `active`.
+```{r}
+# * ACTIVE COLUMN
+edm_df %>% pull(active)
+```
+
+The `R` language and also in mathematics, we can read these T/F values as a bunch of 0's for `FALSE` and 1's for `TRUE`.
+```{r}
+# * CONVERTING ACTIVE COLUMN TO NUMERIC FOR UNDERSTANDING
+as.numeric(edm_df %>% pull(active))
+```
+
+We can use the `mean()` function to calculate the proportion of DJ's within our dataset that are currently still actively working as DJ's. Remember that the formula for mean is $\frac{\sum_{i=1}^{n} x_i}{n}$. The numerator is the count of how many DJs are active and the denominator is the total in our dataset. We can use a `dplyr` function to calculate this for us.
+
+```{r}
+# * PROPORTION OF ACTIVE DJ's
+edm_df %>% summarize(mean=mean(active))
+```
+
+94.12% of the DJ's in our dataset are still active. The one DJ who isn't active anymore in our dataset is Avicii who sadly passed away this year.
+
+#### Making a Boolean/Logical/True-False Vector
+Making a logical vector or column in our dataframe goes like this. We need to look at our column and create a standard that values in a column may or may not satisfy. We will look at the `instruments` column.
+
+We are using the `lengths()` function to calculate how many instruments a given DJ plays.
+
+```{r}
+edm_df <- edm_df %>%
+  mutate(num_instruments=lengths(instruments))
+edm_df
+```
+
+To make a Boolean column based on whether or not an EDM DJ plays more than 5 instruments, we'll consider the condition `num_instruments>5` in a `mutate()` pipe. Let's just say you have the opinion that if the DJ plays more than 5 instruments, then they're insanely talented.
+
+```{r}
+edm_df <- edm_df %>% mutate(insanely_talented=num_instruments>5)
+edm_df %>% select(artist, num_instruments, insanely_talented)
+```
+
+### Is this a good sample?
+Now, no matter how interesting this dataset can be to explore, this is probably not a good sample, nor has the data been collected in the best way. We induced a lot of bias choosing DJ's we saw straight off of Google and Spotify. We didn't check Billboard or some other sort of music charts authority.
+
+If we want to get a good idea of EDM DJ's in general, we would need way more data. The more data we have, the better our estimates can become for whatever we wish to classify or predict.
+
+### There's so much more we can do!
+Think about it! We could have done these.
+
+From this class:
+- Plotting
+  - Scatterplots
+  - Histograms
+  - Boxplots
+  - Faceted scatterplots
+  - Barplots of genres or instruments played
+- Regression
+  - On age and net worth
+  - On number of instruments and net worth
+- Two-way tables
+  - To see how many DJ's share different categorical properties (i.e. `month` and `active`)
+  
+And beyond:
+- Machine learning
+- Maps (Yes, like GIS with coordinates!)
