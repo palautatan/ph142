@@ -1,23 +1,27 @@
 ---
 title: "PH142 Midterm II Review"
-output: html_notebook
+output: html_document
 ---
 
 <b>Note to fellow GSI's</b>: Some of this does not need to be read aloud, but rather just as some extra conceptual material for students to read on their own.
 
 <b>Note to students</b>: Please also consult lecture notes and your text. Good luck studying to all!
 
-## Study Design
+## Study Design and Inference
 
 ### Chapter 6
-Chapter 6 has to do with the main idea of how to get the best estimates of your population with a sample.
+Chapter 6 has to do with the main idea of how to get the best estimates of your population with a sample. What you need to take from both chapters most is what constitutes to a good statistical setup to get estimates you care about. Understanding where the following terms play in a study are key.   
 
+For additional material, see appendix.
+
+#### Inference
+The process of drawing conclusions about a population based on a sample
 
 #### Population vs. Sample
 - **Population**: The entire group of individuals about which we want information.
 - **Sample**: The part of the population for which we actually collect information. We use a sample to draw conclusions about the entire population.
 - **External validity/representativeness**: Does the sample represent the population? 
-Comes from your sampling design
+Comes from your sampling design.
 
 #### Observational vs. Experimental
 **NOTE**: The textbook states experiments are the only way to assess cause-and-effect, but we argue that observational studies can also be used to assess this
@@ -25,27 +29,11 @@ Comes from your sampling design
 - **Observational**: observes individuals and measures variables of interest but does not attempt to influence the responses
 - **Experimental**: deliberately imposes some treatment on individuals in order to observe their responses
 
-
-#### Lurking/Confounding variables
-- The association between an exposure and an outcome is **confounded** if there exist
-one or more variables that are causes of the outcome that are also associated 
-with the exposure of interest
-- Only important if you want to estimate if some factor causes some outcome (no confounders in predictive or descriptive)
-
 #### Study Design
 1. **Who** belongs to the target population?
 2. **How** you will take a sample of the target population?
 3. What **variables** you will measure? What are the levels of each variable? How will you measure these variables?
     
-
-#### Inference
-The process of drawing conclusions about a population based on a sample
-
-
-#### Bias
-When the expected value based on a sample differs from the true underlying parameter value. 
-
-
 #### Good versus Bad Designs
 What factors contribute to good vs. bad study designs?
 
@@ -54,17 +42,42 @@ What factors contribute to good vs. bad study designs?
 - Are the individuals chosen randomly or with some other manner? For what purpose?
 
 
-#### Some types of samples to consider
-**NOTE**: not all of these are necessarily "good" samples (look to textbook/lecture notes for pros/cons)
+#### Bias
+When the expected value based on a sample differs from the true underlying parameter value. 
 
-- Simple random sample
-- Multistage sampling
-- Proportion stratified sample
-- Disproportion stratified sample
-- Sample surveys
-- Cohort studies
+#### Confounding variables
+- The association between an exposure and an outcome is **confounded** if there exist
+one or more variables that are causes of the outcome that are also associated 
+with the exposure of interest
+- Only important if you want to estimate if some factor causes some outcome (no confounders in predictive or descriptive)
+
 
 ### Chapter 7
+
+#### Factor
+An explanatory variable that is **being manipulated**. There can be more than 1 factor.
+
+
+#### Treatment
+A specific **experimental condition**. When there is more than 1 factor, then the treatment is a combination of specific values of each factor.
+
+
+#### Placebo effect
+A response to a fake treatment because a person expects the treatment to be helpful  
+
+
+#### Randomized comparative experiments
+- An experiment that uses both **comparison** of two or more treatments and **chance assignment** of subjects to treatments  
+- **Experimental Group** (aka treated, exposed): those individuals receiving treatment  
+- **Control** (aka untreated/unexposed group): those individuals not receiving treatment  
+- **Placebo**: a control treatment that is fake, and meant to be indistiguishable from the treatment  
+- _**Randomization!!!!**_ Individuals are assigned to treatment vs. control by chance
+
+#### Experimental Design for Randomized Comparative Experiments
+1. Always have at least one **comparison group**  
+2. **Randomization** to treatment  
+3. Have a large enough **sample size** to reduce chance variation in the results  
+4. **Blinding** (can be used on both the individual receiving the treatment and the person conducting the experiment)  
 
 ## Probability
 
@@ -80,16 +93,14 @@ We can think of distributions as things that model patterns in data. If we see d
 (*) See the following Chapter 11 and 12 notes for these recipes.
 
 ### Chapter 11: Normal Distribution
-```{r, echo=FALSE, fig.cap="The empirical rule for the Normal Distribution", out.width = '100%'}
+```{r, echo=FALSE}
 knitr::include_graphics("normal.png")
 ```
 
 <u>Recipe for Normal</u>  
-This isn't quite a recipe, but more like guidelines.
-<ol>
-  <li>Goals: We want to find a probability, i.e. $P(X>k), P(X<k), P(X \geq K), P(X \leq k)$ but <i>NEVER</i> $P(X=k)$</li>
-  <li>The data are said to be normal or are assumed to be normal in the prompt</li>
-</ol>
+This isn't quite a recipe, but more like guidelines.  
+1. Goals: We want to find a probability, i.e. $P(X>k), P(X<k), P(X \geq K), P(X \leq k)$ but <i>NEVER</i> $P(X=k)$  
+2. The data are said to be normal or are assumed to be normal in the prompt
 
 ##### Question
 What is the difference between normal and standard normal?
@@ -124,14 +135,12 @@ Since you'll probably have this formula on your cheat sheet, what's more importa
 
 As we said earlier, distributions are used to calculate means, variances, and probabilities of situations we see often! Think back to the Korean drama or pop song. They have well-known structures. So does the Binomial setting. Check if your data fit the Binomial setting.
 
-<u>Recipe for Binomial</u>
-<ol>
-  <li>Goals: We want to find a probability, these are all fine: $P(X>k), P(X<k), P(X \geq K), P(X \leq k), P(X=k)$</li>
-  <li>You have some fixed amount of trials</li>
-  <li>Trials are independent</li>
-  <li>The probability of success is the same for each trial</li>
-  <li>Assumption k</li>
-</ol>
+<u>Recipe for Binomial</u>  
+1. Goals: We want to find a probability, these are all fine: $P(X>k), P(X<k), P(X \geq K), P(X \leq k), P(X=k)$  
+2. You have some fixed amount of trials  
+3. Trials are independent  
+4. The probability of success is the same for each trial  
+5. Assumption k  
 
 ##### Question
 When can we approximate the binomial as a normal distribution? Why?
@@ -181,12 +190,10 @@ $$
 P(X=k) = e^{-\lambda}\frac{\lambda^k}{k!}
 $$
 
-<u>Recipe for Poisson</u>
-<ol>
-  <li>Goals: We want to find a probability, these are all fine: $P(X>k), P(X<k), P(X \geq K), P(X \leq k), P(X=k)$</li>
-  <li>The data are said to be normal or are assumed to be normal in the prompt</li>
-  <li>Assumption 1</li>
-</ol>
+<u>Recipe for Poisson</u>  
+1. Goals: We want to find a probability, these are all fine: $P(X>k), P(X<k), P(X \geq K), P(X \leq k), P(X=k)$  
+2. The data are said to be normal or are assumed to be normal in the prompt  
+3. Assumption 1  
 
 ##### Example
 San Francisco is known for its fog. In fact, the fog's name is Karl! We expect a warm, sunny, Karl-free day in San Francisco about twice per month.
@@ -198,20 +205,134 @@ A sampling distribution is the distribution of estimates that we have for our pa
 
 ### Chapter 13
 
-## Extra Clarity on Distributions
-We can think of the typical Korean drama or the common pop song.  
+#### Law of Large Numbers
+As $n$ gets huge, our sampling distribution's mean will get closer and closer to the true population paramter value.
 
-<u>Recipe for the Typical Korean Drama</u>
-<ol>
-  <li>Story revolves around 2 potential lovers</li>
-  <li>One of the lovers is super dopey/clumsy or nonconforming to some standard of beauty</li>
-  <li>The other lover is mean</li>
-  <li>Many dramatic, slow motion moments betweent the 2 lovers</li>
-  <li>After many tribulations, the lovers end up as a couple</li>
-</ol>
+#### Central Limit Theorem
+As $n$ gets huge, our sampling distribution itself will look more and more like a normal distribution.
 
-<u>Recipe for a LOT of Pop Songs</u>
-<ol>
-  <li>Chords: E B C#m A</li>
-  <li>Verse 1, Verse 2, Chorus, Bridge, Chorus or some very similar format</li>
-</ol>
+#### Sampling Distribution Means and Variances
+Sampling distributions have means and variances that can be calculated as specified below!
+
+```{r, echo=FALSE}
+counts      <- c(mean="x-bar", variance="sd/sqrt(n)")
+proportions <- c(mean="p", variance="(p(1-p))/n")
+data.frame(rbind(counts, proportions))
+```
+
+Here's a figure from the text.
+
+```{r, echo=FALSE}
+knitr::include_graphics("samp_dist_p.png")
+```
+
+#### Example
+Let's take a look at some NBA data that was scraped off of basketball-reference.com. We'll read in the csv.
+
+```{r}
+western_conference <- read.csv("western_nba.csv")[,-1]
+head(western_conference, 10)
+```
+
+##### Exploring the Population ("The Underlying Distribution")
+This is the distribution of the population salaries.
+
+```{r, echo=FALSE}
+library(ggplot2)
+ggplot(western_conference, aes(x=millions)) +
+  geom_histogram(binwidth=0.5) +
+  ggtitle("Salaries of Western Conference NBA Players") +
+  xlab("millions of dollars")
+```
+
+
+What is the mean parameter $\mu$ of the population? We can calculate this by hand or by a function. Focus on the by hand calculation. 
+
+Here's the "by hand" calculation. The following functions may seem new to you, but think intuitively instead of code-wise. We have a data on all of the salaries, then we add all the salaries up, then divide by the number of salaries we have to get the average.
+
+```{r}
+vector_of_salaries <- western_conference$millions
+sum(vector_of_salaries) / length(vector_of_salaries)
+```
+
+Here's the `dplyr` solution.
+
+```{r, warning=FALSE, message=FALSE}
+library(dplyr)
+western_conference %>% summarize(mu=mean(vector_of_salaries))
+```
+
+Let's see what our sample distribution looks like for several choices of $n$.
+
+```{r}
+western_conference %>% 
+  sample_n(size=5) %>% 
+  summarize(mean_salary=mean(millions))
+```
+
+In the following block, we're going to take 100 samples of size $n=2, 5, 30$. Ignore the code. Just take a look at the output.
+
+```{r, echo=FALSE}
+# IGNORE
+sample_n_salaries <- function(n) {
+  western_conference %>% 
+  sample_n(size=n) %>% 
+  summarize(mean_salary=mean(millions))
+}
+```
+
+##### Sampling with n=2
+```{r}
+sample_means <- do.call(rbind, lapply(1:100, function(x) sample_n_salaries(2)))
+sample_means %>% summarize(n_5_mean=mean(mean_salary))
+```
+
+```{r}
+ggplot(sample_means, aes(x=mean_salary)) + geom_histogram(binwidth=0.2)
+```
+
+##### Sampling with n=5
+```{r}
+sample_means <- do.call(rbind, lapply(1:100, function(x) sample_n_salaries(5)))
+sample_means %>% summarize(n_5_mean=mean(mean_salary))
+```
+
+```{r}
+ggplot(sample_means, aes(x=mean_salary)) + geom_histogram(binwidth=0.2)
+```
+
+##### Sampling with n=30
+Visually, the sample size of $n=30$ is the most symmetric.
+```{r}
+sample_means <- do.call(rbind, lapply(1:100, function(x) sample_n_salaries(30)))
+sample_means %>% summarize(n_30_mean=mean(mean_salary))
+```
+
+```{r}
+ggplot(sample_means, aes(x=mean_salary)) + geom_histogram(binwidth=0.1)
+```
+
+
+As $n$ gets larger, then we see the sampling distribution get less skewed and more like the normal curve.
+
+## Appendix
+
+#### More Study Designs
+
+##### Some types of samples to consider
+**NOTE**: Not all of these are necessarily "good" samples (look to textbook/lecture notes for pros/cons)
+
+- Simple random sample
+- Multistage sampling
+- Proportion stratified sample
+- Disproportion stratified sample
+- Sample surveys
+- Cohort studies
+
+##### Some other experimental designs
+**Note**: Not all included here, there are more types of experimental designs out there!  
+- Completely randomized design  
+- Block design  
+- Matching  
+- Case-crossover design  
+- Repeated measures design  
