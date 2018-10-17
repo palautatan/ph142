@@ -176,6 +176,8 @@ $(document).ready(function () {
 
 
 <!-- rnb-text-begin -->
+<p><b>Note to fellow GSI’s</b>: Some of this does not need to be read aloud, but rather just as some extra conceptual material for students to read on their own.</p>
+<p>This review is not exhaustive. Please consult lecture notes and your text. Good luck studying to all!</p>
 <div id="experimental-design" class="section level2">
 <h2>Experimental Design</h2>
 <div id="chapter-6" class="section level3">
@@ -196,7 +198,7 @@ $(document).ready(function () {
 </div>
 <div id="distributions" class="section level2">
 <h2>Distributions</h2>
-<p>A common question has been <i><b>WHEN DO WE USE DISTRIBUTIONS!?</i></b> Well, sometimes our data tell a story that we see over and over again. We can think of the typical Korean drama or the common pop song.</p>
+<p>A common question has been <i><b>WHEN DO WE USE THESE DISTRIBUTIONS!?</i></b> Well, sometimes our data tell a story that we see over and over again. We can think of the typical Korean drama or the common pop song.</p>
 <u>Recipe for the Typical Korean Drama</u>
 <ol>
 <li>
@@ -218,18 +220,162 @@ After many tribulations, the lovers end up as a couple
 <u>Recipe for a LOT of Pop Songs</u>
 <ol>
 <li>
+Chords: E B C#m A
 </li>
 <li>
+Verse 1, Verse 2, Chorus, Bridge, Chorus or some very similar format
 </li>
 </ol>
+<p>We can think of distributions as things that model patterns in data. If we see data that looks approximately normal or follows a recipe for the Binomial or Poisson(*), then we should definitely consider using the appropriate distribution. When we use a distribution like one of the named three above, we can end up saying a lot about our data. We can say the mean, the variance/standard deviation, and calculate probabilities.</p>
+<p>(*) See the following Chapter 11 and 12 notes for these recipes.</p>
 <div id="chapter-11-normal-distribution" class="section level3">
 <h3>Chapter 11: Normal Distribution</h3>
-<div id="example" class="section level4">
-<h4>Example</h4>
+<p>INSERT PICTURE OF NORMAL DISTRIBUTION</p>
+<u>Recipe for Normal</u><br />
+This isn’t quite a recipe, but more like guidelines.
+<ol>
+<li>
+Goals: We want to find a probability, i.e. <span class="math inline">\(P(X&gt;k), P(X&lt;k), P(X \geq K), P(X \leq k)\)</span> but <i>NEVER</i> <span class="math inline">\(P(X=k)\)</span>
+</li>
+<li>
+The data are said to be normal or are assumed to be normal in the prompt
+</li>
+</ol>
+<div id="question" class="section level5">
+<h5>Question</h5>
+<p>What is the difference between normal and standard normal?</p>
+</div>
+<div id="example" class="section level5">
+<h5>Example</h5>
+<p>According to <a href="https://www.basketball-reference.com/leagues/NBA_stats.html">basketball-reference.net</a>, the mean height for NBA players is 6’7&quot; = 79 inches. Suppose it is known that player height is normally distributed with a standard deviation of 4 inches. What is the probability of a ball player to be shorter than 6 feet?</p>
+<p>The prompt information translates to:</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubXUgIDwtIDc5XG5zZCAgPC0gNFxuayAgIDwtIDYqMTJcbmBgYCJ9 -->
+<pre class="r"><code>mu  &lt;- 79
+sd  &lt;- 4
+k   &lt;- 6*12</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>We can calculate this probability one way (without tables!).</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucG5vcm0ocT1rLCBtZWFuPW11LCBzZD1zZClcbmBgYCJ9 -->
+<pre class="r"><code>pnorm(q=k, mean=mu, sd=sd)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIDAuMDQwMDU5MTZcbiJ9 -->
+<pre><code>[1] 0.04005916</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>All these <code>[ ]norm</code> functions are fair game!</p>
 </div>
 </div>
 <div id="chapter-12-binomial-and-poisson-distributions" class="section level3">
 <h3>Chapter 12: Binomial and Poisson Distributions</h3>
+<div id="binomial" class="section level4">
+<h4>Binomial</h4>
+<p>INSERT BINOMIAL DISTRIBUTION HERE</p>
+<u>Recipe for Binomial</u>
+<ol>
+<li>
+Goals: We want to find a probability, these are all fine: <span class="math inline">\(P(X&gt;k), P(X&lt;k), P(X \geq K), P(X \leq k), P(X=k)\)</span>
+</li>
+<li>
+You have some fixed amount of trials
+</li>
+<li>
+Trials are independent
+</li>
+<li>
+The probability of success is the same for each trial
+</li>
+<li>
+Assumption k
+</li>
+</ol>
+<div id="question-1" class="section level5">
+<h5>Question</h5>
+<p>When can we approximate the binomial as a normal distribution? Why?</p>
+</div>
+<div id="example-1" class="section level5">
+<h5>Example</h5>
+<p>A shopper goes online Thursday mornings to attempt to purchase Supreme apparel and accessories. Due to the brand’s popularity and limited supply, the shopper successfully purchases any item 1 in 10 times. What is the probability that the shopper will make 4 successful purchases after 10 independent purchase attempts? How about greater than 4?</p>
+<p>The prompt information translates to:</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubl90cmlhbHMgICAgPC0gMTBcbmtfc3VjY2VzcyAgIDwtIDRcbnByb2JhYmlsaXR5IDwtIDEvMTBcbmBgYCJ9 -->
+<pre class="r"><code>n_trials    &lt;- 10
+k_success   &lt;- 4
+probability &lt;- 1/10</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>And we can calculate the first quantity “by hand” using the formula:</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuY2hvb3NlKG5fdHJpYWxzLCBrX3N1Y2Nlc3MpKihwcm9iYWJpbGl0eSlea19zdWNjZXNzKigxLXByb2JhYmlsaXR5KV4obl90cmlhbHMta19zdWNjZXNzKVxuYGBgIn0= -->
+<pre class="r"><code>choose(n_trials, k_success)*(probability)^k_success*(1-probability)^(n_trials-k_success)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>Or we can use a special function:</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZGJpbm9tKHg9a19zdWNjZXNzLCBzaXplPW5fdHJpYWxzLCBwcm9iPXByb2JhYmlsaXR5KVxuYGBgIn0= -->
+<pre class="r"><code>dbinom(x=k_success, size=n_trials, prob=probability)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>The second quantity can be found by using the Complement Rule.</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuMSAtIGNob29zZShuX3RyaWFscywgNCkqKHByb2JhYmlsaXR5KV4oNCkqKDEtcHJvYmFiaWxpdHkpXihuX3RyaWFscy00KSAtIGNob29zZShuX3RyaWFscywgMykqKHByb2JhYmlsaXR5KV4oMykqKDEtcHJvYmFiaWxpdHkpXihuX3RyaWFscy0zKSAtIGNob29zZShuX3RyaWFscywgMikqKHByb2JhYmlsaXR5KV4oMikqKDEtcHJvYmFiaWxpdHkpXihuX3RyaWFscy0yKSAtIGNob29zZShuX3RyaWFscywgMSkqKHByb2JhYmlsaXR5KV4oMSkqKDEtcHJvYmFiaWxpdHkpXihuX3RyaWFscy0xKSAtIGNob29zZShuX3RyaWFscywgMCkqKHByb2JhYmlsaXR5KV4oMCkqKDEtcHJvYmFiaWxpdHkpXihuX3RyaWFscy0wKVxuYGBgIn0= -->
+<pre class="r"><code>1 - choose(n_trials, 4)*(probability)^(4)*(1-probability)^(n_trials-4) - choose(n_trials, 3)*(probability)^(3)*(1-probability)^(n_trials-3) - choose(n_trials, 2)*(probability)^(2)*(1-probability)^(n_trials-2) - choose(n_trials, 1)*(probability)^(1)*(1-probability)^(n_trials-1) - choose(n_trials, 0)*(probability)^(0)*(1-probability)^(n_trials-0)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>Or using another cool function that calculate the sum of probabilities from 0 to k.</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuMS1wYmlub20ocT1rX3N1Y2Nlc3MsIHNpemU9bl90cmlhbHMsIHByb2I9cHJvYmFiaWxpdHkpXG5gYGAifQ== -->
+<pre class="r"><code>1-pbinom(q=k_success, size=n_trials, prob=probability)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>Or even more conveniently:</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucGJpbm9tKHE9a19zdWNjZXNzLCBzaXplPW5fdHJpYWxzLCBwcm9iPXByb2JhYmlsaXR5LCBsb3dlci50YWlsPUZBTFNFKVxuYGBgIn0= -->
+<pre class="r"><code>pbinom(q=k_success, size=n_trials, prob=probability, lower.tail=FALSE)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>All these <code>[ ]binom</code> functions are fair game!</p>
+</div>
+</div>
+<div id="poisson" class="section level4">
+<h4>Poisson</h4>
+<p>INSERT POISSON DISTRIBUTION HERE</p>
+<u>Recipe for Poisson</u>
+<ol>
+<li>
+Goals: We want to find a probability, these are all fine: <span class="math inline">\(P(X&gt;k), P(X&lt;k), P(X \geq K), P(X \leq k), P(X=k)\)</span>
+</li>
+<li>
+The data are said to be normal or are assumed to be normal in the prompt
+</li>
+<li>
+Assumption 1
+</li>
+</ol>
+<div id="example-2" class="section level5">
+<h5>Example</h5>
+<p>San Francisco is known for its fog. In fact, the fog’s name is Karl! We expect a warm, sunny, Karl-free day in San Francisco about twice per month.</p>
+<p>All these <code>[ ]pois</code> functions are fair game!</p>
+</div>
+</div>
 </div>
 </div>
 <div id="sampling-distributions" class="section level2">
@@ -240,7 +386,7 @@ After many tribulations, the lovers end up as a couple
 </div>
 </div>
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiUEgxNDIgTWlkdGVybSBJSSBSZXZpZXciCm91dHB1dDogaHRtbF9ub3RlYm9vawotLS0KCiMjIEV4cGVyaW1lbnRhbCBEZXNpZ24KCiMjIyBDaGFwdGVyIDYKCiMjIyBDaGFwdGVyIDcKCiMjIFByb2JhYmlsaXR5CgojIyMgQ2hhcHRlciA5CgojIyMgQ2hhcHRlciAxMAoKIyMgRGlzdHJpYnV0aW9ucwpBIGNvbW1vbiBxdWVzdGlvbiBoYXMgYmVlbiA8aT48Yj5XSEVOIERPIFdFIFVTRSBESVNUUklCVVRJT05TIT88L2k+PC9iPiBXZWxsLCBzb21ldGltZXMgb3VyIGRhdGEgdGVsbCBhIHN0b3J5IHRoYXQgd2Ugc2VlIG92ZXIgYW5kIG92ZXIgYWdhaW4uIFdlIGNhbiB0aGluayBvZiB0aGUgdHlwaWNhbCBLb3JlYW4gZHJhbWEgb3IgdGhlIGNvbW1vbiBwb3Agc29uZy4gIAoKPHU+UmVjaXBlIGZvciB0aGUgVHlwaWNhbCBLb3JlYW4gRHJhbWE8L3U+CjxvbD4KICA8bGk+U3RvcnkgcmV2b2x2ZXMgYXJvdW5kIDIgcG90ZW50aWFsIGxvdmVyczwvbGk+CiAgPGxpPk9uZSBvZiB0aGUgbG92ZXJzIGlzIHN1cGVyIGRvcGV5L2NsdW1zeSBvciBub25jb25mb3JtaW5nIHRvIHNvbWUgc3RhbmRhcmQgb2YgYmVhdXR5PC9saT4KICA8bGk+VGhlIG90aGVyIGxvdmVyIGlzIG1lYW48L2xpPgogIDxsaT5NYW55IGRyYW1hdGljLCBzbG93IG1vdGlvbiBtb21lbnRzIGJldHdlZW50IHRoZSAyIGxvdmVyczwvbGk+CiAgPGxpPkFmdGVyIG1hbnkgdHJpYnVsYXRpb25zLCB0aGUgbG92ZXJzIGVuZCB1cCBhcyBhIGNvdXBsZTwvbGk+Cjwvb2w+Cgo8dT5SZWNpcGUgZm9yIGEgTE9UIG9mIFBvcCBTb25nczwvdT4KPG9sPgogIDxsaT48L2xpPgogIDxsaT48L2xpPgo8L29sPgoKIyMjIENoYXB0ZXIgMTE6IE5vcm1hbCBEaXN0cmlidXRpb24KCiMjIyMgRXhhbXBsZQoKIyMjIENoYXB0ZXIgMTI6IEJpbm9taWFsIGFuZCBQb2lzc29uIERpc3RyaWJ1dGlvbnMKCiMjIFNhbXBsaW5nIERpc3RyaWJ1dGlvbnMKCiMjIyBDaGFwdGVyIDEz</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiUEgxNDIgTWlkdGVybSBJSSBSZXZpZXciCm91dHB1dDogaHRtbF9ub3RlYm9vawotLS0KCjxiPk5vdGUgdG8gZmVsbG93IEdTSSdzPC9iPjogU29tZSBvZiB0aGlzIGRvZXMgbm90IG5lZWQgdG8gYmUgcmVhZCBhbG91ZCwgYnV0IHJhdGhlciBqdXN0IGFzIHNvbWUgZXh0cmEgY29uY2VwdHVhbCBtYXRlcmlhbCBmb3Igc3R1ZGVudHMgdG8gcmVhZCBvbiB0aGVpciBvd24uCgpUaGlzIHJldmlldyBpcyBub3QgZXhoYXVzdGl2ZS4gUGxlYXNlIGNvbnN1bHQgbGVjdHVyZSBub3RlcyBhbmQgeW91ciB0ZXh0LiBHb29kIGx1Y2sgc3R1ZHlpbmcgdG8gYWxsIQoKIyMgRXhwZXJpbWVudGFsIERlc2lnbgoKIyMjIENoYXB0ZXIgNgoKIyMjIENoYXB0ZXIgNwoKIyMgUHJvYmFiaWxpdHkKCiMjIyBDaGFwdGVyIDkKCiMjIyBDaGFwdGVyIDEwCgojIyBEaXN0cmlidXRpb25zCkEgY29tbW9uIHF1ZXN0aW9uIGhhcyBiZWVuIDxpPjxiPldIRU4gRE8gV0UgVVNFIFRIRVNFIERJU1RSSUJVVElPTlMhPzwvaT48L2I+IFdlbGwsIHNvbWV0aW1lcyBvdXIgZGF0YSB0ZWxsIGEgc3RvcnkgdGhhdCB3ZSBzZWUgb3ZlciBhbmQgb3ZlciBhZ2Fpbi4gV2UgY2FuIHRoaW5rIG9mIHRoZSB0eXBpY2FsIEtvcmVhbiBkcmFtYSBvciB0aGUgY29tbW9uIHBvcCBzb25nLiAgCgo8dT5SZWNpcGUgZm9yIHRoZSBUeXBpY2FsIEtvcmVhbiBEcmFtYTwvdT4KPG9sPgogIDxsaT5TdG9yeSByZXZvbHZlcyBhcm91bmQgMiBwb3RlbnRpYWwgbG92ZXJzPC9saT4KICA8bGk+T25lIG9mIHRoZSBsb3ZlcnMgaXMgc3VwZXIgZG9wZXkvY2x1bXN5IG9yIG5vbmNvbmZvcm1pbmcgdG8gc29tZSBzdGFuZGFyZCBvZiBiZWF1dHk8L2xpPgogIDxsaT5UaGUgb3RoZXIgbG92ZXIgaXMgbWVhbjwvbGk+CiAgPGxpPk1hbnkgZHJhbWF0aWMsIHNsb3cgbW90aW9uIG1vbWVudHMgYmV0d2VlbnQgdGhlIDIgbG92ZXJzPC9saT4KICA8bGk+QWZ0ZXIgbWFueSB0cmlidWxhdGlvbnMsIHRoZSBsb3ZlcnMgZW5kIHVwIGFzIGEgY291cGxlPC9saT4KPC9vbD4KCjx1PlJlY2lwZSBmb3IgYSBMT1Qgb2YgUG9wIFNvbmdzPC91Pgo8b2w+CiAgPGxpPkNob3JkczogRSBCIEMjbSBBPC9saT4KICA8bGk+VmVyc2UgMSwgVmVyc2UgMiwgQ2hvcnVzLCBCcmlkZ2UsIENob3J1cyBvciBzb21lIHZlcnkgc2ltaWxhciBmb3JtYXQ8L2xpPgo8L29sPgoKV2UgY2FuIHRoaW5rIG9mIGRpc3RyaWJ1dGlvbnMgYXMgdGhpbmdzIHRoYXQgbW9kZWwgcGF0dGVybnMgaW4gZGF0YS4gSWYgd2Ugc2VlIGRhdGEgdGhhdCBsb29rcyBhcHByb3hpbWF0ZWx5IG5vcm1hbCBvciBmb2xsb3dzIGEgcmVjaXBlIGZvciB0aGUgQmlub21pYWwgb3IgUG9pc3NvbigqKSwgdGhlbiB3ZSBzaG91bGQgZGVmaW5pdGVseSBjb25zaWRlciB1c2luZyB0aGUgYXBwcm9wcmlhdGUgZGlzdHJpYnV0aW9uLiBXaGVuIHdlIHVzZSBhIGRpc3RyaWJ1dGlvbiBsaWtlIG9uZSBvZiB0aGUgbmFtZWQgdGhyZWUgYWJvdmUsIHdlIGNhbiBlbmQgdXAgc2F5aW5nIGEgbG90IGFib3V0IG91ciBkYXRhLiBXZSBjYW4gc2F5IHRoZSBtZWFuLCB0aGUgdmFyaWFuY2Uvc3RhbmRhcmQgZGV2aWF0aW9uLCBhbmQgY2FsY3VsYXRlIHByb2JhYmlsaXRpZXMuCgooKikgU2VlIHRoZSBmb2xsb3dpbmcgQ2hhcHRlciAxMSBhbmQgMTIgbm90ZXMgZm9yIHRoZXNlIHJlY2lwZXMuCgojIyMgQ2hhcHRlciAxMTogTm9ybWFsIERpc3RyaWJ1dGlvbgpJTlNFUlQgUElDVFVSRSBPRiBOT1JNQUwgRElTVFJJQlVUSU9OCgo8dT5SZWNpcGUgZm9yIE5vcm1hbDwvdT4gIApUaGlzIGlzbid0IHF1aXRlIGEgcmVjaXBlLCBidXQgbW9yZSBsaWtlIGd1aWRlbGluZXMuCjxvbD4KICA8bGk+R29hbHM6IFdlIHdhbnQgdG8gZmluZCBhIHByb2JhYmlsaXR5LCBpLmUuICRQKFg+ayksIFAoWDxrKSwgUChYIFxnZXEgSyksIFAoWCBcbGVxIGspJCBidXQgPGk+TkVWRVI8L2k+ICRQKFg9aykkPC9saT4KICA8bGk+VGhlIGRhdGEgYXJlIHNhaWQgdG8gYmUgbm9ybWFsIG9yIGFyZSBhc3N1bWVkIHRvIGJlIG5vcm1hbCBpbiB0aGUgcHJvbXB0PC9saT4KPC9vbD4KCiMjIyMjIFF1ZXN0aW9uCldoYXQgaXMgdGhlIGRpZmZlcmVuY2UgYmV0d2VlbiBub3JtYWwgYW5kIHN0YW5kYXJkIG5vcm1hbD8KCiMjIyMjIEV4YW1wbGUKQWNjb3JkaW5nIHRvIDxhIGhyZWY9Imh0dHBzOi8vd3d3LmJhc2tldGJhbGwtcmVmZXJlbmNlLmNvbS9sZWFndWVzL05CQV9zdGF0cy5odG1sIj5iYXNrZXRiYWxsLXJlZmVyZW5jZS5uZXQ8L2E+LCB0aGUgbWVhbiBoZWlnaHQgZm9yIE5CQSBwbGF5ZXJzIGlzIDYnNyIgPSA3OSBpbmNoZXMuIFN1cHBvc2UgaXQgaXMga25vd24gdGhhdCBwbGF5ZXIgaGVpZ2h0IGlzIG5vcm1hbGx5IGRpc3RyaWJ1dGVkIHdpdGggYSBzdGFuZGFyZCBkZXZpYXRpb24gb2YgNCBpbmNoZXMuIFdoYXQgaXMgdGhlIHByb2JhYmlsaXR5IG9mIGEgYmFsbCBwbGF5ZXIgdG8gYmUgc2hvcnRlciB0aGFuIDYgZmVldD8KClRoZSBwcm9tcHQgaW5mb3JtYXRpb24gdHJhbnNsYXRlcyB0bzoKYGBge3J9Cm11ICA8LSA3OQpzZCAgPC0gNAprICAgPC0gNioxMgpgYGAKCldlIGNhbiBjYWxjdWxhdGUgdGhpcyBwcm9iYWJpbGl0eSBvbmUgd2F5ICh3aXRob3V0IHRhYmxlcyEpLgpgYGB7cn0KcG5vcm0ocT1rLCBtZWFuPW11LCBzZD1zZCkKYGBgCgpBbGwgdGhlc2UgYFsgXW5vcm1gIGZ1bmN0aW9ucyBhcmUgZmFpciBnYW1lIQoKIyMjIENoYXB0ZXIgMTI6IEJpbm9taWFsIGFuZCBQb2lzc29uIERpc3RyaWJ1dGlvbnMKCiMjIyMgQmlub21pYWwKSU5TRVJUIEJJTk9NSUFMIERJU1RSSUJVVElPTiBIRVJFCgo8dT5SZWNpcGUgZm9yIEJpbm9taWFsPC91Pgo8b2w+CiAgPGxpPkdvYWxzOiBXZSB3YW50IHRvIGZpbmQgYSBwcm9iYWJpbGl0eSwgdGhlc2UgYXJlIGFsbCBmaW5lOiAkUChYPmspLCBQKFg8ayksIFAoWCBcZ2VxIEspLCBQKFggXGxlcSBrKSwgUChYPWspJDwvbGk+CiAgPGxpPllvdSBoYXZlIHNvbWUgZml4ZWQgYW1vdW50IG9mIHRyaWFsczwvbGk+CiAgPGxpPlRyaWFscyBhcmUgaW5kZXBlbmRlbnQ8L2xpPgogIDxsaT5UaGUgcHJvYmFiaWxpdHkgb2Ygc3VjY2VzcyBpcyB0aGUgc2FtZSBmb3IgZWFjaCB0cmlhbDwvbGk+CiAgPGxpPkFzc3VtcHRpb24gazwvbGk+Cjwvb2w+CgojIyMjIyBRdWVzdGlvbgpXaGVuIGNhbiB3ZSBhcHByb3hpbWF0ZSB0aGUgYmlub21pYWwgYXMgYSBub3JtYWwgZGlzdHJpYnV0aW9uPyBXaHk/CgojIyMjIyBFeGFtcGxlCkEgc2hvcHBlciBnb2VzIG9ubGluZSBUaHVyc2RheSBtb3JuaW5ncyB0byBhdHRlbXB0IHRvIHB1cmNoYXNlIFN1cHJlbWUgYXBwYXJlbCBhbmQgYWNjZXNzb3JpZXMuIER1ZSB0byB0aGUgYnJhbmQncyBwb3B1bGFyaXR5IGFuZCBsaW1pdGVkIHN1cHBseSwgdGhlIHNob3BwZXIgc3VjY2Vzc2Z1bGx5IHB1cmNoYXNlcyBhbnkgaXRlbSAxIGluIDEwIHRpbWVzLiBXaGF0IGlzIHRoZSBwcm9iYWJpbGl0eSB0aGF0IHRoZSBzaG9wcGVyIHdpbGwgbWFrZSA0IHN1Y2Nlc3NmdWwgcHVyY2hhc2VzIGFmdGVyIDEwIGluZGVwZW5kZW50IHB1cmNoYXNlIGF0dGVtcHRzPyBIb3cgYWJvdXQgZ3JlYXRlciB0aGFuIDQ/CgpUaGUgcHJvbXB0IGluZm9ybWF0aW9uIHRyYW5zbGF0ZXMgdG86CmBgYHtyfQpuX3RyaWFscyAgICA8LSAxMAprX3N1Y2Nlc3MgICA8LSA0CnByb2JhYmlsaXR5IDwtIDEvMTAKYGBgCgpBbmQgd2UgY2FuIGNhbGN1bGF0ZSB0aGUgZmlyc3QgcXVhbnRpdHkgImJ5IGhhbmQiIHVzaW5nIHRoZSBmb3JtdWxhOgpgYGB7cn0KY2hvb3NlKG5fdHJpYWxzLCBrX3N1Y2Nlc3MpKihwcm9iYWJpbGl0eSlea19zdWNjZXNzKigxLXByb2JhYmlsaXR5KV4obl90cmlhbHMta19zdWNjZXNzKQpgYGAKCk9yIHdlIGNhbiB1c2UgYSBzcGVjaWFsIGZ1bmN0aW9uOgpgYGB7cn0KZGJpbm9tKHg9a19zdWNjZXNzLCBzaXplPW5fdHJpYWxzLCBwcm9iPXByb2JhYmlsaXR5KQpgYGAKClRoZSBzZWNvbmQgcXVhbnRpdHkgY2FuIGJlIGZvdW5kIGJ5IHVzaW5nIHRoZSBDb21wbGVtZW50IFJ1bGUuCmBgYHtyfQoxIC0gY2hvb3NlKG5fdHJpYWxzLCA0KSoocHJvYmFiaWxpdHkpXig0KSooMS1wcm9iYWJpbGl0eSleKG5fdHJpYWxzLTQpIC0gY2hvb3NlKG5fdHJpYWxzLCAzKSoocHJvYmFiaWxpdHkpXigzKSooMS1wcm9iYWJpbGl0eSleKG5fdHJpYWxzLTMpIC0gY2hvb3NlKG5fdHJpYWxzLCAyKSoocHJvYmFiaWxpdHkpXigyKSooMS1wcm9iYWJpbGl0eSleKG5fdHJpYWxzLTIpIC0gY2hvb3NlKG5fdHJpYWxzLCAxKSoocHJvYmFiaWxpdHkpXigxKSooMS1wcm9iYWJpbGl0eSleKG5fdHJpYWxzLTEpIC0gY2hvb3NlKG5fdHJpYWxzLCAwKSoocHJvYmFiaWxpdHkpXigwKSooMS1wcm9iYWJpbGl0eSleKG5fdHJpYWxzLTApCmBgYAoKT3IgdXNpbmcgYW5vdGhlciBjb29sIGZ1bmN0aW9uIHRoYXQgY2FsY3VsYXRlIHRoZSBzdW0gb2YgcHJvYmFiaWxpdGllcyBmcm9tIDAgdG8gay4KCmBgYHtyfQoxLXBiaW5vbShxPWtfc3VjY2Vzcywgc2l6ZT1uX3RyaWFscywgcHJvYj1wcm9iYWJpbGl0eSkKYGBgCgpPciBldmVuIG1vcmUgY29udmVuaWVudGx5OgpgYGB7cn0KcGJpbm9tKHE9a19zdWNjZXNzLCBzaXplPW5fdHJpYWxzLCBwcm9iPXByb2JhYmlsaXR5LCBsb3dlci50YWlsPUZBTFNFKQpgYGAKCkFsbCB0aGVzZSBgWyBdYmlub21gIGZ1bmN0aW9ucyBhcmUgZmFpciBnYW1lIQoKIyMjIyBQb2lzc29uCklOU0VSVCBQT0lTU09OIERJU1RSSUJVVElPTiBIRVJFCgo8dT5SZWNpcGUgZm9yIFBvaXNzb248L3U+CjxvbD4KICA8bGk+R29hbHM6IFdlIHdhbnQgdG8gZmluZCBhIHByb2JhYmlsaXR5LCB0aGVzZSBhcmUgYWxsIGZpbmU6ICRQKFg+ayksIFAoWDxrKSwgUChYIFxnZXEgSyksIFAoWCBcbGVxIGspLCBQKFg9aykkPC9saT4KICA8bGk+VGhlIGRhdGEgYXJlIHNhaWQgdG8gYmUgbm9ybWFsIG9yIGFyZSBhc3N1bWVkIHRvIGJlIG5vcm1hbCBpbiB0aGUgcHJvbXB0PC9saT4KICA8bGk+QXNzdW1wdGlvbiAxPC9saT4KPC9vbD4KCiMjIyMjIEV4YW1wbGUKU2FuIEZyYW5jaXNjbyBpcyBrbm93biBmb3IgaXRzIGZvZy4gSW4gZmFjdCwgdGhlIGZvZydzIG5hbWUgaXMgS2FybCEgV2UgZXhwZWN0IGEgd2FybSwgc3VubnksIEthcmwtZnJlZSBkYXkgaW4gU2FuIEZyYW5jaXNjbyBhYm91dCB0d2ljZSBwZXIgbW9udGguCgpBbGwgdGhlc2UgYFsgXXBvaXNgIGZ1bmN0aW9ucyBhcmUgZmFpciBnYW1lIQoKIyMgU2FtcGxpbmcgRGlzdHJpYnV0aW9ucwoKIyMjIENoYXB0ZXIgMTM=</div>
 
 
 

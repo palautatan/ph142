@@ -3,6 +3,10 @@ title: "PH142 Midterm II Review"
 output: html_notebook
 ---
 
+<b>Note to fellow GSI's</b>: Some of this does not need to be read aloud, but rather just as some extra conceptual material for students to read on their own.
+
+This review is not exhaustive. Please consult lecture notes and your text. Good luck studying to all!
+
 ## Experimental Design
 
 ### Chapter 6
@@ -16,7 +20,7 @@ output: html_notebook
 ### Chapter 10
 
 ## Distributions
-A common question has been <i><b>WHEN DO WE USE DISTRIBUTIONS!?</i></b> Well, sometimes our data tell a story that we see over and over again. We can think of the typical Korean drama or the common pop song.  
+A common question has been <i><b>WHEN DO WE USE THESE DISTRIBUTIONS!?</i></b> Well, sometimes our data tell a story that we see over and over again. We can think of the typical Korean drama or the common pop song.  
 
 <u>Recipe for the Typical Korean Drama</u>
 <ol>
@@ -29,15 +33,113 @@ A common question has been <i><b>WHEN DO WE USE DISTRIBUTIONS!?</i></b> Well, so
 
 <u>Recipe for a LOT of Pop Songs</u>
 <ol>
-  <li></li>
-  <li></li>
+  <li>Chords: E B C#m A</li>
+  <li>Verse 1, Verse 2, Chorus, Bridge, Chorus or some very similar format</li>
 </ol>
 
-### Chapter 11: Normal Distribution
+We can think of distributions as things that model patterns in data. If we see data that looks approximately normal or follows a recipe for the Binomial or Poisson(*), then we should definitely consider using the appropriate distribution. When we use a distribution like one of the named three above, we can end up saying a lot about our data. We can say the mean, the variance/standard deviation, and calculate probabilities.
 
-#### Example
+(*) See the following Chapter 11 and 12 notes for these recipes.
+
+### Chapter 11: Normal Distribution
+INSERT PICTURE OF NORMAL DISTRIBUTION
+
+<u>Recipe for Normal</u>  
+This isn't quite a recipe, but more like guidelines.
+<ol>
+  <li>Goals: We want to find a probability, i.e. $P(X>k), P(X<k), P(X \geq K), P(X \leq k)$ but <i>NEVER</i> $P(X=k)$</li>
+  <li>The data are said to be normal or are assumed to be normal in the prompt</li>
+</ol>
+
+##### Question
+What is the difference between normal and standard normal?
+
+##### Example
+According to <a href="https://www.basketball-reference.com/leagues/NBA_stats.html">basketball-reference.net</a>, the mean height for NBA players is 6'7" = 79 inches. Suppose it is known that player height is normally distributed with a standard deviation of 4 inches. What is the probability of a ball player to be shorter than 6 feet?
+
+The prompt information translates to:
+```{r}
+mu  <- 79
+sd  <- 4
+k   <- 6*12
+```
+
+We can calculate this probability one way (without tables!).
+```{r}
+pnorm(q=k, mean=mu, sd=sd)
+```
+
+All these `[ ]norm` functions are fair game!
 
 ### Chapter 12: Binomial and Poisson Distributions
+
+#### Binomial
+INSERT BINOMIAL DISTRIBUTION HERE
+
+<u>Recipe for Binomial</u>
+<ol>
+  <li>Goals: We want to find a probability, these are all fine: $P(X>k), P(X<k), P(X \geq K), P(X \leq k), P(X=k)$</li>
+  <li>You have some fixed amount of trials</li>
+  <li>Trials are independent</li>
+  <li>The probability of success is the same for each trial</li>
+  <li>Assumption k</li>
+</ol>
+
+##### Question
+When can we approximate the binomial as a normal distribution? Why?
+
+##### Example
+A shopper goes online Thursday mornings to attempt to purchase Supreme apparel and accessories. Due to the brand's popularity and limited supply, the shopper successfully purchases any item 1 in 10 times. What is the probability that the shopper will make 4 successful purchases after 10 independent purchase attempts? How about greater than 4?
+
+The prompt information translates to:
+```{r}
+n_trials    <- 10
+k_success   <- 4
+probability <- 1/10
+```
+
+And we can calculate the first quantity "by hand" using the formula:
+```{r}
+choose(n_trials, k_success)*(probability)^k_success*(1-probability)^(n_trials-k_success)
+```
+
+Or we can use a special function:
+```{r}
+dbinom(x=k_success, size=n_trials, prob=probability)
+```
+
+The second quantity can be found by using the Complement Rule.
+```{r}
+1 - choose(n_trials, 4)*(probability)^(4)*(1-probability)^(n_trials-4) - choose(n_trials, 3)*(probability)^(3)*(1-probability)^(n_trials-3) - choose(n_trials, 2)*(probability)^(2)*(1-probability)^(n_trials-2) - choose(n_trials, 1)*(probability)^(1)*(1-probability)^(n_trials-1) - choose(n_trials, 0)*(probability)^(0)*(1-probability)^(n_trials-0)
+```
+
+Or using another cool function that calculate the sum of probabilities from 0 to k.
+
+```{r}
+1-pbinom(q=k_success, size=n_trials, prob=probability)
+```
+
+Or even more conveniently:
+```{r}
+pbinom(q=k_success, size=n_trials, prob=probability, lower.tail=FALSE)
+```
+
+All these `[ ]binom` functions are fair game!
+
+#### Poisson
+INSERT POISSON DISTRIBUTION HERE
+
+<u>Recipe for Poisson</u>
+<ol>
+  <li>Goals: We want to find a probability, these are all fine: $P(X>k), P(X<k), P(X \geq K), P(X \leq k), P(X=k)$</li>
+  <li>The data are said to be normal or are assumed to be normal in the prompt</li>
+  <li>Assumption 1</li>
+</ol>
+
+##### Example
+San Francisco is known for its fog. In fact, the fog's name is Karl! We expect a warm, sunny, Karl-free day in San Francisco about twice per month.
+
+All these `[ ]pois` functions are fair game!
 
 ## Sampling Distributions
 
