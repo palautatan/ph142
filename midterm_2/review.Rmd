@@ -1,0 +1,44 @@
+---
+title: "PH142 Midterm II Review"
+output: html_notebook
+---
+
+## Experimental Design
+
+### Chapter 6
+
+### Chapter 7
+
+## Probability
+
+### Chapter 9
+
+### Chapter 10
+
+## Distributions
+A common question has been <i><b>WHEN DO WE USE DISTRIBUTIONS!?</i></b> Well, sometimes our data tell a story that we see over and over again. We can think of the typical Korean drama or the common pop song.  
+
+<u>Recipe for the Typical Korean Drama</u>
+<ol>
+  <li>Story revolves around 2 potential lovers</li>
+  <li>One of the lovers is super dopey/clumsy or nonconforming to some standard of beauty</li>
+  <li>The other lover is mean</li>
+  <li>Many dramatic, slow motion moments betweent the 2 lovers</li>
+  <li>After many tribulations, the lovers end up as a couple</li>
+</ol>
+
+<u>Recipe for a LOT of Pop Songs</u>
+<ol>
+  <li></li>
+  <li></li>
+</ol>
+
+### Chapter 11: Normal Distribution
+
+#### Example
+
+### Chapter 12: Binomial and Poisson Distributions
+
+## Sampling Distributions
+
+### Chapter 13
