@@ -208,25 +208,7 @@ A sampling distribution is the distribution of estimates that we have for our pa
 #### Law of Large Numbers
 As $n$ gets huge, our sampling distribution's mean will get closer and closer to the true population paramter value.
 
-#### Central Limit Theorem
-As $n$ gets huge, our sampling distribution itself will look more and more like a normal distribution.
-
-#### Sampling Distribution Means and Variances
-Sampling distributions have means and variances that can be calculated as specified below!
-
-```{r, echo=FALSE}
-counts      <- c(mean="x-bar", variance="sd/sqrt(n)")
-proportions <- c(mean="p", variance="(p(1-p))/n")
-data.frame(rbind(counts, proportions))
-```
-
-Here's a figure from the text.
-
-```{r, echo=FALSE}
-knitr::include_graphics("samp_dist_p.png")
-```
-
-#### Example
+##### Example
 Let's take a look at some NBA data that was scraped off of basketball-reference.com. We'll read in the csv.
 
 ```{r}
@@ -234,7 +216,47 @@ western_conference <- read.csv("western_nba.csv")[,-1]
 head(western_conference, 10)
 ```
 
-##### Exploring the Population ("The Underlying Distribution")
+In the following blocks, we're going to take 100 samples of size $n=2, 5, 30$. Ignore the code that you know you never learned for midterm 1. Just take a look at the output.
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+# IGNORE
+library(dplyr)
+sample_n_salaries <- function(n) {
+  western_conference %>% 
+  sample_n(size=n) %>% 
+  summarize(mean_salary=mean(millions))
+}
+```
+
+###### Sampling with n=2
+```{r}
+sample_means_2 <- do.call(rbind, lapply(1:100, function(x) sample_n_salaries(2)))
+sample_means_2 %>% summarize(sampling_mean=mean(mean_salary))
+```
+
+###### Sampling with n=5
+```{r}
+sample_means_5 <- do.call(rbind, lapply(1:100, function(x) sample_n_salaries(5)))
+sample_means_5 %>% summarize(sampling_mean=mean(mean_salary))
+```
+
+###### Sampling with n=30
+```{r}
+sample_means_30 <- do.call(rbind, lapply(1:100, function(x) sample_n_salaries(30)))
+sample_means_30 %>% summarize(sampling_mean=mean(mean_salary))
+```
+
+#### Central Limit Theorem
+As $n$ gets huge, our sampling distribution itself will look more and more like a normal distribution.
+
+##### Example
+Recall the data from earlier.
+
+```{r}
+head(western_conference, 10)
+```
+
+###### Exploring the Population ("The Underlying Distribution")
 This is the distribution of the population salaries.
 
 ```{r, echo=FALSE}
@@ -264,56 +286,39 @@ western_conference %>% summarize(mu=mean(vector_of_salaries))
 
 Let's see what our sample distribution looks like for several choices of $n$.
 
+###### Sampling with n=2
 ```{r}
-western_conference %>% 
-  sample_n(size=5) %>% 
-  summarize(mean_salary=mean(millions))
+ggplot(sample_means_2, aes(x=mean_salary)) + geom_histogram(binwidth=0.2)
 ```
 
-In the following block, we're going to take 100 samples of size $n=2, 5, 30$. Ignore the code. Just take a look at the output.
-
-```{r, echo=FALSE}
-# IGNORE
-sample_n_salaries <- function(n) {
-  western_conference %>% 
-  sample_n(size=n) %>% 
-  summarize(mean_salary=mean(millions))
-}
-```
-
-##### Sampling with n=2
+###### Sampling with n=5
 ```{r}
-sample_means <- do.call(rbind, lapply(1:100, function(x) sample_n_salaries(2)))
-sample_means %>% summarize(n_5_mean=mean(mean_salary))
+ggplot(sample_means_5, aes(x=mean_salary)) + geom_histogram(binwidth=0.2)
 ```
 
-```{r}
-ggplot(sample_means, aes(x=mean_salary)) + geom_histogram(binwidth=0.2)
-```
-
-##### Sampling with n=5
-```{r}
-sample_means <- do.call(rbind, lapply(1:100, function(x) sample_n_salaries(5)))
-sample_means %>% summarize(n_5_mean=mean(mean_salary))
-```
-
-```{r}
-ggplot(sample_means, aes(x=mean_salary)) + geom_histogram(binwidth=0.2)
-```
-
-##### Sampling with n=30
+###### Sampling with n=30
 Visually, the sample size of $n=30$ is the most symmetric.
-```{r}
-sample_means <- do.call(rbind, lapply(1:100, function(x) sample_n_salaries(30)))
-sample_means %>% summarize(n_30_mean=mean(mean_salary))
-```
 
 ```{r}
-ggplot(sample_means, aes(x=mean_salary)) + geom_histogram(binwidth=0.1)
+ggplot(sample_means_30, aes(x=mean_salary)) + geom_histogram(binwidth=0.1)
 ```
-
 
 As $n$ gets larger, then we see the sampling distribution get less skewed and more like the normal curve.
+
+#### Sampling Distribution Means and Variances
+Sampling distributions have means and variances that can be calculated as specified below!
+
+```{r, echo=FALSE}
+counts      <- c(mean="x-bar", variance="sd/sqrt(n)")
+proportions <- c(mean="p", variance="(p(1-p))/n")
+data.frame(rbind(counts, proportions))
+```
+
+Here's a figure from the text.
+
+```{r, echo=FALSE}
+knitr::include_graphics("samp_dist_p.png")
+```
 
 ## Appendix
 
