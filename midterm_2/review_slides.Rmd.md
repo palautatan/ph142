@@ -196,9 +196,9 @@ sample_2
 ```
 
 ```
-    Sepal.Length Sepal.Width Petal.Length Petal.Width   Species
-141          6.7         3.1          5.6         2.4 virginica
-149          6.2         3.4          5.4         2.3 virginica
+    Sepal.Length Sepal.Width Petal.Length Petal.Width    Species
+80           5.7         2.6          3.5         1.0 versicolor
+128          6.1         3.0          4.9         1.8  virginica
 ```
 
 
@@ -213,18 +213,20 @@ sample_6
 
 ```
     Sepal.Length Sepal.Width Petal.Length Petal.Width    Species
-124          6.3         2.7          4.9         1.8  virginica
-42           4.5         2.3          1.3         0.3     setosa
-121          6.9         3.2          5.7         2.3  virginica
-95           5.6         2.7          4.2         1.3 versicolor
-62           5.9         3.0          4.2         1.5 versicolor
-35           4.9         3.1          1.5         0.2     setosa
+41           5.0         3.5          1.3         0.3     setosa
+11           5.4         3.7          1.5         0.2     setosa
+105          6.5         3.0          5.8         2.2  virginica
+97           5.7         2.9          4.2         1.3 versicolor
+23           4.6         3.6          1.0         0.2     setosa
+81           5.5         2.4          3.8         1.1 versicolor
 ```
 
 
 Chapter 10
 ========================================================
 Now, we're *sliding* into Chapter 10 material.
+
+See Sarah's slides on bCourses for Venn Diagram help. Visualizing with Venn Diagrams will change your life for Chapter 10 material.
 
 Dependence and Independence
 ========================================================
@@ -320,9 +322,9 @@ We can think of distributions as things that model patterns in data. If we see d
 
 (*) See the following Chapter 11 and 12 notes for these recipes.
 
-### Chapter 11: Normal Distribution
+Chapter 11: Normal Distribution
 ========================================================
-![plot of chunk unnamed-chunk-3](normal.png)
+![plot of chunk unnamed-chunk-3](images/normal.png)
 
 Recipe for Normal
 ========================================================
@@ -497,7 +499,7 @@ A sampling distribution is the distribution of estimates that we have for our pa
 
 Here's a motivating figure from the text. After you're done looking over this section, reflect on this figure and see if you can understand it all.
 
-![plot of chunk unnamed-chunk-13](samp_dist_p.png)
+![plot of chunk unnamed-chunk-13](images/samp_dist_p.png)
 
 Law of Large Numbers
 ========================================================
@@ -546,7 +548,7 @@ sample_means_2 %>% summarize(sampling_mean=mean(mean_salary))
 
 ```
   sampling_mean
-1      5.058284
+1      7.297346
 ```
 
 Law of Large Numbers
@@ -560,7 +562,7 @@ sample_means_5 %>% summarize(sampling_mean=mean(mean_salary))
 
 ```
   sampling_mean
-1      6.394968
+1       6.36792
 ```
 
 Law of Large Numbers
@@ -574,7 +576,7 @@ sample_means_30 %>% summarize(sampling_mean=mean(mean_salary))
 
 ```
   sampling_mean
-1      6.374774
+1      6.603053
 ```
 
 Central Limit Theorem
@@ -588,21 +590,16 @@ Recall the data from earlier.
 
 
 ```r
-head(western_conference, 10)
+head(western_conference, 5)
 ```
 
 ```
-              Player millions                   team
-1      Stephen Curry 37.45715  Golden State Warriors
-2  Russell Westbrook 35.65415  Oklahoma City Thunder
-3         Chris Paul 35.65415        Houston Rockets
-4       LeBron James 35.65415     Los Angeles Lakers
-5        Paul George 30.56070  Oklahoma City Thunder
-6        Mike Conley 30.52112      Memphis Grizzlies
-7       James Harden 30.43185        Houston Rockets
-8       Kevin Durant 30.00000  Golden State Warriors
-9       Paul Millsap 29.73077         Denver Nuggets
-10    Damian Lillard 27.97769 Portland Trail Blazers
+             Player millions                  team
+1     Stephen Curry 37.45715 Golden State Warriors
+2 Russell Westbrook 35.65415 Oklahoma City Thunder
+3        Chris Paul 35.65415       Houston Rockets
+4      LeBron James 35.65415    Los Angeles Lakers
+5       Paul George 30.56070 Oklahoma City Thunder
 ```
 
 Central Limit Theorem
@@ -711,3 +708,17 @@ Some More Questions
 - If P(B)=3% and P(A)=4% and are independent of one another, what is $P(A \cap B)$? Hint: can you multiply two percentages?
 - If you're asked for the P(+), does this include both true and false positives?
 
+Mo Probability, Mo Problems
+========================================================
+- MIT Resource
+  -https://ocw.mit.edu/courses/mathematics/18-05-introduction-to-probability-and-statistics-spring-2014/exams/MIT18_05S14_Prac_Exam1a.pdf
+  - #3, 4
+  
+- UCD Resource
+  - http://www.stat.ucdavis.edu/~ntyang/teaching/12SSII/sol_mid1.pdf
+  - # 12, 18, 15
+
+
+Name that Distribution
+========================================================
+1. We expect there to be only 2 BART delays per week because BART is so efficient and amazing and uses its few-rail system wisely. 

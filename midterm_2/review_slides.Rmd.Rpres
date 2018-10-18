@@ -208,6 +208,8 @@ Chapter 10
 ========================================================
 Now, we're *sliding* into Chapter 10 material.
 
+See Sarah's slides on bCourses for Venn Diagram help. Visualizing with Venn Diagrams will change your life for Chapter 10 material.
+
 Dependence and Independence
 ========================================================
 Two events are independent if knowing that one event occurred does not change the probability that the other occurred 
@@ -302,10 +304,10 @@ We can think of distributions as things that model patterns in data. If we see d
 
 (*) See the following Chapter 11 and 12 notes for these recipes.
 
-### Chapter 11: Normal Distribution
+Chapter 11: Normal Distribution
 ========================================================
 ```{r, echo=FALSE}
-knitr::include_graphics("normal.png")
+knitr::include_graphics("images/normal.png")
 ```
 
 Recipe for Normal
@@ -449,7 +451,7 @@ A sampling distribution is the distribution of estimates that we have for our pa
 Here's a motivating figure from the text. After you're done looking over this section, reflect on this figure and see if you can understand it all.
 
 ```{r, echo=FALSE}
-knitr::include_graphics("samp_dist_p.png")
+knitr::include_graphics("images/samp_dist_p.png")
 ```
 
 Law of Large Numbers
@@ -515,7 +517,7 @@ Central Limit Theorem
 Recall the data from earlier.
 
 ```{r}
-head(western_conference, 10)
+head(western_conference, 5)
 ```
 
 Central Limit Theorem
@@ -610,3 +612,17 @@ Some More Questions
 - If P(B)=3% and P(A)=4% and are independent of one another, what is $P(A \cap B)$? Hint: can you multiply two percentages?
 - If you're asked for the P(+), does this include both true and false positives?
 
+Mo Probability, Mo Problems
+========================================================
+- MIT Resource
+  -https://ocw.mit.edu/courses/mathematics/18-05-introduction-to-probability-and-statistics-spring-2014/exams/MIT18_05S14_Prac_Exam1a.pdf
+  - #3, 4
+  
+- UCD Resource
+  - http://www.stat.ucdavis.edu/~ntyang/teaching/12SSII/sol_mid1.pdf
+  - # 12, 18, 15
+
+
+Name that Distribution
+========================================================
+1. We expect there to be only 2 BART delays per week because BART is so efficient and amazing and uses its few-rail system wisely. 
