@@ -415,10 +415,13 @@ Let's take a look at some NBA data that was scraped off of basketball-reference.
 
 ```{r}
 western_conference <- read.csv("western_nba.csv")[,-1]
-head(western_conference)
+head(western_conference, 3)
+mean(western_conference$millions)
 ```
 
-In the following blocks, we're going to take 100 samples of size $n=2, 5, 30$. Ignore the code that you know you never learned for midterm 1. Just take a look at the output.
+Law of Large Numbers
+========================================================
+In the following blocks, we're going to take 100 samples of size $n=2, 5, 30$. Ignore the code that you have you never learned for midterm 1. Focus on the output.
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 # IGNORE

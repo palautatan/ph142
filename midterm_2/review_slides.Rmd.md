@@ -168,12 +168,12 @@ sample_5
 ```
 
 ```
-    Sepal.Length Sepal.Width Petal.Length Petal.Width    Species
-134          6.3         2.8          5.1         1.5  virginica
-68           5.8         2.7          4.1         1.0 versicolor
-25           4.8         3.4          1.9         0.2     setosa
-16           5.7         4.4          1.5         0.4     setosa
-6            5.4         3.9          1.7         0.4     setosa
+    Sepal.Length Sepal.Width Petal.Length Petal.Width   Species
+17           5.4         3.9          1.3         0.4    setosa
+40           5.1         3.4          1.5         0.2    setosa
+116          6.4         3.2          5.3         2.3 virginica
+102          5.8         2.7          5.1         1.9 virginica
+19           5.7         3.8          1.7         0.3    setosa
 ```
 
 
@@ -188,16 +188,16 @@ sample_10
 
 ```
     Sepal.Length Sepal.Width Petal.Length Petal.Width    Species
-54           5.5         2.3          4.0         1.3 versicolor
-28           5.2         3.5          1.5         0.2     setosa
-34           5.5         4.2          1.4         0.2     setosa
-69           6.2         2.2          4.5         1.5 versicolor
-3            4.7         3.2          1.3         0.2     setosa
-43           4.4         3.2          1.3         0.2     setosa
-73           6.3         2.5          4.9         1.5 versicolor
-134          6.3         2.8          5.1         1.5  virginica
-6            5.4         3.9          1.7         0.4     setosa
-36           5.0         3.2          1.2         0.2     setosa
+49           5.3         3.7          1.5         0.2     setosa
+24           5.1         3.3          1.7         0.5     setosa
+145          6.7         3.3          5.7         2.5  virginica
+81           5.5         2.4          3.8         1.1 versicolor
+16           5.7         4.4          1.5         0.4     setosa
+13           4.8         3.0          1.4         0.1     setosa
+46           4.8         3.0          1.4         0.3     setosa
+104          6.3         2.9          5.6         1.8  virginica
+80           5.7         2.6          3.5         1.0 versicolor
+79           6.0         2.9          4.5         1.5 versicolor
 ```
 
 
@@ -470,7 +470,7 @@ Let's take a look at some NBA data that was scraped off of basketball-reference.
 
 ```r
 western_conference <- read.csv("western_nba.csv")[,-1]
-head(western_conference)
+head(western_conference, 3)
 ```
 
 ```
@@ -478,12 +478,19 @@ head(western_conference)
 1     Stephen Curry 37.45715 Golden State Warriors
 2 Russell Westbrook 35.65415 Oklahoma City Thunder
 3        Chris Paul 35.65415       Houston Rockets
-4      LeBron James 35.65415    Los Angeles Lakers
-5       Paul George 30.56070 Oklahoma City Thunder
-6       Mike Conley 30.52112     Memphis Grizzlies
 ```
 
-In the following blocks, we're going to take 100 samples of size $n=2, 5, 30$. Ignore the code that you know you never learned for midterm 1. Just take a look at the output.
+```r
+mean(western_conference$millions)
+```
+
+```
+[1] 6.500936
+```
+
+Law of Large Numbers
+========================================================
+In the following blocks, we're going to take 100 samples of size $n=2, 5, 30$. Ignore the code that you have you never learned for midterm 1. Focus on the output.
 
 
 
@@ -498,7 +505,7 @@ sample_means_2 %>% summarize(sampling_mean=mean(mean_salary))
 
 ```
   sampling_mean
-1      6.115401
+1      7.025869
 ```
 
 Law of Large Numbers
@@ -512,7 +519,7 @@ sample_means_5 %>% summarize(sampling_mean=mean(mean_salary))
 
 ```
   sampling_mean
-1      6.323419
+1      5.934631
 ```
 
 Law of Large Numbers
@@ -526,7 +533,7 @@ sample_means_30 %>% summarize(sampling_mean=mean(mean_salary))
 
 ```
   sampling_mean
-1      6.468691
+1      6.318916
 ```
 
 Central Limit Theorem
