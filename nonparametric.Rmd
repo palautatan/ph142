@@ -1,0 +1,241 @@
+---
+title: "Final Practice Problems"
+output: html_document
+---
+
+**DISCLAIMER:** You do not need to know any of the code you're going to see on this worksheet. You just need to understand the output.
+
+## Mixed practice.
+1. How do you calculate the median of a dataset? (Please provide case-by-case scenarios.)
+
+2. Below are several datasets. Please match the labels to the datasets depending on what type of test you could potentially use on them.
+
+**Labels**  
+Permutation Test  
+$\chi^2$ test for independence  
+$\chi^2$ Goodness-of-Fit test  
+Two sample t-test  
+One sample z-test  
+
+#### Dataset 1.
+```{r, echo=FALSE}
+row        <- data.frame(t(c(5, 20, 17)))
+names(row) <- c("kings", "warriors", "lakers")
+row
+```
+
+#### Dataset 2.
+```{r, echo=FALSE}
+unis <- c("stanford", "berkeley")
+eths <- c("african american", "asian", "chicano/latino", "native american/alaska native", "pacific islander", "white", "other/decline to state", "mixed")
+cal  <- c(843, 9990, 3192, 186, 65, 7243, 1137, 2525)
+sta  <- c(6,     21,   16,   1,  1,   36,    1,   10) * (7032/100)
+
+uni_data <- data.frame(cbind(cal, sta))
+rownames(uni_data) <- eths
+names(uni_data) <- unis
+uni_data
+```
+
+#### Dataset 3.
+```{r, echo=FALSE}
+sweater <- round(runif(6, 50, 65), 1)
+shirt   <- round(runif(6, 68, 80), 1)
+outfit_df <- data.frame(cbind(c(sweater, shirt), rep(c("sweater", "shirt"), each=6)))
+names(outfit_df) <- c("farenheit", "outfit")
+outfit_df
+```
+
+#### Dataset 4.
+This dataset is similar to Dataset 3 but actually includes `r 365-nrow(outfit_df)` more rows that just weren't printed!
+```{r, echo=FALSE}
+sweater <- round(runif(6, 50, 65), 1)
+shirt   <- round(runif(6, 68, 80), 1)
+outfit_df <- data.frame(cbind(c(sweater, shirt), rep(c("sweater", "shirt"), each=6)))
+names(outfit_df) <- c("farenheit", "outfit")
+outfit_df
+```
+
+#### Dataset 5.
+For some reason, you know, for sure, the true standard deviation of Chance the Rapper's plays on Spotify. (What are the chances?) You also have these data.
+```{r, echo=FALSE}
+play_df <- data.frame(c(307507262, 35403776, 172425446, 166859476, 127965740, 46487943, 17032831, 15322923, 106902309, 114293608))
+names(play_df) <- "spotify_plays"
+play_df
+```
+
+3. If you know population standard deviation, then use a ________ test! If you don't know the population standard deviation, then use a ________ test!
+
+4. Surely, we always want our sample to representative of our population. We do this by taking _________ samples. Also, just to be clear, just because the samples are said to be just that, they are not taken haphazardly.  
+
+5. When we want to make a histogram in the library ______________, we use the function ________________.  
+
+6. In `dplyr`, we use the following symbol %>% called the _____________________ to send our data into functions.  
+
+## Short Answer.
+1. Because assumptions, such as large sample size, may be difficult to satisfy, we have alternative methods. We can evade the large sample size requirement when testing hypotheses by using a ____________ test instead of formal testing procedures.
+
+2. When we construct a 95% confidence interval using the _____________ method, we have to find the 2.5th percentile and the 97.5 percentile of our estimated "sampling" distribution to capture ____% of the data within these bounds.
+
+## Santa's Little Statistician.
+<i>Directions: It is your job to talk to the elf.</i>
+
+Welcome to Santa's Workshop! We really needed some help so we decided to invite you, a cheery statistician, to the North Pole! This year, we're working on sending good folk as much presents as possible! That being said, Santa himself said we could only use 15 total presents to make a confidence interval about the weights of the presents. Why weight, you say? Well, Santa's sleigh can only carry up to 1000 lbs! What? Did you think the sleigh was magic? 
+
+### Part a.
+
+#### Median Weights.
+First item on Santa's stats wishlist today: he wants to know if we can test the hypotheses
+
+$H_0:$ Median weight of presents is 10 lbs. (He carries 100 presents per ride.)  
+$H_1:$ Median weight of presents is greater than 10 lbs.
+
+given these data. I chose these presents randomly!
+
+```{r data-making, message=FALSE, warning=FALSE, echo=FALSE}
+present_weights <- c(15, 30, 2, 25, 11, 10,
+                     10, 20, 5,  7,  9,  8,
+                     12, 10, 7,  6,  2,  1)
+
+destinations    <- c("north america", "south america", "africa", "asia", "europe", "australia", "europe")
+shipping        <- c("priority", "economy")
+present_df      <- data.frame(cbind(present_weights, destinations, shipping))
+
+present_df$present_weights <- as.numeric(present_df$present_weights)
+present_df
+```
+
+```{r, echo=FALSE}
+library(ggplot2)
+ggplot(present_df, aes(x=present_weights)) +
+  geom_histogram(bins=18, col="white", size=0.25, fill="firebrick3") +
+  xlab("present weights (lbs)") +
+  ggtitle("Distribution of Present Weights") +
+  theme_bw()
+```
+
+So, can we? (<i>Select one by removing the boldface... I urge you to choose the first option so you can actually finish this worksheet</i>).  
+
+**(a) Yes, we can using ___________________.**  
+**(b) No, we can't.**
+
+
+
+#### Hypothesis testing with a confidence interval.
+Great! Good to know since we really need to know about these gift weights... Rudolph's back is beginning to hurt! From what I understand about the method you mentioned earlier, we are going to sample from our sample to calculate statistics? Why would we do that?  
+
+**We sample from our sample because we want to estimate our ____________ distribution of the statistic we are interested in, which is what confidence intervals are normally based off of.**  
+
+What was the median of our original present weight dataset?    
+
+**Our sample's median is _______** <i>(numeric value)</i>.
+
+Gotcha! Also, here are the 1000 medians you asked for earlier in histogram format. I also plotted the 5th percentile and the 95th percentile. You said you could make a confidence interval out of it. So what is the interval?  
+
+```{r, echo=FALSE}
+medians <- sapply(1:1000, function(x) median(sample(present_weights, length(present_weights), replace=TRUE)))
+medians <- data.frame(medians)
+```
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+library(dplyr)
+median_quantiles <- medians %>% summarize(fifth_perc=quantile(medians, 0.05),
+                      ninetyfifth_perc=quantile(medians, 0.95))
+median_quantiles
+```
+
+```{r, echo=FALSE}
+ggplot(medians, aes(x=medians)) +
+  geom_histogram(bins=20, col="white", size=0.25, fill="firebrick3") +
+  ggtitle("Medians") +
+  geom_vline(xintercept=7, col="darkgreen") +
+  geom_vline(xintercept=10, col="darkgreen") +
+  theme_bw()
+```
+
+So, what do you think about our original hypotheses? Do you think we need to stop loading our sleigh with 100 presents? <i>(Use as much space as you need!)</i>  
+**Based on our data, _______________________________________________.**
+
+
+### Part b.
+
+#### Weights between shipping methods.
+Now, for Santa's next item on his stats wishlist. He wants to know if there's a difference between the average weights between presents under priority and economy shipping. It could give us a little more intuition to work off of when we load up the sleigh. We're very much a data-driven business, you see!   
+
+You asked for the means of the two subsamples, which can also be considered as random samples. So, here they are!
+
+```{r, echo=FALSE}
+sample_means <- present_df %>% 
+  group_by(shipping) %>% 
+  summarize(n=length(present_weights),
+            mean=mean(present_weights))
+sample_means
+```
+
+
+What hypotheses can we test and how can we test them based off of these data?  
+**We can test the null hypothesis that ___________________________________ using a ____________________. We are choosing this test because we don't have that large of a sample size and need to simulate the case if we did. Our observed difference in means is __________________.**  
+
+How can we interpret the observed difference? 
+**On average, we expect ______________________________________________.**
+
+#### Simulating a null distribution.
+Here's a preview of the data we were looking at earlier, but subsetted to just see present weights and shipping methods.  
+```{r, echo=FALSE}
+head(present_df %>% select(present_weights, shipping))
+```
+
+And here's a preview (the first five columns only) of what the computer is giving us after running the code you wrote to switch up the shipping labels. 
+
+```{r, echo=FALSE}
+new_labels <- lapply(1:999, function(x) sample(present_df$shipping, nrow(present_df), replace=TRUE))
+new_lab_df <- cbind(present_df, new_labels)
+names(new_lab_df) <- c("present_weights", "shipping", paste0("shipping_i", 1:1000))
+head(new_lab_df[,c(1:5)])
+```
+
+I understood how you switched up the labels, but I actually don't understand how you got to this next part with all these sample means. What exactly did you do and why?  
+
+```{r, echo=FALSE}
+all_the_means <- c()
+
+each_col <- 3
+for (each_col in 3:1002) {
+  tmp_df <- data.frame(cbind(new_lab_df %>% pull(present_weights), new_lab_df[,each_col]))
+  names(tmp_df) <- c("present_weights", "shipping")
+  tmp_df$shipping <- ifelse(tmp_df$shipping==1, "priority", "economy")
+  tmp_means <- tmp_df %>% group_by(shipping) %>% summarize(mean=mean(present_weights))
+  all_the_means <- rbind(all_the_means, tmp_means$mean)
+}
+
+all_the_means <- data.frame(all_the_means)
+names(all_the_means) <- c("priority", "economy")
+
+all_the_means <- all_the_means %>% mutate(mean_difference=priority-economy)
+
+head(all_the_means)
+```
+
+```{r, echo=FALSE}
+original_diff <- 6.888889 - 7.222222
+
+ggplot(all_the_means, aes(x=mean_difference)) +
+  geom_histogram(bins=40, col="white", size=0.25, fill="firebrick3") +
+  geom_vline(xintercept=original_diff, col="darkgreen") + 
+  xlab("difference in sample means") +
+  ggtitle("Histogram of Sample Mean Differences") +
+  theme_bw()
+```
+
+**We calculated the ______________________________ for each of the new relabels so that we could simulate the ___________ distribution. From this distribution, we can now calculate the _______________ which is the probability of observing our data or more extreme, given that ________________________!**
+
+**Therefore, we can calculate our p-value by seeing how much data lie above our original difference.**
+
+```{r}
+c(prob_below_value=length(which(all_the_means %>% pull(mean_difference) < original_diff)) / nrow(all_the_means), prob_above_value=length(which(all_the_means %>% pull(mean_difference) > original_diff)) / nrow(all_the_means))
+```
+
+**Because our p-value is _____________________, we ________________________ our null hypothesis. Therefore, when you pack up your next sleigh _________________________________________________.**
+
+
+Well, that's all great to know now! Santa will be pleased. Thanks for all your help, Cheery statistician! All of the North Pole thanks you for all your data skills. I have very few things on my wishlist this year... but I do truly wish that you have a super jolly winter break!
