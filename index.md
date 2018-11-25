@@ -1,7 +1,12 @@
 # PH142 Resource Hub
 Welcome to the resource hub! You will find lots of help for PH142 on this page.
 
+## Subject Matter Notes
+I will soon post my personal notes.
+
 ## Lab Demos
+Here are demos that will be helpful for and complement your weekly labs. Some of which, without the lab, may be difficult to understand, so please read along with corresponding lab assignments.
+<br>
 <a href="lab_demos/lab_1/lab_1_demo.html">Lab 1: Dataframes and Data Viz</a>
 <br>
 <a href="lab_demos/lab_2/lab_2_demo.html">Lab 2: Regression Scatterplots</a>
@@ -14,7 +19,10 @@ Welcome to the resource hub! You will find lots of help for PH142 on this page.
 <br>
 <a href="lab_demos/lab_12/lab_12.html">Lab 12: Regression Test Intro</a>
 
+## YouTube Videos
+Here is the link to YouTube videos. For extensive `dplyr` and `ggplot2`, do see the videos on the following channel.
+<br>
+<a href="https://www.youtube.com/channel/UCcwP59Z7IT29Qi-izAwf7rA/videos">YouTube Channel</a>
 
 ## Exam Practice
-
 <a href="final/nonparametric.html">Final Practice: Nonparametrics</a>
