@@ -1,8 +1,8 @@
 # PH142 Resource Hub
 Welcome to the resource hub! You will find lots of help for PH142 on this page.
 
-## Subject Matter Notes
-I will soon post my personal notes.
+## Chalk Talks
+I will soon post my personal notes. These may take a while to develop since I don't actually prepare specific notes for lessons.
 
 ## Lab Demos
 Here are demos that will be helpful for and complement your weekly labs. Some of which, without the lab, may be difficult to understand, so please read along with corresponding lab assignments.
