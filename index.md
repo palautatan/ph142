@@ -4,4 +4,4 @@ Welcome to the resource hub! You will find lots of help for PH142 on this page.
 ## Lab Demos
 
 ## Practice Problems
-<a href="Final Practice Nonparametric Problems">nonparametric.html</a>
+<a href="Nonparametric Methods">final/nonparametric.html</a>
