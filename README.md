@@ -1,4 +1,7 @@
 # PH142 Resource Hub
-Welcome!
+Welcome to the resource hub! You will find lots of help for PH142 on this page.
 
-<a href="Final Practice Problems">nonparametric.html</a>
+## Lab Demos
+
+## Practice Problems
+<a href="Final Practice Nonparametric Problems">nonparametric.html</a>
