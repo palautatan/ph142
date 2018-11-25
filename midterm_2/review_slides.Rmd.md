@@ -12,6 +12,18 @@ Use Piazza for all your statistical questions!
 
 Good luck studying to all!
 
+Midterm Information
+========================================================
+**Room Info:**  
+- Those with extra time accommodation should have received an email from Dr. Hubbard. You will determine your room via email exchange with Alan.  
+- For everyone else: Those with last names at/before "Moh" will write in Li Ka Shing in our regular room (n=153). Those with last names at/**after** "Mok" will write in Barker 101 (n=110). 
+
+**Please bring:**   
+1. Your ID  
+2. Calculator   
+3. Cheat sheet  
+4. Watch  
+
 Material
 ========================================================
 **Chapter 6, 7:** Make your sample representative of your population!  
@@ -197,8 +209,8 @@ sample_2
 
 ```
     Sepal.Length Sepal.Width Petal.Length Petal.Width    Species
-80           5.7         2.6          3.5         1.0 versicolor
-128          6.1         3.0          4.9         1.8  virginica
+92           6.1           3          4.6         1.4 versicolor
+113          6.8           3          5.5         2.1  virginica
 ```
 
 
@@ -213,12 +225,12 @@ sample_6
 
 ```
     Sepal.Length Sepal.Width Petal.Length Petal.Width    Species
-41           5.0         3.5          1.3         0.3     setosa
-11           5.4         3.7          1.5         0.2     setosa
-105          6.5         3.0          5.8         2.2  virginica
-97           5.7         2.9          4.2         1.3 versicolor
-23           4.6         3.6          1.0         0.2     setosa
-81           5.5         2.4          3.8         1.1 versicolor
+87           6.7         3.1          4.7         1.5 versicolor
+118          7.7         3.8          6.7         2.2  virginica
+51           7.0         3.2          4.7         1.4 versicolor
+89           5.6         3.0          4.1         1.3 versicolor
+140          6.9         3.1          5.4         2.1  virginica
+84           6.0         2.7          5.1         1.6 versicolor
 ```
 
 
@@ -292,7 +304,7 @@ $P(B \cup I) = P(B) + P(I) - P(B\cap I) = 0.11 + 0.28 - 0.05 = 0.34$
 Example
 ========================================================
 **Additional Questions for Home:**
-- What is the probability of a dalmatian being unimpaired and brown-eyed dog if it is neither hearing impaired nor blue eyed?  
+- What is the probability of a dalmatian being neither hearing impaired nor blue eyed?  
 - Are $B$ and $I$ independent? Or dependent?  
 
 *If this was difficult to answer, please refer to Sarah's Venn Diagram notes on bCourses.*
@@ -482,7 +494,8 @@ $$
 
 <u>Recipe for Poisson</u>  
 1. Goals: We want to find a probability, these are all fine: greater/less/equal/combo  
-2. The data are said to be normal or are assumed to be normal in the prompt  
+2. Events occur independently.
+3. The rate at which events occur is constant. The rate cannot be higher in some intervals and lower in other intervals.  
 3. **There are more assumptions, look for these at home.**  
 
 Example
@@ -548,7 +561,7 @@ sample_means_2 %>% summarize(sampling_mean=mean(mean_salary))
 
 ```
   sampling_mean
-1      7.297346
+1      6.680716
 ```
 
 Law of Large Numbers
@@ -562,7 +575,7 @@ sample_means_5 %>% summarize(sampling_mean=mean(mean_salary))
 
 ```
   sampling_mean
-1       6.36792
+1      6.512029
 ```
 
 Law of Large Numbers
@@ -576,7 +589,7 @@ sample_means_30 %>% summarize(sampling_mean=mean(mean_salary))
 
 ```
   sampling_mean
-1      6.603053
+1      6.517297
 ```
 
 Central Limit Theorem
@@ -692,9 +705,9 @@ Sampling distributions have means and variances that can be calculated as specif
 
 
 ```
-             mean   variance
-counts      x-bar sd/sqrt(n)
-proportions     p (p(1-p))/n
+            mean   variance
+counts        mu  sigma^2/n
+proportions    p (p(1-p))/n
 ```
 
 **Question:** What is the relationship between variance and standard deviation?
@@ -719,6 +732,52 @@ Mo Probability, Mo Problems
   - # 12, 18, 15
 
 
-Name that Distribution
+More for Home...
 ========================================================
-1. We expect there to be only 2 BART delays per week because BART is so efficient and amazing and uses its few-rail system wisely. 
+**Extra Example 1** We expect there to be only 2 BART delays per week because BART is so efficient and amazing and uses its few-rail system wisely. What's the probability of there being 2 delays in a day?
+
+
+```r
+?dpois
+?ppois
+```
+
+More for Home...
+========================================================
+**Extra Example 2** *Carl Gauss in the house!* Check out his signature.
+
+![plot of chunk unnamed-chunk-28](images/gauss.png)
+
+
+More for Home...
+========================================================
+**Extra Example 2** *Carl Gauss in the house!* Carl Gauss was a very smart man. He made discoveries on the weekly. Assume that the number of discoveries he made per week can be modeled by the Gaussian distribution $N(\mu=5,\sigma=7)$.  
+
+- Interpret $\mu$.  
+- Interpret $\sigma$.
+- Does the $N(5,7)$ perfectly model Carl Gauss's discoveries per week?
+
+More for Home...
+========================================================
+**Extra Example 3** Check out the NBA data!
+
+
+```
+                   Team Freq
+1 Golden State Warriors   20
+2  Los Angeles Clippers   20
+3    Los Angeles Lakers   16
+4      Sacramento Kings   21
+```
+
+Pool all the California NBA players together. If we take a random sample of size 12 of these huge humans, what is the probability that we choose exactly 5 of them from the Warriors?
+
+More...
+========================================================
+**True or False?**  The normal distribution is a discrete distribution.
+
+**True or False?**  The mean of a Poisson distribution is the variance of the Poisson distribution.
+
+**True or False?**  Sample proportion $\hat p$ is an unbiased estimator for population parameter $p$.
+
+**True or False?**  A binomial distribution can have three outcomes.

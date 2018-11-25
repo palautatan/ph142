@@ -12,6 +12,18 @@ Use Piazza for all your statistical questions!
 
 Good luck studying to all!
 
+Midterm Information
+========================================================
+**Room Info:**  
+- Those with extra time accommodation should have received an email from Dr. Hubbard. You will determine your room via email exchange with Alan.  
+- For everyone else: Those with last names at/before "Moh" will write in Li Ka Shing in our regular room (n=153). Those with last names at/**after** "Mok" will write in Barker 101 (n=110). 
+
+**Please bring:**   
+1. Your ID  
+2. Calculator   
+3. Cheat sheet  
+4. Watch  
+
 Material
 ========================================================
 **Chapter 6, 7:** Make your sample representative of your population!  
@@ -274,7 +286,7 @@ $P(B \cup I) = P(B) + P(I) - P(B\cap I) = 0.11 + 0.28 - 0.05 = 0.34$
 Example
 ========================================================
 **Additional Questions for Home:**
-- What is the probability of a dalmatian being unimpaired and brown-eyed dog if it is neither hearing impaired nor blue eyed?  
+- What is the probability of a dalmatian being neither hearing impaired nor blue eyed?  
 - Are $B$ and $I$ independent? Or dependent?  
 
 *If this was difficult to answer, please refer to Sarah's Venn Diagram notes on bCourses.*
@@ -433,7 +445,8 @@ $$
 
 <u>Recipe for Poisson</u>  
 1. Goals: We want to find a probability, these are all fine: greater/less/equal/combo  
-2. The data are said to be normal or are assumed to be normal in the prompt  
+2. Events occur independently.
+3. The rate at which events occur is constant. The rate cannot be higher in some intervals and lower in other intervals.  
 3. **There are more assumptions, look for these at home.**  
 
 Example
@@ -596,7 +609,7 @@ Sampling Distribution Means and Variances
 Sampling distributions have means and variances that can be calculated as specified below!
 
 ```{r, echo=FALSE}
-counts      <- c(mean="x-bar", variance="sd/sqrt(n)")
+counts      <- c(mean="mu", variance="sigma^2/n")
 proportions <- c(mean="p", variance="(p(1-p))/n")
 data.frame(rbind(counts, proportions))
 ```
@@ -623,6 +636,52 @@ Mo Probability, Mo Problems
   - # 12, 18, 15
 
 
-Name that Distribution
+More for Home...
 ========================================================
-1. We expect there to be only 2 BART delays per week because BART is so efficient and amazing and uses its few-rail system wisely. 
+**Extra Example 1** We expect there to be only 2 BART delays per week because BART is so efficient and amazing and uses its few-rail system wisely. What's the probability of there being 2 delays in a day?
+
+```{r}
+?dpois
+?ppois
+```
+
+More for Home...
+========================================================
+**Extra Example 2** *Carl Gauss in the house!* Check out his signature.
+
+```{r, echo=FALSE}
+knitr::include_graphics("images/gauss.png")
+```
+
+
+More for Home...
+========================================================
+**Extra Example 2** *Carl Gauss in the house!* Carl Gauss was a very smart man. He made discoveries on the weekly. Assume that the number of discoveries he made per week can be modeled by the Gaussian distribution $N(\mu=5,\sigma=7)$.  
+
+- Interpret $\mu$.  
+- Interpret $\sigma$.
+- Does the $N(5,7)$ perfectly model Carl Gauss's discoveries per week?
+
+More for Home...
+========================================================
+**Extra Example 3** Check out the NBA data!
+
+```{r, echo=FALSE}
+cali_nba <- western_conference %>% filter(team %in% c("Golden State Warriors", "Los Angeles Lakers", "Los Angeles Clippers", "Sacramento Kings"))
+cali_nba_table <- table(cali_nba$team)[which(table(cali_nba$team)!=0)]
+cali_nba_table <- data.frame(cali_nba_table)
+names(cali_nba_table)[1] <- "Team"
+cali_nba_table
+```
+
+Pool all the California NBA players together. If we take a random sample of size 12 of these huge humans, what is the probability that we choose exactly 5 of them from the Warriors?
+
+More...
+========================================================
+**True or False?**  The normal distribution is a discrete distribution.
+
+**True or False?**  The mean of a Poisson distribution is the variance of the Poisson distribution.
+
+**True or False?**  Sample proportion $\hat p$ is an unbiased estimator for population parameter $p$.
+
+**True or False?**  A binomial distribution can have three outcomes.
