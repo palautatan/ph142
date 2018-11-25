@@ -49,7 +49,7 @@ library(ggplot2)
 # How to Run Your Chunks
 You can run using the green arrow, the run dropdown above, or control/command+enter.
 ```{r}
-CS_data <- read.csv("Data/Cesarean.csv")
+CS_data <- read.csv("data/Cesarean.csv")
 ```
 
 # Your Environment
@@ -67,7 +67,7 @@ To easily manage dataframes in R, we can use a library called `dplyr`. A library
 
 ```{r}
 # EXAMPLE FROM LAB
-CS_data %>% mutate(CS_rate_100 = CS_rate * 100)
+head(CS_data %>% mutate(CS_rate_100 = CS_rate * 100))
 CS_data <- CS_data %>% mutate(CS_rate_100 = CS_rate * 100)
 
 # ANOTHER HELPFUL(?) EXAMPLE
