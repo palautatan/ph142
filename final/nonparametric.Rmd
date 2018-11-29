@@ -3,8 +3,6 @@ title: "Final Practice Problems"
 output: html_document
 ---
 
-**DISCLAIMER:** You do not need to know any of the code you're going to see on this worksheet. You just need to understand the output.
-
 ## Mixed practice.
 1. How do you calculate the median of a dataset? (Please provide case-by-case scenarios.)
 
@@ -66,31 +64,35 @@ play_df
 
 3. If you know population standard deviation, then use a ________ test! If you don't know the population standard deviation, then use a ________ test!
 
-4. Surely, we always want our sample to representative of our population. We do this by taking _________ samples. Also, just to be clear, just because the samples are said to be just that, they are not taken haphazardly.  
+4. Surely, we always want our sample to be representative of our population. We do this by taking a _________ sample. Also, just to be clear, just because the samples are said to be just that, they are not taken haphazardly.  
 
-5. When we want to make a histogram in the library ______________, we use the function ________________.  
+5. When we want to make a histogram using the library ______________, we use the function ________________.  
 
-6. In `dplyr`, we use the following symbol %>% called the _____________________ to send our data into functions.  
+6. In `dplyr`, we use the symbol `%>%` called the _____________________ to send our data into functions.  
 
 ## Short Answer.
-1. Because assumptions, such as large sample size, may be difficult to satisfy, we have alternative methods. We can evade the large sample size requirement when testing hypotheses by using a ____________ test instead of formal testing procedures.
+1. Because assumptions, such as large sample size, may be difficult to satisfy, we have alternative methods. We can evade the large sample size requirement when testing hypotheses by using a ____________ test instead of classical testing procedures.
 
-2. When we construct a 95% confidence interval using the _____________ method, we have to find the 2.5th percentile and the 97.5 percentile of our estimated "sampling" distribution to capture ____% of the data within these bounds.
+2. When we construct a 95% confidence interval using the _____________ method, we have to find the 2.5th percentile and the 97.5 percentile of our approximate "sampling" distribution to capture ____% of the data within these bounds.
 
 ## Santa's Little Statistician.
-<i>Directions: It is your job to talk to the elf.</i>
+<i>Directions: It is your job to talk to Santa's elf. Your responses are shown 
+in bold and you need to fill in the blanks.</i>
 
-Welcome to Santa's Workshop! We really needed some help so we decided to invite you, a cheery statistician, to the North Pole! This year, we're working on sending good folk as much presents as possible! That being said, Santa himself said we could only use 15 total presents to make a confidence interval about the weights of the presents. Why weight, you say? Well, Santa's sleigh can only carry up to 1000 lbs! What? Did you think the sleigh was magic? 
+Welcome to Santa's Workshop! We really needed some help so we decided to invite you, a cheery statistician, to the North Pole! This year, we're working on sending good folk as many presents as possible! That being said, Santa himself said we could only use 15 total presents to make a confidence interval about the weights (in pounds) of the presents. Why weight, you say? Well, Santa's sleigh can only carry up to 1000 lbs! What? Did you think the sleigh was magic? 
 
 ### Part a.
 
 #### Median Weights.
-First item on Santa's stats wishlist today: he wants to know if we can test the hypotheses
+First item on Santa's stats wishlist today: he wants to know if we can test the hypotheses:
 
 $H_0:$ Median weight of presents is 10 lbs. (He carries 100 presents per ride.)  
 $H_1:$ Median weight of presents is greater than 10 lbs.
 
-given these data. I chose these presents randomly!
+To test the hypothesis, we will use the data below, based on presents chosen random
+by Santa.
+
+The data frame for the sample of presents:
 
 ```{r data-making, message=FALSE, warning=FALSE, echo=FALSE}
 present_weights <- c(15, 30, 2, 25, 11, 10,
@@ -104,6 +106,8 @@ present_df      <- data.frame(cbind(present_weights, destinations, shipping))
 present_df$present_weights <- as.numeric(present_df$present_weights)
 present_df
 ```
+
+A histogram of the sample:
 
 ```{r, echo=FALSE}
 library(ggplot2)
@@ -119,18 +123,20 @@ So, can we? (<i>Select one by removing the boldface... I urge you to choose the 
 **(a) Yes, we can using ___________________.**  
 **(b) No, we can't.**
 
-
+[Hint: This question relies on your knowledge that a 95% confidence interval
+can be used to know whether the p-value for the corresponding two-sided test is 
+< 0.05!]
 
 #### Hypothesis testing with a confidence interval.
-Great! Good to know since we really need to know about these gift weights... Rudolph's back is beginning to hurt! From what I understand about the method you mentioned earlier, we are going to sample from our sample to calculate statistics? Why would we do that?  
+Great! Good to know since we really need to know about these gift weights... Rudolph's back is beginning to hurt! From what I understand about the method you mentioned earlier, we are going to sample from our sample to calculate statistics. Why would we do that?  
 
-**We sample from our sample because we want to estimate our ____________ distribution of the statistic we are interested in, which is what confidence intervals are normally based off of.**  
+**We sample ___________ replacement from our sample because we want to estimate the ____________ distribution of the statistic we are interested in, which is what confidence intervals are normally based off of.**  
 
 What was the median of our original present weight dataset?    
 
 **Our sample's median is _______** <i>(numeric value)</i>.
 
-Gotcha! Also, here are the 1000 medians you asked for earlier in histogram format. I also plotted the 5th percentile and the 95th percentile. You said you could make a confidence interval out of it. So what is the interval?  
+Gotcha! Here are the 1000 medians (one for each of the resamples) you asked for in histogram format. I also illustrated the 5th percentile and the 95th percentile using vertical lines.
 
 ```{r, echo=FALSE}
 medians <- sapply(1:1000, function(x) median(sample(present_weights, length(present_weights), replace=TRUE)))
@@ -141,7 +147,7 @@ medians <- data.frame(medians)
 library(dplyr)
 median_quantiles <- medians %>% summarize(fifth_perc=quantile(medians, 0.05),
                       ninetyfifth_perc=quantile(medians, 0.95))
-median_quantiles
+
 ```
 
 ```{r, echo=FALSE}
@@ -153,9 +159,16 @@ ggplot(medians, aes(x=medians)) +
   theme_bw()
 ```
 
-So, what do you think about our original hypotheses? Do you think we need to stop loading our sleigh with 100 presents? <i>(Use as much space as you need!)</i>  
-**Based on our data, _______________________________________________.**
+Here are the values for the 5th and 95th percentiles, which I think you might need
+to make your confidence interval.
 
+```{r}
+median_quantiles
+```
+
+So, what do you think about our original hypotheses? Do you think we need to stop loading our sleigh with 100 presents? <i>(Use as much space as you need!)</i>  
+
+**Based on our data, _______________________________________________.**
 
 ### Part b.
 
@@ -185,7 +198,7 @@ Here's a preview of the data we were looking at earlier, but subsetted to just s
 head(present_df %>% select(present_weights, shipping))
 ```
 
-And here's a preview (the first five columns only) of what the computer is giving us after running the code you wrote to switch up the shipping labels. 
+And here's a preview (the first five columns only) of what the computer is giving us after running the code you wrote to shuffle the shipping labels. 
 
 ```{r, echo=FALSE}
 new_labels <- lapply(1:999, function(x) sample(present_df$shipping, nrow(present_df), replace=TRUE))
@@ -194,7 +207,7 @@ names(new_lab_df) <- c("present_weights", "shipping", paste0("shipping_i", 1:100
 head(new_lab_df[,c(1:5)])
 ```
 
-I understood how you switched up the labels, but I actually don't understand how you got to this next part with all these sample means. What exactly did you do and why?  
+I understood how you shulffed the labels, but I actually don't understand how you got to this next part with all these sample means. What exactly did you do and why?  
 
 ```{r, echo=FALSE}
 all_the_means <- c()
@@ -231,7 +244,9 @@ ggplot(all_the_means, aes(x=mean_difference)) +
 
 **Therefore, we can calculate our p-value by seeing how much data lie above our original difference.**
 
-```{r}
+Here is the output from our calculation:
+
+```{r, echo=F}
 c(prob_below_value=length(which(all_the_means %>% pull(mean_difference) < original_diff)) / nrow(all_the_means), prob_above_value=length(which(all_the_means %>% pull(mean_difference) > original_diff)) / nrow(all_the_means))
 ```
 

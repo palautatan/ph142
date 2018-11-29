@@ -26,5 +26,7 @@ Here is the link to YouTube videos. For extensive `dplyr` and `ggplot2`, do see 
 <br>
 <a href="https://www.youtube.com/channel/UCcwP59Z7IT29Qi-izAwf7rA/videos">YouTube Channel</a>
 
-## Exam Practice
+## Exam Materials
+<a href="final/part-3-review.pdf">Statistical Inference Overview</a>
+
 <a href="final/nonparametric.html">Final Practice: Nonparametrics</a>
