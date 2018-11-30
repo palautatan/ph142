@@ -29,4 +29,6 @@ Here is the link to YouTube videos. For extensive `dplyr` and `ggplot2`, do see 
 ## Exam Materials
 <a href="final/part-3-review.pdf">Statistical Inference Overview</a>
 <br>
+<a href="resources/inference-cheat-sheet.pdf">The Best Inference Cheat Sheet Ever (z, t test)</a>
+<br>
 <a href="final/nonparametric.html">Final Practice: Nonparametrics</a>
