@@ -1,7 +1,2 @@
 theme: jekyll-theme-minimal
 description: <img src="images/thumbnail/thumbnail.001.jpeg"> <br> <b>Berkeley, CA.</b><br><br>Don't forget to come to class and office hours.
-defaults:
-  - scope:
-      path: ""
-    values:
-      layout: default
