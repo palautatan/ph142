@@ -9,4 +9,4 @@ Coming soon!
 Professor Corinne Riddell
 MWF 8:00-9:00, Li Ka Shing
 
-See material from fall 2018 <a href="archives/2018-fall.md">here</a>.
+See material from fall 2018 <a href="archives/2018-fall">here</a>.
