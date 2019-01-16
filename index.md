@@ -2,8 +2,8 @@
 Welcome to the resource hub! My name is Edie Espejo, and I am one of the course grad student instructors! If you want, learn more about me <a href="">here</a>. You will find lots of help for PH142 on this page. I hope that we can all grow together as a class this semester... Do it big, everyone!
 
 ## Spring 2019 Material
-Professor Mi-Suk Kang Dufour
-MWF 8:00-9:00, 245 Li Ka Shing
+Professor Mi-Suk Kang Dufour  
+MWF 8:00-9:00, 245 Li Ka Shing  
 
 Welcome to a new semester! I'll be posting my resources here for organization.
 
