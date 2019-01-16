@@ -10,6 +10,9 @@ MWF 8:00-9:00, 245 Li Ka Shing
 <a href="notes/formatting.html">i. Homework Formatting</a>  
 <a href="notes/knitting-issues.html"> ii. Knitting Issues</a>  
 
+#### Part 1 | Introduction
+We're going to be starting here!
+
 ### Lab Demos
 No lab demos yet.
 
