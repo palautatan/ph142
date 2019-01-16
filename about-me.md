@@ -1,26 +1,11 @@
-# PH142 Resource Hub
-Welcome to the resource hub! My name is Edie Espejo, and I am one of the course grad student instructors! If you want, learn more about me <a href="">here</a>. You will find lots of help for PH142 on this page. I hope that we can all grow together as a class this semester... Do it big, everyone!
+# About me
+Hello, hello! I'm Edie, and I'm probably your GSI or friend or both. Here's a little on my background so you can **trust me** when I teach you!
 
-## Spring 2019 Material
-Professor Mi-Suk Kang Dufour  
-MWF 8:00-9:00, 245 Li Ka Shing  
+## Teaching philosophy
+I'm one half academic instructor (for you) and one half athletic instructor (for my karate students), and my two sides unavoidably mesh together. I will always try my best to give you what you need as students; I aim to be your faithful academic plug. I apologize in advance for my overanimated facial expressions, my graduate student fatigue, and (sometimes) sharp tongue, but I'll give you no BS in my classroom. Xoxo.
 
-### Notes
-No notes yet.
+## Education and Experience
+You can check out my <a href="https://www.linkedin.com/in/palautatan/">LinkedIn</a> profile for more. You can add me as well! No awkwardness, I'm just a person.
 
-### Lab Demos
-No lab demos yet.
-
-### YouTube Videos
-No videos yet.
-
-### Exam Material
-No exams yet.
-
-
-## Past Material Material
-
-### Fall 2018
-Professor Corinne Riddell  
-MWF 8:00-9:00, 245 Li Ka Shing  
-Past material <a href="archives/2018-fall">here</a>
+## Hobbies
+I like to do a lot of things! I love music, teach karate, avoid playing The Sims 4, and can't live without caffeine.
