@@ -23,6 +23,6 @@ No exams yet.
 ## Past Material Material
 
 ### Fall 2018
-Professor Corinne Riddell
-MWF 8:00-9:00, 245 Li Ka Shing
+Professor Corinne Riddell  
+MWF 8:00-9:00, 245 Li Ka Shing  
 Past material <a href="archives/2018-fall">here</a>
