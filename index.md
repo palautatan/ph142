@@ -1,5 +1,5 @@
 # PH142 Resource Hub
-Welcome to the resource hub! My name is Edie Espejo, and I am one of the course grad student instructors! If you want, learn more about me <a href="">here</a>. You will find lots of help for PH142 on this page. I hope that we can all grow together as a class this semester... Do it big, everyone!
+Welcome to the resource hub! My name is Edie Espejo, and I am one of the course grad student instructors! If you want, learn more about me <a href="about-me">here</a>. You will find lots of help for PH142 on this page. I hope that we can all grow together as a class this semester... Do it big, everyone!
 
 ## Spring 2019 Material
 Professor Mi-Suk Kang Dufour  
