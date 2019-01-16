@@ -20,8 +20,9 @@ No videos yet.
 No exams yet.
 
 
-## Fall 2018 Material
+## Past Material Material
+
+### Fall 2018
 Professor Corinne Riddell
 MWF 8:00-9:00, 245 Li Ka Shing
-
-See past material from fall 2018 <a href="archives/2018-fall">here</a>.
+Past material <a href="archives/2018-fall">here</a>
