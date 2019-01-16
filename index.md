@@ -5,8 +5,6 @@ Welcome to the resource hub! My name is Edie Espejo, and I am one of the course 
 Professor Mi-Suk Kang Dufour  
 MWF 8:00-9:00, 245 Li Ka Shing  
 
-Welcome to a new semester! I'll be posting my resources here for organization.
-
 ### Notes
 No notes yet.
 
