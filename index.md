@@ -7,8 +7,8 @@ MWF 8:00-9:00, 245 Li Ka Shing
 
 ### Notes
 #### The kickoff
-<a href="notes/formatting.html">0. a. Homework Formatting</a>
-<a href="notes/knitting-issues.html">0. b. Knitting Issues</a>
+<a href="notes/formatting.html">i. Homework Formatting</a>  
+<a href="notes/knitting-issues.html"> ii. Knitting Issues</a>  
 
 ### Lab Demos
 No lab demos yet.
