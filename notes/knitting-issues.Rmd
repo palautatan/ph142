@@ -1,0 +1,33 @@
+---
+title: "Knitting Issues"
+output: html_document
+---
+
+Your assignments will be assigned to you on RStudio cloud. You will be coding in the statistical programming language R which is really versatile and powerful. When you turn in your homework, you will be asked to "knit" your document. Here are some tips and tricks on what to do if you have a knitting error.
+
+## Debug by yourself
+This is the best thing to do before you go to office hours! Now you may say... Edie... what the heck... I don't code... Well, I kid you not, here are some foolproof ways to (a) get your homework done and (b) become a good coder.
+
+### Search your error on Stackoverflow
+You may see an answer from the stack community on your error.
+
+### Make sure you didn't copy any "special" characters into your doc
+Special characters are not allowed in RStudio. What do I mean? Do you know how when you type into Microsoft word and write "Hello", the apostrophes change as if to frame the word? Well, those are not the same as normal apostrophes when typed into RStudio! Make sure those don't exist. This could happen if you copy and pasted any code from lecture slides.
+
+### Are your libraries loaded?
+Are the necessary libraries loaded, e.g. `library(tidyverse)` when necessary.
+
+### Copy and paste block by block
+On Rstudio cloud, what you're typing into is a plain text editor. That being said, you can copy and paste piecewise to see how far your code will knit until it starts producing errors. Once you know this, you can pinpoint the error or bring that in to office hours. **WARNING:** Save your work always before doing this!
+
+## Office hours
+The best way to get help from any GSI for knitting errors is to come to office hours! We cannot help you when you send us just a screenshot, and sure enough, we won't be able to read everyone's code. When you're in office hours, we can guide you and find solutions together. Hopefully, along with your classmates.
+
+## Hardly ever on bCourses/Canvas
+If you ask a knitting question on coures forums, we won't be able to circumvent the issue. It is likely we won't be able to fix your knitting error with you.
+
+## Knit to HTML, print to PDF
+If your code is RUNNING, you have the answers, but it is still NOT knitting as a PDF, try knitting to a HTML document instead! Then you can print the html document as a pdf and turn it in that way!
+
+## Microsoft Word
+If your code is RUNNING, you have the answers, but it is still NOT knitting as either a PDF or HTML document, then write in all your code and answers into Microsoft word! You have to turn in something!
