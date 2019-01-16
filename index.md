@@ -6,7 +6,7 @@ Professor Mi-Suk Kang Dufour
 MWF 8:00-9:00, 245 Li Ka Shing  
 
 ### Notes
-#### The kickoff
+#### Part 0 | The Kickoff
 <a href="notes/formatting.html">i. Homework Formatting</a>  
 <a href="notes/knitting-issues.html"> ii. Knitting Issues</a>  
 
