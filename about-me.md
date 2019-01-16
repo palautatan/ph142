@@ -8,4 +8,4 @@ I'm one half academic instructor (for you) and one half athletic instructor (for
 You can check out my <a href="https://www.linkedin.com/in/palautatan/">LinkedIn</a> profile for more. You can add me as well! No awkwardness, I'm just a person.
 
 ## Hobbies
-I like to do a lot of things! I love music, teach karate, avoid playing The Sims 4, and can't live without caffeine.
+I like to do a lot of things! I love music, teach karate, avoid playing The Sims 4, can't live without caffeine, and have an awful shopping habit.
