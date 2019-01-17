@@ -9,7 +9,7 @@ MWF 8:00-9:00, 245 Li Ka Shing
 Statistics is really everywhere! Let's start pinpointing where and grow this list out in the future.  
 
 **Fashion**
-<a href="https://www.youtube.com/watch?v=bkcAmCqIaao">How ZARA Uses Data Analytics to Run A Profitable Business</a>. (ee)
+<a href="https://www.youtube.com/watch?v=bkcAmCqIaao">ZARA Analytics</a>. (ee)
 
 ### Notes
 #### Part 0 | The Kickoff
