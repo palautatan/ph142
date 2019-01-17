@@ -8,7 +8,8 @@ MWF 8:00-9:00, 245 Li Ka Shing
 ### "Statistics is Everywhere"
 Statistics is really everywhere! Let's start pinpointing where and grow this list out in the future.  
 
-Interested in **fashion** at all? Check this one out. <a href="https://www.youtube.com/watch?v=bkcAmCqIaao">How ZARA Uses Data Analytics to Run A Profitable Business</a>. (ee)
+**Fashion**
+<a href="https://www.youtube.com/watch?v=bkcAmCqIaao">How ZARA Uses Data Analytics to Run A Profitable Business</a>. (ee)
 
 ### Notes
 #### Part 0 | The Kickoff
