@@ -5,6 +5,9 @@ Welcome to the resource hub! My name is Edie Espejo, and I am one of the course 
 Professor Mi-Suk Kang Dufour  
 MWF 8:00-9:00, 245 Li Ka Shing  
 
+### "Statistics is Everywhere"
+Interested in fashion at all? Check this one out. <a href="https://www.youtube.com/watch?v=bkcAmCqIaao">How ZARA Uses Data Analytics to Run A Profitable Business</a>.
+
 ### Notes
 #### Part 0 | The Kickoff
 <a href="notes/formatting.html">i. Homework Formatting</a>  
