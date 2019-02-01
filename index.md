@@ -20,7 +20,7 @@ Statistics is really everywhere! Let's start pinpointing where and grow this lis
 We're going to be starting here!
 
 ### Lab Demos
-No lab demos yet.
+<a href="lab-demos/lab-1.html"> Lab 1. Crash course intro to R.</a>  
 
 ### YouTube Videos
 No videos yet.
