@@ -6,15 +6,34 @@ output: html_document
 You will turn in your homework on Gradescope! In order to make grading matters efficient, please follow these guidelines. We will be able to get your homework back to you much faster!
 
 ## 1. Timeliness
-Turn in your homework ON TIME. Gradescope will mark assignments late if they are turned in past the state hour, and we can "unmark" it as late. Aside from emergencies, there is no reason to not turn in work on time.
+Turn in your homework ON TIME. Gradescope will mark assignments late if they are turned in past the stated hour, and we can "unmark" it as late. Aside from emergencies, there is no reason to not turn in work on time.
 
 ## 2. Formatting
 
 ### Displaying your answer
 In RStudio, you will see 4 panes. Two of which are the Console (where answers may show up) and the Editor (where you write your code/answers). You must make sure that your KNIT version (your PDF file that you are going to turn in) displays answers to every question. Please, look at your homework PDF before turning it in!
 
-### Clear separation between answers
-Please provide a `\newpage` line between each of the questions on your homework, and do not delete it if it already exists. This will help you and the GSI's keep track of pages on Gradescope.
+Imagine you were asked to get an arbitrary answer and you wrote in all the functions to get there. Your code chunk would look like this.
+
+```{r}
+a <- "thank u"
+b <- "next"
+answer <- paste0(a, ", ", b)
+```
+
+Any person who views your document (your homework assignment pdf) will see your code. The GSI correcting your homework will also see your code, which is wonderful. **But you must also print your answer.** You can do this by typing `answer` or the variable name of your specific homework answer into your code chunk like so.
+
+```{r}
+a <- "thank u"
+b <- "next"
+answer <- paste0(a, ", ", b)
+answer
+```
+
+See how the answer is displayed? That's how you should do it on your homework.
+
+### Clear separation between answers (Done for you)
+We have provided a `\newpage` line between each of the questions on your homework. Do not delete it. This will help you and the GSI's keep track of pages on Gradescope.
 
 ### R Markdown Cheat Sheet
 RStudio has a cheat sheet <a href="https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf">here</a> for your styling needs. For this class, only look at #1-4.
@@ -22,4 +41,4 @@ RStudio has a cheat sheet <a href="https://www.rstudio.com/wp-content/uploads/20
 ## 3. Submission
 
 ### Assigning pages
-Accurately assign each of your homework pages to the question that they correspond to. You will lose points if you don't!
+Accurately assign each of your homework pages to the question that they correspond to. You can lose points if you don't!

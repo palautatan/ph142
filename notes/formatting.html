@@ -128,17 +128,28 @@ $(document).ready(function () {
 <p>You will turn in your homework on Gradescope! In order to make grading matters efficient, please follow these guidelines. We will be able to get your homework back to you much faster!</p>
 <div id="timeliness" class="section level2">
 <h2>1. Timeliness</h2>
-<p>Turn in your homework ON TIME. Gradescope will mark assignments late if they are turned in past the state hour, and we can “unmark” it as late. Aside from emergencies, there is no reason to not turn in work on time.</p>
+<p>Turn in your homework ON TIME. Gradescope will mark assignments late if they are turned in past the stated hour, and we can “unmark” it as late. Aside from emergencies, there is no reason to not turn in work on time.</p>
 </div>
 <div id="formatting" class="section level2">
 <h2>2. Formatting</h2>
 <div id="displaying-your-answer" class="section level3">
 <h3>Displaying your answer</h3>
 <p>In RStudio, you will see 4 panes. Two of which are the Console (where answers may show up) and the Editor (where you write your code/answers). You must make sure that your KNIT version (your PDF file that you are going to turn in) displays answers to every question. Please, look at your homework PDF before turning it in!</p>
+<p>Imagine you were asked to get an arbitrary answer and you wrote in all the functions to get there. Your code chunk would look like this.</p>
+<pre class="r"><code>a &lt;- &quot;thank u&quot;
+b &lt;- &quot;next&quot;
+answer &lt;- paste0(a, &quot;, &quot;, b)</code></pre>
+<p>Any person who views your document (your homework assignment pdf) will see your code. The GSI correcting your homework will also see your code, which is wonderful. <strong>But you must also print your answer.</strong> You can do this by typing <code>answer</code> or the variable name of your specific homework answer into your code chunk like so.</p>
+<pre class="r"><code>a &lt;- &quot;thank u&quot;
+b &lt;- &quot;next&quot;
+answer &lt;- paste0(a, &quot;, &quot;, b)
+answer</code></pre>
+<pre><code>## [1] &quot;thank u, next&quot;</code></pre>
+<p>See how the answer is displayed? That’s how you should do it on your homework.</p>
 </div>
-<div id="clear-separation-between-answers" class="section level3">
-<h3>Clear separation between answers</h3>
-<p>Please provide a <code>\newpage</code> line between each of the questions on your homework, and do not delete it if it already exists. This will help you and the GSI’s keep track of pages on Gradescope.</p>
+<div id="clear-separation-between-answers-done-for-you" class="section level3">
+<h3>Clear separation between answers (Done for you)</h3>
+<p>We have provided a <code>\newpage</code> line between each of the questions on your homework. Do not delete it. This will help you and the GSI’s keep track of pages on Gradescope.</p>
 </div>
 <div id="r-markdown-cheat-sheet" class="section level3">
 <h3>R Markdown Cheat Sheet</h3>
@@ -149,7 +160,7 @@ $(document).ready(function () {
 <h2>3. Submission</h2>
 <div id="assigning-pages" class="section level3">
 <h3>Assigning pages</h3>
-<p>Accurately assign each of your homework pages to the question that they correspond to. You will lose points if you don’t!</p>
+<p>Accurately assign each of your homework pages to the question that they correspond to. You can lose points if you don’t!</p>
 </div>
 </div>
 
