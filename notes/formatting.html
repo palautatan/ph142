@@ -136,15 +136,23 @@ $(document).ready(function () {
 <h3>Displaying your answer</h3>
 <p>In RStudio, you will see 4 panes. Two of which are the Console (where answers may show up) and the Editor (where you write your code/answers). You must make sure that your KNIT version (your PDF file that you are going to turn in) displays answers to every question. Please, look at your homework PDF before turning it in!</p>
 <p>Imagine you were asked to get an arbitrary answer and you wrote in all the functions to get there. Your code chunk would look like this.</p>
-<pre class="r"><code>a &lt;- &quot;thank u&quot;
-b &lt;- &quot;next&quot;
-answer &lt;- paste0(a, &quot;, &quot;, b)</code></pre>
+<pre class="r"><code>library(dplyr)</code></pre>
+<pre><code>## 
+## Attaching package: 'dplyr'</code></pre>
+<pre><code>## The following objects are masked from 'package:stats':
+## 
+##     filter, lag</code></pre>
+<pre><code>## The following objects are masked from 'package:base':
+## 
+##     intersect, setdiff, setequal, union</code></pre>
+<pre class="r"><code>answer &lt;- iris %&gt;% summarize(mean_sl=mean(Sepal.Length),
+                        median_sl=median(Sepal.Length))</code></pre>
 <p>Any person who views your document (your homework assignment pdf) will see your code. The GSI correcting your homework will also see your code, which is wonderful. <strong>But you must also print your answer.</strong> You can do this by typing <code>answer</code> or the variable name of your specific homework answer into your code chunk like so.</p>
-<pre class="r"><code>a &lt;- &quot;thank u&quot;
-b &lt;- &quot;next&quot;
-answer &lt;- paste0(a, &quot;, &quot;, b)
+<pre class="r"><code>answer &lt;- iris %&gt;% summarize(mean_sl=mean(Sepal.Length),
+                        median_sl=median(Sepal.Length))
 answer</code></pre>
-<pre><code>## [1] &quot;thank u, next&quot;</code></pre>
+<pre><code>##    mean_sl median_sl
+## 1 5.843333       5.8</code></pre>
 <p>See how the answer is displayed? That’s how you should do it on your homework.</p>
 </div>
 <div id="clear-separation-between-answers-done-for-you" class="section level3">

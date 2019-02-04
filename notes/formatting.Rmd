@@ -16,17 +16,16 @@ In RStudio, you will see 4 panes. Two of which are the Console (where answers ma
 Imagine you were asked to get an arbitrary answer and you wrote in all the functions to get there. Your code chunk would look like this.
 
 ```{r}
-a <- "thank u"
-b <- "next"
-answer <- paste0(a, ", ", b)
+library(dplyr)
+answer <- iris %>% summarize(mean_sl=mean(Sepal.Length),
+                        median_sl=median(Sepal.Length))
 ```
 
 Any person who views your document (your homework assignment pdf) will see your code. The GSI correcting your homework will also see your code, which is wonderful. **But you must also print your answer.** You can do this by typing `answer` or the variable name of your specific homework answer into your code chunk like so.
 
 ```{r}
-a <- "thank u"
-b <- "next"
-answer <- paste0(a, ", ", b)
+answer <- iris %>% summarize(mean_sl=mean(Sepal.Length),
+                        median_sl=median(Sepal.Length))
 answer
 ```
 
