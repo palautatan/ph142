@@ -13143,7 +13143,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[30]:</div>
+<div class="prompt input_prompt">In&nbsp;[27]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="kn">library</span><span class="p">(</span>readr<span class="p">)</span>
@@ -13164,10 +13164,10 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[31]:</div>
+<div class="prompt input_prompt">In&nbsp;[28]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre><span></span>CS_data <span class="o">&lt;-</span> read_csv<span class="p">(</span><span class="s">&quot;lab_1/data/Cesarean.csv&quot;</span><span class="p">)</span>
+<div class=" highlight hl-r"><pre><span></span>CS_data <span class="o">&lt;-</span> read_csv<span class="p">(</span><span class="s">&quot;data/Cesarean.csv&quot;</span><span class="p">)</span>
 <span class="kp">head</span><span class="p">(</span>CS_data<span class="p">)</span>
 </pre></div>
 
@@ -13248,7 +13248,7 @@ cols(
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[32]:</div>
+<div class="prompt input_prompt">In&nbsp;[29]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="c1"># str(CS_data)</span>
@@ -13269,7 +13269,7 @@ cols(
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[33]:</div>
+<div class="prompt input_prompt">In&nbsp;[30]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="kp">dim</span><span class="p">(</span>CS_data<span class="p">)</span>
@@ -13313,7 +13313,7 @@ cols(
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[34]:</div>
+<div class="prompt input_prompt">In&nbsp;[31]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="kp">names</span><span class="p">(</span>CS_data<span class="p">)</span>
@@ -13362,7 +13362,7 @@ cols(
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[35]:</div>
+<div class="prompt input_prompt">In&nbsp;[32]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="kp">head</span><span class="p">(</span>CS_data<span class="p">)</span>
@@ -13414,7 +13414,7 @@ cols(
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[36]:</div>
+<div class="prompt input_prompt">In&nbsp;[33]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="kn">library</span><span class="p">(</span>dplyr<span class="p">)</span>
@@ -13436,7 +13436,7 @@ cols(
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[37]:</div>
+<div class="prompt input_prompt">In&nbsp;[34]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="kp">head</span><span class="p">(</span>CS_data<span class="p">)</span>
@@ -13487,7 +13487,7 @@ cols(
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[38]:</div>
+<div class="prompt input_prompt">In&nbsp;[35]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="kp">head</span><span class="p">(</span>CS_data <span class="o">%&gt;%</span> mutate<span class="p">(</span>CS_rate_100 <span class="o">=</span> CS_rate <span class="o">*</span> <span class="m">100</span><span class="p">))</span>
@@ -13543,7 +13543,7 @@ cols(
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[48]:</div>
+<div class="prompt input_prompt">In&nbsp;[36]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="kp">head</span><span class="p">(</span>CS_data <span class="o">%&gt;%</span> select<span class="p">(</span>CS_rate<span class="p">)</span> <span class="o">%&gt;%</span>
@@ -13590,9 +13590,55 @@ cols(
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Notice here that spaces don't matter.</p>
+<h4 id="Saving-a-copy-of-your-new-dataframe">Saving a copy of your new dataframe<a class="anchor-link" href="#Saving-a-copy-of-your-new-dataframe">&#182;</a></h4><p>If you do not assign your <code>CS_data %&gt;% select(CS_rate) %&gt;% ...</code> pipe to a new R object, then you won't be able to access the column in future code! Make sure you save your new dataframe. You can either save your code to (a) the name of your original dataframe to overwrite it or (b) save it to a new name like <code>CS_data_2</code> to make a brand new dataframe.</p>
 
 </div>
 </div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[37]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span>CS_data_2 <span class="o">&lt;-</span> CS_data <span class="o">%&gt;%</span> select<span class="p">(</span>CS_rate<span class="p">)</span> <span class="o">%&gt;%</span> mutate<span class="p">(</span>cs_rate_100_space <span class="o">=</span> CS_rate <span class="o">*</span> <span class="m">100</span><span class="p">,</span>
+                                                  cs_rate_100_no_space<span class="o">=</span>CS_rate<span class="o">*</span><span class="m">100</span><span class="p">)</span>
+<span class="kp">head</span><span class="p">(</span>CS_data_2<span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<table>
+<thead><tr><th scope=col>CS_rate</th><th scope=col>cs_rate_100_space</th><th scope=col>cs_rate_100_no_space</th></tr></thead>
+<tbody>
+	<tr><td>0.256</td><td>25.6 </td><td>25.6 </td></tr>
+	<tr><td>0.237</td><td>23.7 </td><td>23.7 </td></tr>
+	<tr><td>0.100</td><td>10.0 </td><td>10.0 </td></tr>
+	<tr><td>0.352</td><td>35.2 </td><td>35.2 </td></tr>
+	<tr><td>0.141</td><td>14.1 </td><td>14.1 </td></tr>
+	<tr><td>0.303</td><td>30.3 </td><td>30.3 </td></tr>
+</tbody>
+</table>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
@@ -13604,7 +13650,7 @@ cols(
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[49]:</div>
+<div class="prompt input_prompt">In&nbsp;[38]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="kn">library</span><span class="p">(</span>ggplot2<span class="p">)</span>
@@ -13626,7 +13672,7 @@ cols(
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[53]:</div>
+<div class="prompt input_prompt">In&nbsp;[39]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span>ggplot<span class="p">(</span>CS_data<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>Income_Group<span class="p">))</span> <span class="o">+</span>
@@ -14212,7 +14258,7 @@ AAmQAAmQAAmQAAmQQJoI/AAV1aoqQAWfOAAAAABJRU5ErkJggg=="
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[55]:</div>
+<div class="prompt input_prompt">In&nbsp;[40]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span>ggplot<span class="p">(</span>CS_data<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>Income_Group<span class="p">))</span> <span class="o">+</span>
@@ -14928,7 +14974,7 @@ IAIiUBWB/wJHI6O9f+7y6gAAAABJRU5ErkJggg=="
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[56]:</div>
+<div class="prompt input_prompt">In&nbsp;[41]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span>ggplot<span class="p">(</span>CS_data<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>Income_Group<span class="p">))</span> <span class="o">+</span>
@@ -16054,7 +16100,7 @@ AiRAAiRQhAT+ARTP09s4tqaEAAAAAElFTkSuQmCC"
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[57]:</div>
+<div class="prompt input_prompt">In&nbsp;[42]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span>ggplot<span class="p">(</span>CS_data<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>Region<span class="p">))</span> <span class="o">+</span>
@@ -17261,7 +17307,7 @@ AElFTkSuQmCC"
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[60]:</div>
+<div class="prompt input_prompt">In&nbsp;[43]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span>ggplot<span class="p">(</span>CS_data<span class="p">,</span> aes<span class="p">(</span>x <span class="o">=</span> GDP_2006<span class="p">))</span> <span class="o">+</span>
@@ -17853,7 +17899,7 @@ JEAC6U2ABlJ6f/4cPQmQAAmQAAmQAAmQAAmQgI/A/wAWo7pX4OUV9gAAAABJRU5ErkJggg=="
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[61]:</div>
+<div class="prompt input_prompt">In&nbsp;[44]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span>ggplot<span class="p">(</span>CS_data<span class="p">,</span> aes<span class="p">(</span>x <span class="o">=</span> GDP_2006<span class="p">))</span> <span class="o">+</span>
@@ -18449,7 +18495,7 @@ oIJUu//+vHoSIAESIAESIAESIAESIAGHwP9e+zW9ADTxDAAAAABJRU5ErkJggg=="
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[66]:</div>
+<div class="prompt input_prompt">In&nbsp;[45]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span>ggplot<span class="p">(</span>CS_data<span class="p">,</span> aes<span class="p">(</span>x <span class="o">=</span> GDP_2006<span class="p">))</span> <span class="o">+</span>
@@ -19060,7 +19106,7 @@ GAAAAABJRU5ErkJggg=="
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[63]:</div>
+<div class="prompt input_prompt">In&nbsp;[46]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span>ggplot<span class="p">(</span>CS_data<span class="p">,</span> aes<span class="p">(</span>x <span class="o">=</span> GDP_2006<span class="p">))</span> <span class="o">+</span>
@@ -19694,7 +19740,7 @@ QAABBBJbgAApsd9/zh4BBBBAAAEEEEAAAQR8AgRIPgwmEUAAAQQQQAABBBBAILEFCJAS+/3n
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[65]:</div>
+<div class="prompt input_prompt">In&nbsp;[47]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span>ggplot<span class="p">(</span>CS_data<span class="p">,</span> aes<span class="p">(</span>x <span class="o">=</span> GDP_2006<span class="p">))</span> <span class="o">+</span>
@@ -20365,7 +20411,7 @@ AQQQQAABBBAICfwfrnQpsSPFeyEAAAAASUVORK5CYII="
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[68]:</div>
+<div class="prompt input_prompt">In&nbsp;[48]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span>install.packages<span class="p">(</span><span class="s">&quot;xml2&quot;</span><span class="p">)</span>
@@ -20406,7 +20452,7 @@ Making &#39;packages.html&#39; ... done
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[69]:</div>
+<div class="prompt input_prompt">In&nbsp;[49]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="kn">library</span><span class="p">(</span>xml2<span class="p">)</span>
