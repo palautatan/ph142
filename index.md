@@ -17,7 +17,8 @@ Statistics is really everywhere! Let's start pinpointing where and grow this lis
 <a href="notes/knitting-issues.html"> ii. Knitting Issues</a>  
 
 #### Part 1 | Introduction
-We're going to be starting here!
+<a href="notes/plotting.pdf">i. Plotting</a>  
+<a href="notes/causal.pdf">ii. Causal Inference</a>  
 
 ### Lab Demos
 <a href="lab-demos/lab-1/lab-1.html"> Lab 1. Crash course intro to R.</a>  
@@ -28,6 +29,10 @@ No videos yet.
 ### Exam Material
 No exams yet.
 
+### Supplementary
+If you need more information about topics, read these too. I wrote them to give you some more examples/clarity.  
+<a href="notes/rappers/code/01-rappers-eda.html">i. Exploring the Rappers Dataset</a>  
+<a href="notes/rappers/code/02-rappers-regression.html">ii. Regression with rappers</a>
 
 ## Past Material Material
 
