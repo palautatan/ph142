@@ -21,7 +21,8 @@ Statistics is really everywhere! Let's start pinpointing where and grow this lis
 <a href="notes/causal.pdf">ii. Causal inference</a>  
 
 ### Lab Demos
-<a href="lab-demos/lab-1/lab-1.html"> Lab 1. Crash course intro to R.</a>  
+<a href="lab-demos/lab-1/lab-1.html"> Lab 1, Crash course intro to R</a>  
+<a href="lab-demos/lab-2/lab-2.html"> Lab 2, Regression</a>  
 
 ### YouTube Videos
 No videos yet.
