@@ -17,8 +17,9 @@ Statistics is really everywhere! Let's start pinpointing where and grow this lis
 <a href="notes/knitting-issues.html"> ii. Knitting Issues</a>  
 
 #### Part 1 | Introduction
-<a href="notes/plotting.pdf">i. Plotting</a>  
-<a href="notes/causal.pdf">ii. Causal inference</a>  
+<a href="notes/loading-data.pdf">i. Loading in data</a>  
+<a href="notes/plotting.pdf">ii. Plotting</a>  
+<a href="notes/causal.pdf">iii. Causal inference</a>  
 
 ### Lab Demos
 <a href="lab-demos/lab-1/lab-1.html"> Lab 1, Crash course intro to R</a>  
