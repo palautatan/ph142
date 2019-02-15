@@ -22,14 +22,14 @@ Statistics is really everywhere! Let's start pinpointing where and grow this lis
 <a href="notes/causal.pdf">iii. Causal inference</a>  
 
 ### Lab Demos
-<a href="lab-demos/lab-1/lab-1.html"> Lab 1, Crash course intro to R</a>  
-<a href="lab-demos/lab-2/lab-2.html"> Lab 2, Regression</a>  
+<a href="lab-demos/lab-1/lab-1.html">i. Lab 1, Crash course intro to R</a>  
+<a href="lab-demos/lab-2/lab-2.html">ii. Lab 2, Regression</a>  
 
 ### YouTube Videos
 No videos yet.
 
 ### Exam Material
-No exams yet.
+<a href="midterm-1/midterm-1-review.pdf">i. Midterm 1 Review</a>  
 
 ### Supplementary
 If you need more information about topics, read these too. I wrote them to give you some more examples/clarity.  
