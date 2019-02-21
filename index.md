@@ -24,6 +24,8 @@ Statistics is really everywhere! Let's start pinpointing where and grow this lis
 ### Lab Demos
 <a href="lab-demos/lab-1/lab-1.html">i. Lab 1, Crash course intro to R</a>  
 <a href="lab-demos/lab-2/lab-2.html">ii. Lab 2, Regression</a>  
+<a href=""> iii. Lab 3, Sampling (Not up yet)</a>  
+<a href="lab-demos/lab-4/lab-4.html">iii. Lab 4, Conditional Probability</a>
 
 ### YouTube Videos
 No videos yet.

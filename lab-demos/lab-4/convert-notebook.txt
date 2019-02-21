@@ -1,0 +1,1 @@
+jupyter nbconvert lab-4.ipynb --to slides --post serve
