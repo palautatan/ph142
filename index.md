@@ -13,14 +13,18 @@ Statistics is really everywhere! Let's start pinpointing where and grow this lis
 
 ### Notes
 #### Part 0 | The Kickoff
-<a href="notes/formatting.html">i. Homework Formatting</a>  
-<a href="notes/knitting-issues.html"> ii. Knitting Issues</a>  
+Before we get deep into the class, here are a few helper documents.  
+<a href="notes/formatting/formatting.html">i. Homework Formatting</a>  
+<a href="notes/knitting/knitting-issues.html"> ii. Knitting Issues</a>  
 
-#### Part 1 | Introduction
-<a href="notes/loading-data.pdf">i. Loading in data</a>  
-<a href="notes/plotting.pdf">ii. Plotting</a>  
-<a href="notes/causal.pdf">iii. Causal inference</a>  
-<a href="notes/probability-intro.pdf">iv. Probability introduction</a>  
+#### Part 1 | Exploring data
+In Part 1, we learn how to summarize, manipulate, and and visualize data. We also learn about how studies are designed so that they may collect representative data.  
+<a href="notes/loading-data/loading-data.pdf">i. Loading in data</a>  
+<a href="notes/plotting/plotting.pdf">ii. Plotting</a>  
+<a href="notes/causal/causal.pdf">iii. Causal inference</a>  
+
+#### Part 2 | Probabilistic foundations
+<a href="notes/probability/probability-intro.pdf">iv. Probability introduction</a>  
 
 ### Lab Demos
 <a href="lab-demos/lab-1/lab-1.html">i. Lab 1, Crash course intro to R</a>  
