@@ -32,7 +32,7 @@ In Part 1, we learn how to summarize, manipulate, and and visualize data. We als
 <a href="lab-demos/lab-3/lab-3.html"> iii. Lab 3, Sampling</a>  
 <a href="lab-demos/lab-4/lab-4.html">iv. Lab 4, Conditional Probability</a>  
 <a href="lab-demos/lab-5/lab-5.html"> v. Lab 5, Probability functions in R</a>  
-<a href="lab-demos/lab-6/lab-6-condensed.pdf"> vi. Lab 6, Sampling distribution slides</a> and <a href="lab-demos/lab-6/code/lab-6.html">Lab 6, Sampling distribution GIFs</a>  
+ vi. Lab 6, Sampling distribution <a href="lab-demos/lab-6/lab-6-condensed.pdf">slides</a> and <a href="lab-demos/lab-6/code/lab-6.html">Notes with GIFs</a>  
 
 
 ### YouTube Videos
