@@ -125,7 +125,6 @@ $(document).ready(function () {
 </div>
 
 
-<p>This is my <span class="math inline">\(P(X \geq 109)\)</span>.</p>
 <div id="getting-population-parameters" class="section level2">
 <h2>Getting population parameters</h2>
 <p>First, we load in libraries as normal.</p>
@@ -161,15 +160,15 @@ ggplot(data=alameda, aes(x=num_sibs)) +
 <pre class="r"><code>sample_5 &lt;- alameda %&gt;% sample_n(5)
 sample_5</code></pre>
 <pre><code>##      birth_loc num_sibs hosp_visit   height
-## 2639         0        0          0 68.41246
-## 6207         0        0          0 66.47906
-## 7108         1        2          0 72.43389
-## 3425         0        3          0 67.69139
-## 824          0        3          0 68.65032</code></pre>
+## 3553         0        0          0 65.57817
+## 9791         1        2          0 69.04170
+## 1585         0        2          0 70.01666
+## 1121         0        0          0 71.78479
+## 7450         1        1         20 68.17404</code></pre>
 <p>Then, we take the sample statistic of the mean number of siblings. This value may not properly reflect the true population mean number of siblings which is 1.18 siblings, as per above.</p>
 <pre class="r"><code>sample_5 %&gt;% summarize(mean_sibs=mean(num_sibs))</code></pre>
 <pre><code>##   mean_sibs
-## 1       1.6</code></pre>
+## 1         1</code></pre>
 <p>Now, we’re going to show you how if we take many many samples of size <span class="math inline">\(n={5, 50, 500}\)</span> how our sampling distribution of the sample mean <span class="math inline">\(\bar{X}_n\)</span> would change. We will be taking a total of 100 samples for each of the sample sizes. As you look at the following GIF’s (is it jiff or ghiff? :P), think about the following questions:</p>
 <ol style="list-style-type: decimal">
 <li>How does the variance change when we increase the sample size?</li>

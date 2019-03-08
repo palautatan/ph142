@@ -3,8 +3,6 @@ title: "Lab 6"
 output: html_document
 ---
 
-This is my $P(X \geq 109)$.
-
 ## Getting population parameters
 
 First, we load in libraries as normal.
