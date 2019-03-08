@@ -30,8 +30,9 @@ In Part 1, we learn how to summarize, manipulate, and and visualize data. We als
 <a href="lab-demos/lab-1/lab-1.html">i. Lab 1, Crash course intro to R</a>  
 <a href="lab-demos/lab-2/lab-2.html">ii. Lab 2, Regression</a>  
 <a href="lab-demos/lab-3/lab-3.html"> iii. Lab 3, Sampling</a>  
-<a href="lab-demos/lab-4/lab-4.html">iii. Lab 4, Conditional Probability</a>  
-<a href="lab-demos/lab-5/lab-5.html"> iv. Lab 5, Probability functions in R</a>  
+<a href="lab-demos/lab-4/lab-4.html">iv. Lab 4, Conditional Probability</a>  
+<a href="lab-demos/lab-5/lab-5.html"> v. Lab 5, Probability functions in R</a>  
+<a href="lab-demos/lab-6/lab-6.html"> vi. Lab 6, Sampling distribution slides</a>  
 
 ### YouTube Videos
 No videos yet.
