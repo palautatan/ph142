@@ -43,7 +43,8 @@ No videos yet.
 ### Supplementary
 If you need more information about topics, read these too. I wrote them to give you some more examples/clarity.  
 <a href="notes/rappers/code/01-rappers-eda.html">i. Exploring the rappers dataset</a>  
-<a href="notes/rappers/code/02-rappers-regression.html">ii. Regression with rappers</a>
+<a href="notes/rappers/code/02-rappers-regression.html">ii. Regression with rappers</a>  
+<a href="notes/rappers/code/03-categorical-data.html">ii. Rappers in categories</a>  
 
 ## Past Material Material
 
