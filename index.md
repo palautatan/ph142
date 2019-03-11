@@ -35,9 +35,6 @@ In Part 1, we learn how to summarize, manipulate, and and visualize data. We als
  vi. Lab 6, Sampling distribution <a href="lab-demos/lab-6/lab-6-condensed.pdf">slides</a> and <a href="lab-demos/lab-6/code/lab-6.html">animated notes</a>  
 
 
-### YouTube Videos
-No videos yet.
-
 ### Exam Material
 <a href="midterm-1/midterm-1-review.pdf">i. Midterm 1 review notes</a>  
 <a href="midterm-2/midterm-2-slides.html">ii. Midterm 2 review slides</a>  
