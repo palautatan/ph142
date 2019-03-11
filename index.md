@@ -25,6 +25,7 @@ In Part 1, we learn how to summarize, manipulate, and and visualize data. We als
 
 #### Part 2 | Probabilistic foundations
 <a href="notes/probability/probability-intro.pdf">iv. Probability introduction</a>  
+<a href="notes/distributions/distributions.pdf">v. All distributions</a>  
 
 ### Lab Demos
 <a href="lab-demos/lab-1/lab-1.html">i. Lab 1, Crash course intro to R</a>  
