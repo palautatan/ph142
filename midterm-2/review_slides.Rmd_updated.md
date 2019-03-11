@@ -133,19 +133,37 @@ Sampling with Code
 ========================================================
 The `sample_n` function can be used in this way. The `iris` dataset is built into `R`!
 
-```{r, message=FALSE, warning=FALSE}
+
+```r
 library(dplyr)
 sample_2    <- sample_n(iris, size = 2)
 sample_2
+```
+
+```
+   Sepal.Length Sepal.Width Petal.Length Petal.Width    Species
+87          6.7         3.1          4.7         1.5 versicolor
+73          6.3         2.5          4.9         1.5 versicolor
 ```
 
 
 Sampling with Code
 ========================================================
 The `sample_n` function can be used in this way. The `iris` dataset is built into `R`!
-```{r}
+
+```r
 sample_6  <- sample_n(iris, size = 6)
 sample_6
+```
+
+```
+    Sepal.Length Sepal.Width Petal.Length Petal.Width    Species
+27           5.0         3.4          1.6         0.4     setosa
+125          6.7         3.3          5.7         2.1  virginica
+112          6.4         2.7          5.3         1.9  virginica
+77           6.8         2.8          4.8         1.4 versicolor
+146          6.7         3.0          5.2         2.3  virginica
+2            4.9         3.0          1.4         0.2     setosa
 ```
 
 
@@ -249,9 +267,7 @@ We can think of distributions as things that model patterns in data. If we see d
 
 ### Chapter 11: Normal Distribution
 ========================================================
-```{r, echo=FALSE}
-knitr::include_graphics("normal.png")
-```
+![plot of chunk unnamed-chunk-3](normal.png)
 
 Recipe for Normal
 ========================================================
@@ -269,15 +285,21 @@ According to <a href="https://www.basketball-reference.com/leagues/NBA_stats.htm
 Example
 ========================================================
 The prompt information translates to:
-```{r}
+
+```r
 mu  <- 79
 sd  <- 4
 k   <- 6*12
 ```
 
 We can calculate this probability one way (without tables!).
-```{r}
+
+```r
 pnorm(q=k, mean=mu, sd=sd)
+```
+
+```
+[1] 0.04005916
 ```
 
 All the `[ ]norm` functions are fair game!
@@ -318,21 +340,28 @@ A shopper goes online Thursday mornings to attempt to purchase Supreme apparel a
 Example
 ========================================================
 The prompt information translates to:
-```{r}
+
+```r
 n_trials    <- 10
 k_success   <- 4
 probability <- 1/10
 ```
 
 And we can calculate the first quantity "by hand" using the formula:
-```{r}
+
+```r
 choose(n_trials, k_success)*(probability)^k_success*(1-probability)^(n_trials-k_success)
+```
+
+```
+[1] 0.01116026
 ```
 
 Example
 ========================================================
 The prompt information translates to:
-```{r}
+
+```r
 n_trials    <- 10
 k_success   <- 4
 probability <- 1/10
@@ -340,28 +369,48 @@ probability <- 1/10
 
 
 Or we can use a special function:
-```{r}
+
+```r
 dbinom(x=k_success, size=n_trials, prob=probability)
+```
+
+```
+[1] 0.01116026
 ```
 
 Example
 ========================================================
 The second quantity (the probability of greater than 4) can be found by using the Complement Rule.
-```{r}
+
+```r
 1 - choose(n_trials, 4)*(probability)^(4)*(1-probability)^(n_trials-4) - choose(n_trials, 3)*(probability)^(3)*(1-probability)^(n_trials-3) - choose(n_trials, 2)*(probability)^(2)*(1-probability)^(n_trials-2) - choose(n_trials, 1)*(probability)^(1)*(1-probability)^(n_trials-1) - choose(n_trials, 0)*(probability)^(0)*(1-probability)^(n_trials-0)
+```
+
+```
+[1] 0.001634937
 ```
 
 Example
 ========================================================
 Or using another cool function that calculate the sum of probabilities from 0 to k.
 
-```{r}
+
+```r
 1-pbinom(q=k_success, size=n_trials, prob=probability)
 ```
 
+```
+[1] 0.001634937
+```
+
 Or even more conveniently:
-```{r}
+
+```r
 pbinom(q=k_success, size=n_trials, prob=probability, lower.tail=FALSE)
+```
+
+```
+[1] 0.001634937
 ```
 
 All the `[ ]binom` functions are fair game!
@@ -394,9 +443,7 @@ A sampling distribution is the distribution of estimates that we have for our pa
 
 Here's a motivating figure from the text. After you're done looking over this section, reflect on this figure and see if you can understand it all.
 
-```{r, echo=FALSE}
-knitr::include_graphics("samp_dist_p.png")
-```
+![plot of chunk unnamed-chunk-13](samp_dist_p.png)
 
 Law of Large Numbers
 ========================================================
@@ -407,48 +454,73 @@ Law of Large Numbers
 ##### Example
 Let's take a look at some NBA data that was scraped off of basketball-reference.com. We'll read in the csv.
 
-```{r}
+
+```r
 western_conference <- read.csv("western_nba.csv")[,-1]
 head(western_conference, 3)
+```
+
+```
+             Player millions                  team
+1     Stephen Curry 37.45715 Golden State Warriors
+2 Russell Westbrook 35.65415 Oklahoma City Thunder
+3        Chris Paul 35.65415       Houston Rockets
+```
+
+```r
 mean(western_conference$millions)
+```
+
+```
+[1] 6.500936
 ```
 
 Law of Large Numbers
 ========================================================
 In the following blocks, we're going to take 100 samples of size $n=2, 5, 30$. Ignore the code that you have you never learned for midterm 1. Focus on the output.
 
-```{r, echo=FALSE, message=FALSE, warning=FALSE}
-# IGNORE
-library(dplyr)
-sample_n_salaries <- function(n) {
-  western_conference %>% 
-  sample_n(size=n) %>% 
-  summarize(mean_salary=mean(millions))
-}
-```
+
 
 Law of Large Numbers
 ========================================================
 ###### Sampling with n=2
-```{r}
+
+```r
 sample_means_2 <- do.call(rbind, lapply(1:100, function(x) sample_n_salaries(2)))
 sample_means_2 %>% summarize(sampling_mean=mean(mean_salary))
+```
+
+```
+  sampling_mean
+1      7.106405
 ```
 
 Law of Large Numbers
 ========================================================
 ###### Sampling with n=5
-```{r}
+
+```r
 sample_means_5 <- do.call(rbind, lapply(1:100, function(x) sample_n_salaries(5)))
 sample_means_5 %>% summarize(sampling_mean=mean(mean_salary))
+```
+
+```
+  sampling_mean
+1      6.850759
 ```
 
 Law of Large Numbers
 ========================================================
 ###### Sampling with n=30
-```{r}
+
+```r
 sample_means_30 <- do.call(rbind, lapply(1:100, function(x) sample_n_salaries(30)))
 sample_means_30 %>% summarize(sampling_mean=mean(mean_salary))
+```
+
+```
+  sampling_mean
+1      6.499332
 ```
 
 Central Limit Theorem
@@ -460,8 +532,23 @@ Central Limit Theorem
 ##### Example
 Recall the data from earlier.
 
-```{r}
+
+```r
 head(western_conference, 10)
+```
+
+```
+              Player millions                   team
+1      Stephen Curry 37.45715  Golden State Warriors
+2  Russell Westbrook 35.65415  Oklahoma City Thunder
+3         Chris Paul 35.65415        Houston Rockets
+4       LeBron James 35.65415     Los Angeles Lakers
+5        Paul George 30.56070  Oklahoma City Thunder
+6        Mike Conley 30.52112      Memphis Grizzlies
+7       James Harden 30.43185        Houston Rockets
+8       Kevin Durant 30.00000  Golden State Warriors
+9       Paul Millsap 29.73077         Denver Nuggets
+10    Damian Lillard 27.97769 Portland Trail Blazers
 ```
 
 Central Limit Theorem
@@ -469,14 +556,7 @@ Central Limit Theorem
 ###### Exploring the Population ("The Underlying Distribution")
 This is the distribution of the population salaries.
 
-```{r, echo=FALSE}
-library(ggplot2)
-ggplot(western_conference, aes(x=millions)) +
-  geom_histogram(binwidth=0.5) +
-  ggtitle("Salaries of Western Conference NBA Players") +
-  xlab("millions of dollars") +
-  scale_x_continuous(limits = c(0, 40))
-```
+![plot of chunk unnamed-chunk-20](review_slides.Rmd_updated-figure/unnamed-chunk-20-1.png)
 
 Central Limit Theorem
 ========================================================
@@ -485,9 +565,14 @@ What is the mean parameter $\mu$ of the population? We can calculate this by han
 
 Here's the "by hand" calculation. The following functions may seem new to you, but think intuitively instead of code-wise. We have a data on all of the salaries, then we add all the salaries up, then divide by the number of salaries we have to get the average.
 
-```{r}
+
+```r
 vector_of_salaries <- western_conference$millions
 sum(vector_of_salaries) / length(vector_of_salaries)
+```
+
+```
+[1] 6.500936
 ```
 
 Central Limit Theorem
@@ -497,9 +582,15 @@ What is the mean parameter $\mu$ of the population? We can calculate this by han
 
 Here's the `dplyr` solution.
 
-```{r, warning=FALSE, message=FALSE}
+
+```r
 library(dplyr)
 western_conference %>% summarize(mu=mean(vector_of_salaries))
+```
+
+```
+        mu
+1 6.500936
 ```
 
 Let's see what our sample distribution looks like for several choices of $n$.
@@ -507,31 +598,40 @@ Let's see what our sample distribution looks like for several choices of $n$.
 Central Limit Theorem
 ========================================================
 ###### Sampling with n=2
-```{r}
+
+```r
 ggplot(sample_means_2, aes(x=mean_salary)) + 
   geom_histogram(binwidth=0.7) +
   scale_x_continuous(limits = c(0, 40))
 ```
 
+![plot of chunk unnamed-chunk-23](review_slides.Rmd_updated-figure/unnamed-chunk-23-1.png)
+
 Central Limit Theorem
 ========================================================
 ###### Sampling with n=5
-```{r}
+
+```r
 ggplot(sample_means_5, aes(x=mean_salary)) + 
   geom_histogram(binwidth=0.5) +
   scale_x_continuous(limits = c(0, 40))
 ```
+
+![plot of chunk unnamed-chunk-24](review_slides.Rmd_updated-figure/unnamed-chunk-24-1.png)
 
 Central Limit Theorem
 ========================================================
 ###### Sampling with n=30
 Visually, the sample size of $n=30$ is the most symmetric.
 
-```{r}
+
+```r
 ggplot(sample_means_30, aes(x=mean_salary)) + 
   geom_histogram(binwidth=0.5) +
   scale_x_continuous(limits = c(0, 40))
 ```
+
+![plot of chunk unnamed-chunk-25](review_slides.Rmd_updated-figure/unnamed-chunk-25-1.png)
 
 As $n$ gets larger, then we see the sampling distribution get less skewed and more like the normal curve.
 
@@ -539,10 +639,11 @@ Sampling Distribution Means and Variances
 ========================================================
 Sampling distributions have means and variances that can be calculated as specified below!
 
-```{r, echo=FALSE}
-counts      <- c(mean="x-bar", variance="sd/sqrt(n)")
-proportions <- c(mean="p", variance="(p(1-p))/n")
-data.frame(rbind(counts, proportions))
+
+```
+             mean   variance
+counts      x-bar sd/sqrt(n)
+proportions     p (p(1-p))/n
 ```
 
 **Question:** What is the relationship between variance and standard deviation?
