@@ -39,7 +39,8 @@ In Part 1, we learn how to summarize, manipulate, and and visualize data. We als
 No videos yet.
 
 ### Exam Material
-<a href="midterm-1/midterm-1-review.pdf">i. Midterm 1 Review</a>  
+<a href="midterm-1/midterm-1-review.pdf">i. Midterm 1 review notes</a>  
+<a href="midterm-2/midterm-2-slides.html">ii. Midterm 2 review slides</a>  
 
 ### Supplementary
 If you need more information about topics, read these too. I wrote them to give you some more examples/clarity.  
