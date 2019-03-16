@@ -150,9 +150,9 @@ sample_2
 ```
 
 ```
-  Sepal.Length Sepal.Width Petal.Length Petal.Width    Species
-1          6.4         2.9          4.3         1.3 versicolor
-2          6.2         2.2          4.5         1.5 versicolor
+  Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+1          5.4         3.4          1.7         0.2  setosa
+2          4.9         3.1          1.5         0.2  setosa
 ```
 
 
@@ -166,13 +166,13 @@ sample_6
 ```
 
 ```
-  Sepal.Length Sepal.Width Petal.Length Petal.Width    Species
-1          5.6         2.9          3.6         1.3 versicolor
-2          5.5         2.3          4.0         1.3 versicolor
-3          6.5         2.8          4.6         1.5 versicolor
-4          5.4         3.0          4.5         1.5 versicolor
-5          4.6         3.1          1.5         0.2     setosa
-6          6.4         3.1          5.5         1.8  virginica
+  Sepal.Length Sepal.Width Petal.Length Petal.Width   Species
+1          4.8         3.4          1.6         0.2    setosa
+2          5.0         3.4          1.6         0.4    setosa
+3          5.1         3.5          1.4         0.2    setosa
+4          6.3         3.3          6.0         2.5 virginica
+5          5.5         4.2          1.4         0.2    setosa
+6          6.1         2.6          5.6         1.4 virginica
 ```
 
 
@@ -512,7 +512,7 @@ sample_means_2 %>% summarize(sampling_mean=mean(mean_salary))
 
 ```
   sampling_mean
-1      6.624488
+1      8.007647
 ```
 
 Law of Large Numbers
@@ -526,7 +526,7 @@ sample_means_5 %>% summarize(sampling_mean=mean(mean_salary))
 
 ```
   sampling_mean
-1      6.348597
+1      6.080584
 ```
 
 Law of Large Numbers
@@ -540,7 +540,7 @@ sample_means_30 %>% summarize(sampling_mean=mean(mean_salary))
 
 ```
   sampling_mean
-1      6.456796
+1      6.693789
 ```
 
 Central Limit Theorem
@@ -722,34 +722,178 @@ $$
 - If the null hypothesized parameter is not in our interval, then we can say that we reject $H_0$. That is, if 5 is not in the interval that we created, then we reject.  
 - When we reject $H_0$, we do not accept $H_1$.
 
-The z test
-========================================================
-[UPDATE]  
-[OTHER GSI]  
+Z-testing
+=============
+
+The general procedure for running a z-test (after identifying the parameter of interest and ensuring conditions are met) is:
+
+1) State the null and alternative hypotheses
+2) Calculate the z test statistic
+3) Use the test statistic to find the p-value
+4) Generate a conclusion about your hypotheses using your p-value (reject vs. fail to reject the null)
+
+Remember that we run a z-test when we know the true population standard deviation, $\sigma$. You would be provided this value on the midterm.
+
+Z-test conditions
+============
+
+The conditions to run a z-test include:
+
+1) The sample is a SRS (simple random sample)
+2) The data comes from a Normal distribution/population
+3) The true, population standard deviation $\sigma$ is known
+
+
+Step 1: Hypotheses
+==========
+
+Your hypotheses can be one-sided or two-sided.
+
+- An example of a two-sided test is:
+
+$$
+H_0: \mu = 3, H_a: \mu \neq 3
+$$
+
+- Some examples of a one-sided test are:
+
+$$
+H_0: \mu = 3, H_a: \mu > 3
+$$
+
+or
+
+$$
+H_0: \mu = 3, H_a: \mu < 3
+$$
+
+Sometimes you are explicitly told what kind of a test to run. Other times, it is your responsibility to figure out which direction you test based on context from the word problem.
+
+
+Step 2: Z-value calculation
+=================
+
+The formula for the z test statistic is:
+
+$$
+z = \frac{\bar{x} - \mu_0}{\sigma / \sqrt{n}}
+$$
+
+where:
+
+- $\bar{x}$ is the sample mean (aka the statistic)
+- $\mu$ is the population mean that is part of the hypothesis (aka the parameter)
+- $\sigma$ is the population standard deviation
+- n is the sample size
+
+
+Step 3: Finding the p-value
+==========
+
+Once we have our z-value, we can find the p-value. To help find the p-value, sketch the standard Normal curve and mark on it the observed value of z. Depending on whether you are performing a **one-sided test** or a **two-sided**, this will determine in which direction you calculate the p-value/probability:
+
+Here is a visual to illustrate the differences
+
+#![Normal curve for Question 1](images/midterm2_ztest.png)
+
+Use pnorm() functions to calculate your p-value. Remember we are working with a Standard normal.
+
+
+Step 4: Interpreting p-values
+============
+
+Once we have our p-values, we can relate these back to our hypotheses and come to a conclusion. Be careful interpreting p-values! 
+
+The p-value represents the probability, assuming that $H_0$ is true, that the test statistic would take a value at least as extreme (in the direction of $H_a$) as that actually observed. Note that the p-value is **NOT** the probability that the null hypothesis is true. 
+
+The smaller the p-value, the stronger the evidence against $H_0$ provided by the data.
+
+As a general rule of thumb, we:
+
+- reject $H_0$ when p-value < $\alpha$
+- fail to reject $H_0$ when p-value > $\alpha$
+
+where $\alpha$ is *typically* set to 0.05 (**unless otherwise stated in the problem**).
+
+Step 4: Interpreting p-values
+============
+Correct interpretations:
+
+- If p < $\alpha$: We found a p-value of p = [p-value]. This is less than our cut-off value of $\alpha$ = [$\alpha$]. So we reject the null hypothesis that [null hypothesis] and have evidence to support the alternative hypothesis that [alternative hypothesis]
+
+- If p > $\alpha$: We found a p-value of p = [p-value]. This is greater than our cut-off value of $\alpha$ = [$\alpha$]. so we fail to reject the null hypothesis that [null hypothesis] and do not have evidence to support the alternative hypothesis that [alternative hypothesis].
+
+Example (try on your own)
+============
+An environmentalist group collects a liter of water from each of 45 random locations along a stream. The mean amount of dissolved oxygen per liter is 4.62 mg. Suppose
+that we know that dissolved oxygen varies among locations according to a Normal
+distribution with $\sigma$ = 0.92 mg. Is this strong evidence that the stream has a mean oxygen content of less than 5 mg per liter? Perform a hypothesis test by completing the following steps:
+
+1) State your **null and alternate hypotheses** (hint: is it one-sided or two-sided?):
+
+$$
+H_0: 
+$$
+
+$$
+H_a: 
+$$
+
+Example (try on your own)
+============
+2) Calculate the **z-statistic**:
+
+$$
+z = 
+$$
+
+
+3) Find the **p-value**. Express this using probability notation, and write the proper pnorm() function to use.
+
+**Probability notation**:
+
+$$
+p-value = 
+$$
+
+**Code**:
+
+
+```r
+pnorm(               )
+```
+
+4) Interpret your p-value.
+
+
+
+
+
+
 
 Types of error
 ========================================================
-![plot of chunk unnamed-chunk-28](TypesOfErrorsPower/Slide1.jpeg)
+![plot of chunk unnamed-chunk-29](TypesOfErrorsPower/Slide1.jpeg)
 
 Types of error
 ========================================================
-![plot of chunk unnamed-chunk-29](TypesOfErrorsPower/Slide2.jpeg)
+![plot of chunk unnamed-chunk-30](TypesOfErrorsPower/Slide2.jpeg)
 
 Types of error
 ========================================================
-![plot of chunk unnamed-chunk-30](TypesOfErrorsPower/Slide3.jpeg)
+![plot of chunk unnamed-chunk-31](TypesOfErrorsPower/Slide3.jpeg)
 
 Types of error
 ========================================================
-![plot of chunk unnamed-chunk-31](TypesOfErrorsPower/Slide4.jpeg)
+![plot of chunk unnamed-chunk-32](TypesOfErrorsPower/Slide4.jpeg)
 
 Power
 ========================================================
-![plot of chunk unnamed-chunk-32](TypesOfErrorsPower/Slide5.jpeg)
+![plot of chunk unnamed-chunk-33](TypesOfErrorsPower/Slide5.jpeg)
 
 Power
 ========================================================
-![plot of chunk unnamed-chunk-33](TypesOfErrorsPower/Slide6.jpeg)
+![plot of chunk unnamed-chunk-34](TypesOfErrorsPower/Slide6.jpeg)
 
 Take Home Questions
 ======================================================== 
