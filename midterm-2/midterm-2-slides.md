@@ -150,9 +150,9 @@ sample_2
 ```
 
 ```
-    Sepal.Length Sepal.Width Petal.Length Petal.Width   Species
-136          7.7         3.0          6.1         2.3 virginica
-24           5.1         3.3          1.7         0.5    setosa
+  Sepal.Length Sepal.Width Petal.Length Petal.Width    Species
+1          6.4         2.9          4.3         1.3 versicolor
+2          6.2         2.2          4.5         1.5 versicolor
 ```
 
 
@@ -166,13 +166,13 @@ sample_6
 ```
 
 ```
-    Sepal.Length Sepal.Width Petal.Length Petal.Width    Species
-112          6.4         2.7          5.3         1.9  virginica
-150          5.9         3.0          5.1         1.8  virginica
-95           5.6         2.7          4.2         1.3 versicolor
-84           6.0         2.7          5.1         1.6 versicolor
-131          7.4         2.8          6.1         1.9  virginica
-3            4.7         3.2          1.3         0.2     setosa
+  Sepal.Length Sepal.Width Petal.Length Petal.Width    Species
+1          5.6         2.9          3.6         1.3 versicolor
+2          5.5         2.3          4.0         1.3 versicolor
+3          6.5         2.8          4.6         1.5 versicolor
+4          5.4         3.0          4.5         1.5 versicolor
+5          4.6         3.1          1.5         0.2     setosa
+6          6.4         3.1          5.5         1.8  virginica
 ```
 
 
@@ -512,7 +512,7 @@ sample_means_2 %>% summarize(sampling_mean=mean(mean_salary))
 
 ```
   sampling_mean
-1      6.062026
+1      6.624488
 ```
 
 Law of Large Numbers
@@ -526,7 +526,7 @@ sample_means_5 %>% summarize(sampling_mean=mean(mean_salary))
 
 ```
   sampling_mean
-1      6.510441
+1      6.348597
 ```
 
 Law of Large Numbers
@@ -540,7 +540,7 @@ sample_means_30 %>% summarize(sampling_mean=mean(mean_salary))
 
 ```
   sampling_mean
-1      6.621393
+1      6.456796
 ```
 
 Central Limit Theorem
@@ -729,8 +729,27 @@ The z test
 
 Types of error
 ========================================================
-[UPDATE]  
-[Steph]  
+![plot of chunk unnamed-chunk-28](TypesOfErrorsPower/Slide1.jpeg)
+
+Types of error
+========================================================
+![plot of chunk unnamed-chunk-29](TypesOfErrorsPower/Slide2.jpeg)
+
+Types of error
+========================================================
+![plot of chunk unnamed-chunk-30](TypesOfErrorsPower/Slide3.jpeg)
+
+Types of error
+========================================================
+![plot of chunk unnamed-chunk-31](TypesOfErrorsPower/Slide4.jpeg)
+
+Power
+========================================================
+![plot of chunk unnamed-chunk-32](TypesOfErrorsPower/Slide5.jpeg)
+
+Power
+========================================================
+![plot of chunk unnamed-chunk-33](TypesOfErrorsPower/Slide6.jpeg)
 
 Take Home Questions
 ======================================================== 

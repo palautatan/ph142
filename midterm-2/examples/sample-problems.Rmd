@@ -1,0 +1,230 @@
+---
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Sample Questions
+
+## Problem 1
+Senioritis, a disease known to cause mediocre grades and odd sleeping habits, sweeps UC Berkeley seniors every year. A statistician in Evans Hall modeled the probability of k senior-standing students with the following funtion. Let X be the number of infected Berkeley seniors.
+
+$$P(X=k)=\binom{n}{k}(0.67)^k(0.33)^{n-k}$$
+
+a. What is the name of this distribution?  
+
+b. What is the probability that any given senior has senioritis?  
+
+c. What did the statistician assume when making the probability model? Mark all that apply.  
+  ( ) Dependence between seniors  
+  ( ) The event of senioritis has a binary outcome  
+  ( ) Trials are fixed  
+  ( ) The chance that a senior gets senioritis is equal amongst all Berkeley seniors  
+  
+d. Use the probability model to give the exact probability that half of the seniors at UC Berkeley get senioritis. Let the number of Berkeley seniors total be 10,000.  
+
+e. Write an expression using the probability model for the probability that more than half of the seniors are sick with senioritis.  
+
+f. Can you approximate part (e) with a continuous distribution? If so, which distribution? Calculate the approximation.  
+
+
+## Problem 2
+The Evans Hall statistician received data of higher amounts of traffic accidents than usual around midterms week for Berkeley seniors than at any other week during the semester. The statistician modeled the probability of accidents happening on any given week with this equation.
+
+$$f(x)=e^{-3}\frac{3^x}{x!}$$
+
+a. What is the name of this distribution and what is its parameter?  
+
+b. What is the expected amount of traffic accidents for a normal week for Berkeley seniors?  
+
+c. On average, how much would we expect the amount of accidents per week to deviate from the mean?  
+
+d. During midterms week, a professor received 12 emails regarding students getting into car accidents and not being able to take the midterm. What is the probability that 12 of her students truthfully got into accidents?  
+
+
+## Problem 3
+#### Part a.
+Which of the following properties does the Normal distribution have?  
+  - a. 95% of the data lie within 1 standard deviation of the mean.  
+  - b. The distribution is symmetric.  
+  - c. It is used to model rare events.  
+  - d. The total area under the curve is equal to 1.  
+  
+
+#### Part b.
+To calculate the probability to the left of a given x-value in R, we use the function:  
+  - a. pnorm()  
+  - b. qnorm()  
+
+
+#### Part c.
+The standard normal distribution has a mean of ______, a variance of ______, and a standard deviation of ______.  
+
+
+#### Part d.
+What information can you infer from a qqplot in general?  
+
+
+#### Part e.
+The following bell curve represents the birth weight of 3,226 newborn babies studied in O'Cathain et al (2002). The mean birthweight was 3.39 kilograms. The dashed lines on the plot represent standard deviation sized intervals. Answer the following questions about this curve.  
+
+```{r, echo=FALSE}
+library(ggplot2)
+
+
+p1 <- ggplot(data = data.frame(x = c(3.39-3*0.55, 3.39+3*0.55)), aes(x)) +
+  stat_function(fun = dnorm, n = 101, args = list(mean = 3.39, sd = 0.55)) +
+  geom_vline(xintercept=seq(3.39-3*0.55, 3.39+3*0.55, 0.55), lty=2, lwd=0.2) +
+  scale_x_continuous(breaks=seq(3.39-3*0.55, 3.39+3*0.55, 0.55)) +
+  ylab("") +
+  xlab("") +
+  ggtitle("Distribution of Birth Weight") +
+  scale_y_continuous(breaks = NULL) +
+  theme_classic()
+p1
+```
+
+
+True or False. The y-values of the above curve represent probabilities of their corresponding x-values.  
+
+
+What is the variance of the birthweight? What are the units for variance?  
+
+
+
+What is the probability that a baby weights 3.39 kilograms at birth?  
+
+
+What is the probability that a baby weighs more than 4.49 kilograms at birth?  
+
+
+Write code to calculate the probability weighs between 2 and 3 kilograms.  
+
+
+
+# Solutions
+
+## Problem 1
+Senioritis, a disease known to cause mediocre grades and odd sleeping habits, sweeps UC Berkeley seniors every year. A statistician in Evans Hall modeled the probability of k senior-standing students with the following funtion. Let X be the number of infected Berkeley seniors.  
+
+$$P(X=k)=\binom{n}{k}(0.67)^k(0.33)^{n-k}$$  
+
+a. What is the name of this distribution?    
+Binomial  
+
+b. What is the probability that any given senior has senioritis?    
+0.67  
+
+c. What did the statistician assume when making the probability model? Mark all that apply.    
+  ( ) Dependence between seniors  
+  (//) The event of senioritis has a binary outcome  
+  (//) Trials are fixed  
+  (//) The chance that a senior gets senioritis is equal amongst all Berkeley seniors  
+  
+d. Use the probability model to give the exact probability that half of the seniors at UC Berkeley get senioritis. Let the number of Berkeley seniors total be 10,000.  
+$$P(X=5000) = \binom{10000}{5000}(0.67)^{5000}(0.33)^{5000}$$
+
+e. Write an expression using the probability model for the probability that more than half of the seniors are sick with senioritis.  
+$$P(X\geq 5001)=\Sigma_{k=5001}^{10000} \binom{100000}{k}(0.67)^{k}(0.33)^{10000-k}$$  
+
+f. We can approximate the value from part (e) with a distribution. Verify the assumptions, and name the distribution with its paramters.  Write R code to calculate the value.  
+
+We verify $np=10000(0.67)=6700$ and $n(1-p)=10000(0.33)=3300$.  
+The distribution $N(np, n(1-p))$ in this case is $N(6700, 3300)$.  
+The R code is `1-pbinom(5000, 6700, 3300)`.  
+
+
+## Problem 2
+The Evans Hall statistician received data of higher amounts of traffic accidents than usual around midterms week for Berkeley seniors than at any other week during the semester. The statistician modeled the probability of accidents happening on any given week with this equation.  
+
+$$P(X=k)=e^{-3}\frac{3^k}{k!}$$  
+
+a. What is the name of this distribution and what is its parameter?    
+Poisson(3)
+
+b. What is the expected amount of traffic accidents for a normal week for Berkeley seniors?    
+3 accidents  
+
+c. On average, how much would we expect the amount of accidents per week to deviate from the mean? You don't need to simplify.    
+$\sqrt{3}$ accidents  
+
+d. During midterms week, a professor received 12 emails regarding students getting into car accidents and not being able to take the midterm. What is the probability that 12 of her students got into accidents?  
+$f(12)=e^{-3}\frac{3^{12}}{12!}$  
+
+
+## Problem 3  
+#### Part a.  
+Which of the following properties does the Normal distribution have?  
+  - a. 95% of the data lie within 1 standard deviation of the mean.  
+  - b. The distribution is symmetric.  
+  - c. It is used to model rare events.  
+  - d. The total area under the curve is equal to 1.  
+  
+*Solution. Students should have selected (b) and (d) only.*  
+  
+
+#### Part b.
+To calculate the probability to the left of a given x-value in R, we use the function:  
+  - a. pnorm()  
+  - b. qnorm()  
+  
+*Solution. Students should have selected (a).*  
+
+
+#### Part c.
+The standard normal distribution has a mean of ______, a variance of ______, and a standard deviation of ______.  
+
+*Solution. Mean of 0, variance of 1, and standard deviation of 1.*  
+
+
+#### Part d.
+What information can you infer from a qqplot in general?  
+
+*Solution. A qq-plot tells you if your data can be approximated by a normal distribution or not.*  
+
+
+#### Part e.
+The following bell curve represents the birth weight of 3,226 newborn babies studied in O'Cathain et al (2002). The mean birthweight was 3.39 kilograms. The dashed lines on the plot represent standard deviation sized intervals. Answer the following questions about this curve.  
+
+```{r, echo=FALSE}
+library(ggplot2)
+
+
+p1 <- ggplot(data = data.frame(x = c(3.39-3*0.55, 3.39+3*0.55)), aes(x)) +
+  stat_function(fun = dnorm, n = 101, args = list(mean = 3.39, sd = 0.55)) +
+  geom_vline(xintercept=seq(3.39-3*0.55, 3.39+3*0.55, 0.55), lty=2, lwd=0.2) +
+  scale_x_continuous(breaks=seq(3.39-3*0.55, 3.39+3*0.55, 0.55)) +
+  ylab("") +
+  xlab("") +
+  ggtitle("Distribution of Birth Weight") +
+  scale_y_continuous(breaks = NULL) +
+  theme_classic()
+p1
+```
+
+
+True or False. The y-values of the above curve represent probabilities of their corresponding x-values.  
+
+*Solution. False. They represent a density.*  
+
+
+What is the variance of the birthweight? What are the units for variance?  
+
+*Solution. 0.55^2. The variance is in kilograms.*  
+
+
+What is the probability that a baby weights 3.39 kilograms at birth?  
+
+*Solution. 0.*  
+
+
+What is the probability that a baby weighs more than 4.49 kilograms at birth?  
+
+*Solution. (100-95/2)%.*  
+
+
+Write code to calculate the probability weighs between 2 and 3 kilograms.  
+
+*Solution. pnorm(3, 3.39, 0.55) - pnorm(2, 3.39, 0.55).*  

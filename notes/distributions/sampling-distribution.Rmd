@@ -1,0 +1,42 @@
+---
+title: "Sample distribution v. sampling distribution"
+author: "Edie Espejo"
+date: "3/15/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+rappers <- read.csv("../../notes/rappers/data/rappers.csv")
+head(rappers)
+```
+
+```{r}
+library(ggplot2)
+ggplot(rappers, aes(x=net_worth)) + geom_histogram(binwidth=30, col="white", lwd=0.2) + ggtitle("True net worth histogram / true distribution")
+```
+
+```{r}
+library(dplyr)
+our_first_sample <- rappers %>% sample_n(10)
+our_first_sample
+```
+
+```{r}
+ggplot(our_first_sample, aes(x=net_worth)) + geom_histogram(binwidth=30, col="white", lwd=0.2) + ggtitle("Distribution of my sample")
+```
+
+The sample mean is the mean of one sample.
+```{r}
+
+```
+
+```{r}
+sampling_distribution <- c()
+for (i in 1:50) {
+  this_sample <- rappers %>% sample_n(10)
+  sample_mean <- this_sample %>% summarize(mean_net=mean(net_worth))
+  sampling_distribution <- c(sampling_distribution, sample_mean)
+}
+sample_mean_df <- data.frame(sample_means=as.numeric(sampling_distribution))
+ggplot(sample_mean_df, aes(x=sample_means)) + geom_histogram(binwidth=10, col="white", lwd=0.2) + ggtitle("Sampling distribution")
+```

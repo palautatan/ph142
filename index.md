@@ -27,6 +27,9 @@ In Part 1, we learn how to summarize, manipulate, and and visualize data. We als
 <a href="notes/probability/probability-intro.pdf">iv. Probability introduction</a>  
 <a href="notes/distributions/distributions.pdf">v. All distributions</a>  
 
+#### Part 3 | Formal testing  
+vi. Introduction to testing (CI's and the z-test) <a href="notes/testing/intro-to-testing.pdf">slides</a> and <a href="notes/testing/ci-pvalue-examples.pdf">sample problems</a>  
+
 ### Lab Demos
 <a href="lab-demos/lab-1/lab-1.html">i. Lab 1, Crash course intro to R</a>  
 <a href="lab-demos/lab-2/lab-2.html">ii. Lab 2, Regression</a>  
@@ -38,7 +41,7 @@ In Part 1, we learn how to summarize, manipulate, and and visualize data. We als
 
 ### Exam Material
 <a href="midterm-1/midterm-1-review.pdf">i. Midterm 1 review notes</a>  
-<a href="midterm-2/midterm-2-slides.html">ii. Midterm 2 review slides</a>  
+ii. Midterm 2 <a href="midterm-2/midterm-2-slides.html">review slides</a> and <a href="midterm-2/examples/sample-problems.html">sample problems</a>  
 
 ### Supplementary
 If you need more information about topics, read these too. I wrote them to give you some more examples/clarity.  

@@ -630,8 +630,39 @@ The z test
 
 Types of error
 ========================================================
-[UPDATE]  
-[Steph]  
+```{r, echo=FALSE}
+knitr::include_graphics("TypesOfErrorsPower/Slide1.jpeg")
+```
+
+Types of error
+========================================================
+```{r, echo=FALSE}
+knitr::include_graphics("TypesOfErrorsPower/Slide2.jpeg")
+```
+
+Types of error
+========================================================
+```{r, echo=FALSE}
+knitr::include_graphics("TypesOfErrorsPower/Slide3.jpeg")
+```
+
+Types of error
+========================================================
+```{r, echo=FALSE}
+knitr::include_graphics("TypesOfErrorsPower/Slide4.jpeg")
+```
+
+Power
+========================================================
+```{r, echo=FALSE}
+knitr::include_graphics("TypesOfErrorsPower/Slide5.jpeg")
+```
+
+Power
+========================================================
+```{r, echo=FALSE}
+knitr::include_graphics("TypesOfErrorsPower/Slide6.jpeg")
+```
 
 Take Home Questions
 ======================================================== 
