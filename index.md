@@ -40,7 +40,7 @@ vi. Introduction to testing (CI's and the z-test) <a href="notes/testing/intro-t
 
 
 ### Exam Material
-<a href="midterm-1/midterm-1-review.pdf">i. Midterm 1 review notes</a>  
+i. Midterm 1 <a href="midterm-1/midterm-1-review.pdf">review notes</a> and <a href="midterm-1/examples/example-problem.pdf">sample problems</a>  
 ii. Midterm 2 <a href="midterm-2/midterm-2-slides.html">review slides</a> and <a href="midterm-2/examples/sample-problems.html">sample problems</a>  
 
 ### Supplementary
