@@ -4,9 +4,17 @@ author: PH142
 date: Spring 2019
 autosize: true
 
+Navigating these slides
+========================================================
+Welcome to the Midterm 2 Rpres. You can navigate these slides by  
+
+(1) **Arrows** by clicking the right and left arrows on your keyboard,  
+(2) **Progress bar** by clicking on the progress bar located at the very bottom of your browser (it's a slim blue bar),  
+(3) **Manual entry** or waiting a second, then typing in the slide number you wish to view within your URL address bar (change the slide number in the URL).  
+
 Exam logistics
 ========================================================
-Bring your (1) ID, (2) calculator, and (3) intelligent self to **245 Li Ka Shing** at 8:00am sharp on the 22nd of March.
+Bring your (1) ID, (2) calculator, and (3) intelligent self to **your designated testing room** at 8:00am sharp on the 22nd of March.
 
 Note to Students
 ========================================================
@@ -18,7 +26,7 @@ Good luck studying to all!
 
 Material
 ========================================================
-**Study Design Review:**  Fair game midterm 1 material.  
+**PPDAC Application:**  You will still be testing on your ability to intepret studies!    
 **Chapter 9, 10:** Know when to apply your probability rules!  
 **Chapter 11:** Continuous Distribution, Normal  
 **Chapter 12:** Discrete Distributions, Binomial and Poisson  
@@ -27,17 +35,14 @@ Material
 
 
 
-Study Design Review
+PPDAC Applications
 ========================================================
-[UPDATE]  
-[GSI 1]  
+The following PPDAC application slides are difficult to read on this Rpres. To study this topic, click on the following link to Google slides.  
 
-Study Design Review
-========================================================
-[UPDATE]  
-[GSI 2]  
+<a href="https://docs.google.com/presentation/d/1bND-Wkc4Cm6fxZWyb2cwpxj_mGoQSfpEGmcThvTb4CY/edit?usp=sharing">Click here!</a>
 
-Study Design Review
+
+Bias
 ========================================================
 ##### Bias
 When the expected value based on a sample differs from the true underlying parameter value.
@@ -249,11 +254,23 @@ $$P(A|B) =\frac{P(A|B)P(B)}{P(B|A)P(A) + P(B|A^c)P(A^c)}$$
 $$P(A|B) =\frac{P(A \cap B)}{P(B|A)P(A) + P(B|A^c)P(A^c)}$$
 
 
-Example
+Absolute frequencies and tree diagrams
 ========================================================
-[Absolute frequencies and tree diagrams]  
-[UPDATE]  
-[Namita]  
+```{r, echo=FALSE}
+knitr::include_graphics("Midterm2_Review_AbsoluteFreq&Trees/Slide1.jpeg")
+```
+
+Absolute frequencies and tree diagrams
+========================================================
+```{r, echo=FALSE}
+knitr::include_graphics("Midterm2_Review_AbsoluteFreq&Trees/Slide2.jpeg")
+```
+
+Absolute frequencies and tree diagrams
+========================================================
+```{r, echo=FALSE}
+knitr::include_graphics("Midterm2_Review_AbsoluteFreq&Trees/Slide3.jpeg")
+```
 
 Distributions
 ========================================================

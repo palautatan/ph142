@@ -4,9 +4,17 @@ author: PH142
 date: Spring 2019
 autosize: true
 
+Navigating these slides
+========================================================
+Welcome to the Midterm 2 Rpres. You can navigate these slides by  
+
+(1) **Arrows** by clicking the right and left arrows on your keyboard,  
+(2) **Progress bar** by clicking on the progress bar located at the very bottom of your browser (it's a slim blue bar),  
+(3) **Manual entry** or waiting a second, then typing in the slide number you wish to view within your URL address bar (change the slide number in the URL).  
+
 Exam logistics
 ========================================================
-Bring your (1) ID, (2) calculator, and (3) intelligent self to **245 Li Ka Shing** at 8:00am sharp on the 22nd of March.
+Bring your (1) ID, (2) calculator, and (3) intelligent self to **your designated testing room** at 8:00am sharp on the 22nd of March.
 
 Note to Students
 ========================================================
@@ -18,7 +26,7 @@ Good luck studying to all!
 
 Material
 ========================================================
-**Study Design Review:**  Fair game midterm 1 material.  
+**PPDAC Application:**  You will still be testing on your ability to intepret studies!    
 **Chapter 9, 10:** Know when to apply your probability rules!  
 **Chapter 11:** Continuous Distribution, Normal  
 **Chapter 12:** Discrete Distributions, Binomial and Poisson  
@@ -27,17 +35,14 @@ Material
 
 
 
-Study Design Review
+PPDAC Applications
 ========================================================
-[UPDATE]  
-[GSI 1]  
+The following PPDAC application slides are difficult to read on this Rpres. To study this topic, click on the following link to Google slides.  
 
-Study Design Review
-========================================================
-[UPDATE]  
-[GSI 2]  
+<a href="https://docs.google.com/presentation/d/1bND-Wkc4Cm6fxZWyb2cwpxj_mGoQSfpEGmcThvTb4CY/edit?usp=sharing">Click here!</a>
 
-Study Design Review
+
+Bias
 ========================================================
 ##### Bias
 When the expected value based on a sample differs from the true underlying parameter value.
@@ -150,9 +155,9 @@ sample_2
 ```
 
 ```
-  Sepal.Length Sepal.Width Petal.Length Petal.Width Species
-1          5.4         3.4          1.7         0.2  setosa
-2          4.9         3.1          1.5         0.2  setosa
+  Sepal.Length Sepal.Width Petal.Length Petal.Width    Species
+1          5.5         2.5          4.0         1.3 versicolor
+2          5.4         3.9          1.7         0.4     setosa
 ```
 
 
@@ -166,13 +171,13 @@ sample_6
 ```
 
 ```
-  Sepal.Length Sepal.Width Petal.Length Petal.Width   Species
-1          4.8         3.4          1.6         0.2    setosa
-2          5.0         3.4          1.6         0.4    setosa
-3          5.1         3.5          1.4         0.2    setosa
-4          6.3         3.3          6.0         2.5 virginica
-5          5.5         4.2          1.4         0.2    setosa
-6          6.1         2.6          5.6         1.4 virginica
+  Sepal.Length Sepal.Width Petal.Length Petal.Width    Species
+1          5.8         2.7          4.1         1.0 versicolor
+2          5.0         3.2          1.2         0.2     setosa
+3          4.4         3.2          1.3         0.2     setosa
+4          5.0         2.3          3.3         1.0 versicolor
+5          5.5         2.4          3.7         1.0 versicolor
+6          6.7         3.1          4.7         1.5 versicolor
 ```
 
 
@@ -267,11 +272,17 @@ $$P(A|B) =\frac{P(A|B)P(B)}{P(B|A)P(A) + P(B|A^c)P(A^c)}$$
 $$P(A|B) =\frac{P(A \cap B)}{P(B|A)P(A) + P(B|A^c)P(A^c)}$$
 
 
-Example
+Absolute frequencies and tree diagrams
 ========================================================
-[Absolute frequencies and tree diagrams]  
-[UPDATE]  
-[Namita]  
+![plot of chunk unnamed-chunk-3](Midterm2_Review_AbsoluteFreq&Trees/Slide1.jpeg)
+
+Absolute frequencies and tree diagrams
+========================================================
+![plot of chunk unnamed-chunk-4](Midterm2_Review_AbsoluteFreq&Trees/Slide2.jpeg)
+
+Absolute frequencies and tree diagrams
+========================================================
+![plot of chunk unnamed-chunk-5](Midterm2_Review_AbsoluteFreq&Trees/Slide3.jpeg)
 
 Distributions
 ========================================================
@@ -283,7 +294,7 @@ We can think of distributions as things that model patterns in data. If we see d
 
 Chapter 11: Normal Distribution
 ========================================================
-![plot of chunk unnamed-chunk-3](images/normal.png)
+![plot of chunk unnamed-chunk-6](images/normal.png)
 
 Recipe for Normal
 ========================================================
@@ -351,7 +362,7 @@ Normal Approximation for the Binomial Distribution
 - This allows us to use all the awesome properties we know about normal distributions (very convenient!)  
 - This is called a "continuity correction"
 
-![plot of chunk unnamed-chunk-6](images/binomial_normal.png)
+![plot of chunk unnamed-chunk-9](images/binomial_normal.png)
 
 Example
 ========================================================
@@ -463,7 +474,7 @@ A sampling distribution is the distribution of estimates that we have for our pa
 
 Here's a motivating figure from the text. After you're done looking over this section, reflect on this figure and see if you can understand it all.
 
-![plot of chunk unnamed-chunk-14](images/samp_dist_p.png)
+![plot of chunk unnamed-chunk-17](images/samp_dist_p.png)
 
 Law of Large Numbers
 ========================================================
@@ -512,7 +523,7 @@ sample_means_2 %>% summarize(sampling_mean=mean(mean_salary))
 
 ```
   sampling_mean
-1      8.007647
+1      6.079868
 ```
 
 Law of Large Numbers
@@ -526,7 +537,7 @@ sample_means_5 %>% summarize(sampling_mean=mean(mean_salary))
 
 ```
   sampling_mean
-1      6.080584
+1      6.260524
 ```
 
 Law of Large Numbers
@@ -540,7 +551,7 @@ sample_means_30 %>% summarize(sampling_mean=mean(mean_salary))
 
 ```
   sampling_mean
-1      6.693789
+1      6.724023
 ```
 
 Central Limit Theorem
@@ -576,7 +587,7 @@ Central Limit Theorem
 ###### Exploring the Population ("The Underlying Distribution")
 This is the distribution of the population salaries.
 
-![plot of chunk unnamed-chunk-21](midterm-2-slides-figure/unnamed-chunk-21-1.png)
+![plot of chunk unnamed-chunk-24](midterm-2-slides-figure/unnamed-chunk-24-1.png)
 
 Central Limit Theorem
 ========================================================
@@ -625,7 +636,7 @@ ggplot(sample_means_2, aes(x=mean_salary)) +
   scale_x_continuous(limits = c(0, 40))
 ```
 
-![plot of chunk unnamed-chunk-24](midterm-2-slides-figure/unnamed-chunk-24-1.png)
+![plot of chunk unnamed-chunk-27](midterm-2-slides-figure/unnamed-chunk-27-1.png)
 
 Central Limit Theorem
 ========================================================
@@ -637,7 +648,7 @@ ggplot(sample_means_5, aes(x=mean_salary)) +
   scale_x_continuous(limits = c(0, 40))
 ```
 
-![plot of chunk unnamed-chunk-25](midterm-2-slides-figure/unnamed-chunk-25-1.png)
+![plot of chunk unnamed-chunk-28](midterm-2-slides-figure/unnamed-chunk-28-1.png)
 
 Central Limit Theorem
 ========================================================
@@ -651,7 +662,7 @@ ggplot(sample_means_30, aes(x=mean_salary)) +
   scale_x_continuous(limits = c(0, 40))
 ```
 
-![plot of chunk unnamed-chunk-26](midterm-2-slides-figure/unnamed-chunk-26-1.png)
+![plot of chunk unnamed-chunk-29](midterm-2-slides-figure/unnamed-chunk-29-1.png)
 
 As $n$ gets larger, then we see the sampling distribution get less skewed and more like the normal curve.
 
@@ -873,27 +884,27 @@ pnorm(               )
 
 Types of error
 ========================================================
-![plot of chunk unnamed-chunk-29](TypesOfErrorsPower/Slide1.jpeg)
+![plot of chunk unnamed-chunk-32](TypesOfErrorsPower/Slide1.jpeg)
 
 Types of error
 ========================================================
-![plot of chunk unnamed-chunk-30](TypesOfErrorsPower/Slide2.jpeg)
+![plot of chunk unnamed-chunk-33](TypesOfErrorsPower/Slide2.jpeg)
 
 Types of error
 ========================================================
-![plot of chunk unnamed-chunk-31](TypesOfErrorsPower/Slide3.jpeg)
+![plot of chunk unnamed-chunk-34](TypesOfErrorsPower/Slide3.jpeg)
 
 Types of error
 ========================================================
-![plot of chunk unnamed-chunk-32](TypesOfErrorsPower/Slide4.jpeg)
+![plot of chunk unnamed-chunk-35](TypesOfErrorsPower/Slide4.jpeg)
 
 Power
 ========================================================
-![plot of chunk unnamed-chunk-33](TypesOfErrorsPower/Slide5.jpeg)
+![plot of chunk unnamed-chunk-36](TypesOfErrorsPower/Slide5.jpeg)
 
 Power
 ========================================================
-![plot of chunk unnamed-chunk-34](TypesOfErrorsPower/Slide6.jpeg)
+![plot of chunk unnamed-chunk-37](TypesOfErrorsPower/Slide6.jpeg)
 
 Take Home Questions
 ======================================================== 
