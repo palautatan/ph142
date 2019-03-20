@@ -344,7 +344,6 @@ Normal Approximation for the Binomial Distribution
 ========================================================
 - If we have a binomial distribution that satisfies the below properties, we can approximate the distribution as a normal distribution instead  
 - This allows us to use all the awesome properties we know about normal distributions (very convenient!)  
-- This is called a "continuity correction"
 
 ```{r, echo=FALSE}
 knitr::include_graphics("images/binomial_normal.png")

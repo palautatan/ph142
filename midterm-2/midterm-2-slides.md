@@ -156,8 +156,8 @@ sample_2
 
 ```
   Sepal.Length Sepal.Width Petal.Length Petal.Width   Species
-1          7.9         3.8          6.4         2.0 virginica
-2          4.4         3.0          1.3         0.2    setosa
+1          5.8         2.7          5.1         1.9 virginica
+2          5.4         3.9          1.3         0.4    setosa
 ```
 
 
@@ -172,12 +172,12 @@ sample_6
 
 ```
   Sepal.Length Sepal.Width Petal.Length Petal.Width    Species
-1          5.1         3.5          1.4         0.2     setosa
-2          6.5         3.0          5.5         1.8  virginica
-3          4.6         3.2          1.4         0.2     setosa
-4          7.7         3.0          6.1         2.3  virginica
-5          6.0         2.9          4.5         1.5 versicolor
-6          7.9         3.8          6.4         2.0  virginica
+1          6.5         3.0          5.2         2.0  virginica
+2          6.3         2.8          5.1         1.5  virginica
+3          6.7         3.1          5.6         2.4  virginica
+4          4.6         3.6          1.0         0.2     setosa
+5          5.8         2.7          4.1         1.0 versicolor
+6          5.7         2.9          4.2         1.3 versicolor
 ```
 
 
@@ -360,7 +360,6 @@ Normal Approximation for the Binomial Distribution
 ========================================================
 - If we have a binomial distribution that satisfies the below properties, we can approximate the distribution as a normal distribution instead  
 - This allows us to use all the awesome properties we know about normal distributions (very convenient!)  
-- This is called a "continuity correction"
 
 ![plot of chunk unnamed-chunk-9](images/binomial_normal.png)
 
@@ -523,7 +522,7 @@ sample_means_2 %>% summarize(sampling_mean=mean(mean_salary))
 
 ```
   sampling_mean
-1      6.582256
+1        6.3018
 ```
 
 Law of Large Numbers
@@ -537,7 +536,7 @@ sample_means_5 %>% summarize(sampling_mean=mean(mean_salary))
 
 ```
   sampling_mean
-1      6.606738
+1      6.468194
 ```
 
 Law of Large Numbers
@@ -551,7 +550,7 @@ sample_means_30 %>% summarize(sampling_mean=mean(mean_salary))
 
 ```
   sampling_mean
-1      6.467516
+1      6.534246
 ```
 
 Central Limit Theorem
