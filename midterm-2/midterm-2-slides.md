@@ -39,7 +39,7 @@ PPDAC Applications
 ========================================================
 The following PPDAC application slides are difficult to read on this Rpres. To study this topic, click on the following link to Google slides.  
 
-<a href="https://docs.google.com/presentation/d/1bND-Wkc4Cm6fxZWyb2cwpxj_mGoQSfpEGmcThvTb4CY/edit?usp=sharing">Click here!</a>
+<a href="https://docs.google.com/presentation/d/1bND-Wkc4Cm6fxZWyb2cwpxj_mGoQSfpEGmcThvTb4CY/edit?usp=sharing" target="_blank">Click here!</a>
 
 
 Bias
@@ -156,8 +156,8 @@ sample_2
 
 ```
   Sepal.Length Sepal.Width Petal.Length Petal.Width   Species
-1          6.3         2.5          5.0         1.9 virginica
-2          5.1         3.8          1.6         0.2    setosa
+1          7.9         3.8          6.4         2.0 virginica
+2          4.4         3.0          1.3         0.2    setosa
 ```
 
 
@@ -172,12 +172,12 @@ sample_6
 
 ```
   Sepal.Length Sepal.Width Petal.Length Petal.Width    Species
-1          4.8         3.4          1.6         0.2     setosa
-2          6.3         2.5          5.0         1.9  virginica
-3          4.9         2.5          4.5         1.7  virginica
-4          4.6         3.6          1.0         0.2     setosa
-5          6.5         2.8          4.6         1.5 versicolor
-6          5.8         2.6          4.0         1.2 versicolor
+1          5.1         3.5          1.4         0.2     setosa
+2          6.5         3.0          5.5         1.8  virginica
+3          4.6         3.2          1.4         0.2     setosa
+4          7.7         3.0          6.1         2.3  virginica
+5          6.0         2.9          4.5         1.5 versicolor
+6          7.9         3.8          6.4         2.0  virginica
 ```
 
 
@@ -508,7 +508,7 @@ mean(western_conference$millions)
 
 Law of Large Numbers
 ========================================================
-In the following blocks, we're going to take 100 samples of size $n=2, 5, 30$. Ignore the code that you have you never learned for midterm 1. Focus on the output.
+In the following blocks, we're going to take 100 samples of size $n=2, 5, 30$. Ignore the code that you have you never learned. Focus on the output.
 
 
 
@@ -523,7 +523,7 @@ sample_means_2 %>% summarize(sampling_mean=mean(mean_salary))
 
 ```
   sampling_mean
-1      6.404766
+1      6.582256
 ```
 
 Law of Large Numbers
@@ -537,7 +537,7 @@ sample_means_5 %>% summarize(sampling_mean=mean(mean_salary))
 
 ```
   sampling_mean
-1      6.814554
+1      6.606738
 ```
 
 Law of Large Numbers
@@ -551,7 +551,7 @@ sample_means_30 %>% summarize(sampling_mean=mean(mean_salary))
 
 ```
   sampling_mean
-1      6.414668
+1      6.467516
 ```
 
 Central Limit Theorem
@@ -718,7 +718,7 @@ Confidence Intervals
 The interpretation of a CI is very specific! Do **not** say that you are 95% sure that our true parameter is within our interval. Instead, this:  
 
 **Interpretation**
-Using a method that creates confidence intervals that capture the true parameter 95% of the time, we constructed the interval $(\text{LB}, \text{UB})$. This is equivalent to saying that we are 95% confident that our true parameter lies in $(\text{LB}, \text{UB})$.
+Using a method that creates confidence intervals that capture the true parameter 95% of the time, we constructed the interval $(\text{LB}, \text{UB})$. This means that 95% of such intervals will contain our true parameter.  
 
 Confidence Intervals
 ========================================================
