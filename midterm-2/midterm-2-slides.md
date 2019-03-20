@@ -10,7 +10,9 @@ Welcome to the Midterm 2 Rpres. You can navigate these slides by
 
 (1) **Arrows** by clicking the right and left arrows on your keyboard,  
 (2) **Progress bar** by clicking on the progress bar located at the very bottom of your browser (it's a slim blue bar),  
-(3) **Manual entry** or waiting a second, then typing in the slide number you wish to view within your URL address bar (change the last number in the URL to the slide number you wish to view.  
+(3) **Manual entry** by waiting a second, then typing in the slide number you wish to view within your URL address bar (change the last number in the URL to the slide number you wish to view.  
+
+If you cannot see the bottom of a slide try command-minus or control-minus.
 
 Exam logistics
 ========================================================
@@ -155,9 +157,9 @@ sample_2
 ```
 
 ```
-  Sepal.Length Sepal.Width Petal.Length Petal.Width   Species
-1          5.8         2.7          5.1         1.9 virginica
-2          5.4         3.9          1.3         0.4    setosa
+  Sepal.Length Sepal.Width Petal.Length Petal.Width    Species
+1            5         3.6          1.4         0.2     setosa
+2            6         3.4          4.5         1.6 versicolor
 ```
 
 
@@ -172,12 +174,12 @@ sample_6
 
 ```
   Sepal.Length Sepal.Width Petal.Length Petal.Width    Species
-1          6.5         3.0          5.2         2.0  virginica
-2          6.3         2.8          5.1         1.5  virginica
-3          6.7         3.1          5.6         2.4  virginica
-4          4.6         3.6          1.0         0.2     setosa
-5          5.8         2.7          4.1         1.0 versicolor
-6          5.7         2.9          4.2         1.3 versicolor
+1          6.4         2.7          5.3         1.9  virginica
+2          5.1         3.8          1.9         0.4     setosa
+3          4.8         3.0          1.4         0.3     setosa
+4          5.4         3.4          1.7         0.2     setosa
+5          5.6         2.9          3.6         1.3 versicolor
+6          6.9         3.1          5.1         2.3  virginica
 ```
 
 
@@ -522,7 +524,7 @@ sample_means_2 %>% summarize(sampling_mean=mean(mean_salary))
 
 ```
   sampling_mean
-1        6.3018
+1       6.29874
 ```
 
 Law of Large Numbers
@@ -536,7 +538,7 @@ sample_means_5 %>% summarize(sampling_mean=mean(mean_salary))
 
 ```
   sampling_mean
-1      6.468194
+1      6.257228
 ```
 
 Law of Large Numbers
@@ -550,7 +552,7 @@ sample_means_30 %>% summarize(sampling_mean=mean(mean_salary))
 
 ```
   sampling_mean
-1      6.534246
+1       6.36391
 ```
 
 Central Limit Theorem
