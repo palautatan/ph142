@@ -786,25 +786,25 @@ pnorm(               )
 
 
 
-Types of error
+Type I and II Errors
 ========================================================
 ```{r, echo=FALSE}
 knitr::include_graphics("TypesOfErrorsPower/Slide1.jpeg")
 ```
 
-Types of error
+Types I Error
 ========================================================
 ```{r, echo=FALSE}
 knitr::include_graphics("TypesOfErrorsPower/Slide2.jpeg")
 ```
 
-Types of error
+Critical value
 ========================================================
 ```{r, echo=FALSE}
 knitr::include_graphics("TypesOfErrorsPower/Slide3.jpeg")
 ```
 
-Types of error
+Types II Error
 ========================================================
 ```{r, echo=FALSE}
 knitr::include_graphics("TypesOfErrorsPower/Slide4.jpeg")

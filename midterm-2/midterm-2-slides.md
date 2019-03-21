@@ -157,9 +157,9 @@ sample_2
 ```
 
 ```
-  Sepal.Length Sepal.Width Petal.Length Petal.Width   Species
-1          4.6         3.2          1.4         0.2    setosa
-2          6.9         3.1          5.1         2.3 virginica
+  Sepal.Length Sepal.Width Petal.Length Petal.Width    Species
+1          5.1         3.5          1.4         0.2     setosa
+2          6.7         3.1          4.4         1.4 versicolor
 ```
 
 
@@ -174,12 +174,12 @@ sample_6
 
 ```
   Sepal.Length Sepal.Width Petal.Length Petal.Width    Species
-1          5.7         3.8          1.7         0.3     setosa
-2          5.1         2.5          3.0         1.1 versicolor
-3          5.0         3.5          1.6         0.6     setosa
-4          5.7         3.0          4.2         1.2 versicolor
-5          5.2         4.1          1.5         0.1     setosa
-6          4.6         3.1          1.5         0.2     setosa
+1          6.1         2.6          5.6         1.4  virginica
+2          5.1         3.5          1.4         0.2     setosa
+3          6.0         3.0          4.8         1.8  virginica
+4          6.2         2.8          4.8         1.8  virginica
+5          4.9         2.4          3.3         1.0 versicolor
+6          5.1         3.8          1.5         0.3     setosa
 ```
 
 
@@ -524,7 +524,7 @@ sample_means_2 %>% summarize(sampling_mean=mean(mean_salary))
 
 ```
   sampling_mean
-1      7.243937
+1      6.223488
 ```
 
 Law of Large Numbers
@@ -538,7 +538,7 @@ sample_means_5 %>% summarize(sampling_mean=mean(mean_salary))
 
 ```
   sampling_mean
-1      6.781683
+1      6.044828
 ```
 
 Law of Large Numbers
@@ -552,7 +552,7 @@ sample_means_30 %>% summarize(sampling_mean=mean(mean_salary))
 
 ```
   sampling_mean
-1      6.401313
+1      6.426024
 ```
 
 Central Limit Theorem
@@ -880,19 +880,19 @@ pnorm(               )
 
 
 
-Types of error
+Type I and II Errors
 ========================================================
 ![plot of chunk unnamed-chunk-32](TypesOfErrorsPower/Slide1.jpeg)
 
-Types of error
+Types I Error
 ========================================================
 ![plot of chunk unnamed-chunk-33](TypesOfErrorsPower/Slide2.jpeg)
 
-Types of error
+Critical value
 ========================================================
 ![plot of chunk unnamed-chunk-34](TypesOfErrorsPower/Slide3.jpeg)
 
-Types of error
+Types II Error
 ========================================================
 ![plot of chunk unnamed-chunk-35](TypesOfErrorsPower/Slide4.jpeg)
 
