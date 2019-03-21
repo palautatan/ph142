@@ -129,11 +129,10 @@ $$P(X=5000) = \binom{10000}{5000}(0.67)^{5000}(0.33)^{5000}$$
 e. Write an expression using the probability model for the probability that more than half of the seniors are sick with senioritis.  
 $$P(X\geq 5001)=\Sigma_{k=5001}^{10000} \binom{100000}{k}(0.67)^{k}(0.33)^{10000-k}$$  
 
-f. We can approximate the value from part (e) with a distribution. Verify the assumptions, and name the distribution with its paramters.  Write R code to calculate the value.  
+f. We can approximate the value from part (e) with a distribution. Verify the assumptions, and name the distribution with its parameters. 
 
 We verify $np=10000(0.67)=6700$ and $n(1-p)=10000(0.33)=3300$.  
-The distribution $N(np, \sqrt{np(1-p)})$ in this case is $N(6700, \sqrt{10000 \times0.67 \times 0.33})$.  
-The R code is `1-pnorm(5000, 6700, 47.02127)`.  
+The distribution $N(np, \sqrt{np(1-p)})$ in this case is $N(6700, \sqrt{10000 \times0.67 \times 0.33})$.   
 
 
 ## Problem 2
