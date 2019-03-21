@@ -28,7 +28,7 @@ In Part 1, we learn how to summarize, manipulate, and and visualize data. We als
 <a href="notes/distributions/distributions.pdf">v. All distributions</a>  
 
 #### Part 3 | Formal testing  
-vi. Introduction to testing (CI's and the z-test) <a href="notes/testing/intro-to-testing.pdf">slides</a> and <a href="notes/testing/ci-pvalue-examples.pdf">sample problems</a>  
+vi. Introduction to testing (CI's and the z-test) <a href="notes/testing/intro-to-testing.pdf">slides</a> and sample problems <a href="notes/testing/ci-pvalue-examples.pdf">set 1</a>  and <a href="notes/testing/ci-and-z.pdf">set 2</a>
 
 ### Lab Demos
 <a href="lab-demos/lab-1/lab-1.html">i. Lab 1, Crash course intro to R</a>  
