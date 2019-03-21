@@ -157,9 +157,9 @@ sample_2
 ```
 
 ```
-  Sepal.Length Sepal.Width Petal.Length Petal.Width   Species
-1          6.7         3.3          5.7         2.5 virginica
-2          6.9         3.1          5.4         2.1 virginica
+  Sepal.Length Sepal.Width Petal.Length Petal.Width    Species
+1          5.1         3.7          1.5         0.4     setosa
+2          5.8         2.7          3.9         1.2 versicolor
 ```
 
 
@@ -174,12 +174,12 @@ sample_6
 
 ```
   Sepal.Length Sepal.Width Petal.Length Petal.Width    Species
-1          6.5         3.0          5.2         2.0  virginica
-2          5.8         2.7          4.1         1.0 versicolor
-3          5.8         2.7          5.1         1.9  virginica
-4          5.1         3.5          1.4         0.3     setosa
-5          5.7         2.8          4.5         1.3 versicolor
-6          5.6         2.5          3.9         1.1 versicolor
+1          5.5         2.5          4.0         1.3 versicolor
+2          5.4         3.4          1.7         0.2     setosa
+3          5.7         2.8          4.1         1.3 versicolor
+4          5.2         3.4          1.4         0.2     setosa
+5          6.0         2.2          4.0         1.0 versicolor
+6          5.7         3.8          1.7         0.3     setosa
 ```
 
 
@@ -251,7 +251,7 @@ $P(B \cup I) = P(B) + P(I) - P(B\cap I) = 0.11 + 0.28 - 0.05 = 0.34$
 Example
 ========================================================
 **Additional Questions for Home:**
-- What is the probability of a dalmatian being unimpaired and brown-eyed dog if it is neither hearing impaired nor blue eyed?  
+- What is the probability of a dalmatian neither being unimpaired nor a blue-eyed dog?  
 - Are $B$ and $I$ independent? Or dependent?  
 
 *If this was difficult to answer, please refer to Sarah's Venn Diagram notes on bCourses.*
@@ -524,7 +524,7 @@ sample_means_2 %>% summarize(sampling_mean=mean(mean_salary))
 
 ```
   sampling_mean
-1      6.374358
+1      6.884528
 ```
 
 Law of Large Numbers
@@ -538,7 +538,7 @@ sample_means_5 %>% summarize(sampling_mean=mean(mean_salary))
 
 ```
   sampling_mean
-1      6.019269
+1      7.129499
 ```
 
 Law of Large Numbers
@@ -552,7 +552,7 @@ sample_means_30 %>% summarize(sampling_mean=mean(mean_salary))
 
 ```
   sampling_mean
-1      6.560197
+1       6.51757
 ```
 
 Central Limit Theorem

@@ -233,7 +233,7 @@ $P(B \cup I) = P(B) + P(I) - P(B\cap I) = 0.11 + 0.28 - 0.05 = 0.34$
 Example
 ========================================================
 **Additional Questions for Home:**
-- What is the probability of a dalmatian being unimpaired and brown-eyed dog if it is neither hearing impaired nor blue eyed?  
+- What is the probability of a dalmatian neither being unimpaired nor a blue-eyed dog?  
 - Are $B$ and $I$ independent? Or dependent?  
 
 *If this was difficult to answer, please refer to Sarah's Venn Diagram notes on bCourses.*
