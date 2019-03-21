@@ -28,7 +28,7 @@ Good luck studying to all!
 
 Material
 ========================================================
-**PPDAC Application:**  You will still be testing on your ability to intepret studies!    
+**PPDAC Application:**  You will still be tested on your ability to intepret studies!    
 **Chapter 9, 10:** Know when to apply your probability rules!  
 **Chapter 11:** Continuous Distribution, Normal  
 **Chapter 12:** Discrete Distributions, Binomial and Poisson  
@@ -157,9 +157,9 @@ sample_2
 ```
 
 ```
-  Sepal.Length Sepal.Width Petal.Length Petal.Width    Species
-1          5.1         3.5          1.4         0.2     setosa
-2          6.7         3.1          4.4         1.4 versicolor
+  Sepal.Length Sepal.Width Petal.Length Petal.Width   Species
+1          6.7         3.3          5.7         2.5 virginica
+2          6.9         3.1          5.4         2.1 virginica
 ```
 
 
@@ -174,12 +174,12 @@ sample_6
 
 ```
   Sepal.Length Sepal.Width Petal.Length Petal.Width    Species
-1          6.1         2.6          5.6         1.4  virginica
-2          5.1         3.5          1.4         0.2     setosa
-3          6.0         3.0          4.8         1.8  virginica
-4          6.2         2.8          4.8         1.8  virginica
-5          4.9         2.4          3.3         1.0 versicolor
-6          5.1         3.8          1.5         0.3     setosa
+1          6.5         3.0          5.2         2.0  virginica
+2          5.8         2.7          4.1         1.0 versicolor
+3          5.8         2.7          5.1         1.9  virginica
+4          5.1         3.5          1.4         0.3     setosa
+5          5.7         2.8          4.5         1.3 versicolor
+6          5.6         2.5          3.9         1.1 versicolor
 ```
 
 
@@ -524,7 +524,7 @@ sample_means_2 %>% summarize(sampling_mean=mean(mean_salary))
 
 ```
   sampling_mean
-1      6.223488
+1      6.374358
 ```
 
 Law of Large Numbers
@@ -538,7 +538,7 @@ sample_means_5 %>% summarize(sampling_mean=mean(mean_salary))
 
 ```
   sampling_mean
-1      6.044828
+1      6.019269
 ```
 
 Law of Large Numbers
@@ -552,7 +552,7 @@ sample_means_30 %>% summarize(sampling_mean=mean(mean_salary))
 
 ```
   sampling_mean
-1      6.426024
+1      6.560197
 ```
 
 Central Limit Theorem
