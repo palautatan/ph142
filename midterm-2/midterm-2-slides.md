@@ -158,8 +158,8 @@ sample_2
 
 ```
   Sepal.Length Sepal.Width Petal.Length Petal.Width    Species
-1            5         3.6          1.4         0.2     setosa
-2            6         3.4          4.5         1.6 versicolor
+1          6.9         3.1          5.4         2.1  virginica
+2          5.9         3.0          4.2         1.5 versicolor
 ```
 
 
@@ -174,12 +174,12 @@ sample_6
 
 ```
   Sepal.Length Sepal.Width Petal.Length Petal.Width    Species
-1          6.4         2.7          5.3         1.9  virginica
-2          5.1         3.8          1.9         0.4     setosa
-3          4.8         3.0          1.4         0.3     setosa
-4          5.4         3.4          1.7         0.2     setosa
-5          5.6         2.9          3.6         1.3 versicolor
-6          6.9         3.1          5.1         2.3  virginica
+1          5.4         3.7          1.5         0.2     setosa
+2          6.9         3.1          5.4         2.1  virginica
+3          5.7         3.8          1.7         0.3     setosa
+4          5.4         3.9          1.3         0.4     setosa
+5          6.1         2.9          4.7         1.4 versicolor
+6          5.2         4.1          1.5         0.1     setosa
 ```
 
 
@@ -479,7 +479,7 @@ Here's a motivating figure from the text. After you're done looking over this se
 
 Law of Large Numbers
 ========================================================
-As $n$ gets huge, our sampling distribution's mean will get closer and closer to the true population paramter value.
+As $n$ gets huge, our sampling distribution's mean will get closer and closer to the true population parameter value.
 
 Law of Large Numbers
 ========================================================
@@ -524,7 +524,7 @@ sample_means_2 %>% summarize(sampling_mean=mean(mean_salary))
 
 ```
   sampling_mean
-1       6.29874
+1      7.274047
 ```
 
 Law of Large Numbers
@@ -538,7 +538,7 @@ sample_means_5 %>% summarize(sampling_mean=mean(mean_salary))
 
 ```
   sampling_mean
-1      6.257228
+1      6.932385
 ```
 
 Law of Large Numbers
@@ -552,7 +552,7 @@ sample_means_30 %>% summarize(sampling_mean=mean(mean_salary))
 
 ```
   sampling_mean
-1       6.36391
+1      6.476422
 ```
 
 Central Limit Theorem
@@ -737,37 +737,37 @@ $$
 Z-testing
 =============
 
-The general procedure for running a z-test (after identifying the parameter of interest and ensuring conditions are met) is:
+The general procedure for running a z-test (after identifying the parameter of interest and ensuring conditions are met) is:  
 
-1) State the null and alternative hypotheses
-2) Calculate the z test statistic
-3) Use the test statistic to find the p-value
-4) Generate a conclusion about your hypotheses using your p-value (reject vs. fail to reject the null)
+1) State the null and alternative hypotheses  
+2) Calculate the z test statistic  
+3) Use the test statistic to find the p-value  
+4) Generate a conclusion about your hypotheses using your p-value (reject vs. fail to reject the null)  
 
 Remember that we run a z-test when we know the true population standard deviation, $\sigma$. You would be provided this value on the midterm.
 
 Z-test conditions
 ============
 
-The conditions to run a z-test include:
+The conditions to run a z-test include:  
 
-1) The sample is a SRS (simple random sample)
-2) The data comes from a Normal distribution/population
-3) The true, population standard deviation $\sigma$ is known
+1) The sample is a SRS (simple random sample)   
+2) The data comes from a Normal distribution/population  
+3) The true, population standard deviation $\sigma$ is known  
 
 
 Step 1: Hypotheses
 ==========
 
-Your hypotheses can be one-sided or two-sided.
+Your hypotheses can be one-sided or two-sided.  
 
-- An example of a two-sided test is:
+- An example of a two-sided test is:  
 
 $$
 H_0: \mu = 3, H_a: \mu \neq 3
 $$
 
-- Some examples of a one-sided test are:
+- Some examples of a one-sided test are:  
 
 $$
 H_0: \mu = 3, H_a: \mu > 3
@@ -785,7 +785,7 @@ Sometimes you are explicitly told what kind of a test to run. Other times, it is
 Step 2: Z-value calculation
 =================
 
-The formula for the z test statistic is:
+The formula for the z test statistic is:  
 
 $$
 z = \frac{\bar{x} - \mu_0}{\sigma / \sqrt{n}}
@@ -793,20 +793,20 @@ $$
 
 where:
 
-- $\bar{x}$ is the sample mean (aka the statistic)
-- $\mu$ is the population mean that is part of the hypothesis (aka the parameter)
-- $\sigma$ is the population standard deviation
-- n is the sample size
+- $\bar{x}$ is the sample mean (aka the statistic)  
+- $\mu$ is the population mean that is part of the hypothesis (aka the parameter)  
+- $\sigma$ is the population standard deviation  
+- n is the sample size  
 
 
 Step 3: Finding the p-value
 ==========
 
-Once we have our z-value, we can find the p-value. To help find the p-value, sketch the standard Normal curve and mark on it the observed value of z. Depending on whether you are performing a **one-sided test** or a **two-sided**, this will determine in which direction you calculate the p-value/probability:
+Once we have our z-value, we can find the p-value. To help find the p-value, sketch the standard Normal curve and mark on it the observed value of z. Depending on whether you are performing a **one-sided test** or a **two-sided**, this will determine in which direction you calculate the p-value/probability:  
 
-Here is a visual to illustrate the differences
+Here is a visual to illustrate the differences  
 
-#![Normal curve for Question 1](images/midterm2_ztest.png)
+#![Normal curve for Question 1](images/midterm2_ztest.png)  
 
 Use pnorm() functions to calculate your p-value. Remember we are working with a Standard normal.
 
@@ -820,20 +820,20 @@ The p-value represents the probability, assuming that $H_0$ is true, that the te
 
 The smaller the p-value, the stronger the evidence against $H_0$ provided by the data.
 
-As a general rule of thumb, we:
+As a general rule of thumb, we:  
 
-- reject $H_0$ when p-value < $\alpha$
-- fail to reject $H_0$ when p-value > $\alpha$
+- reject $H_0$ when p-value < $\alpha$  
+- fail to reject $H_0$ when p-value > $\alpha$  
 
 where $\alpha$ is *typically* set to 0.05 (**unless otherwise stated in the problem**).
 
 Step 4: Interpreting p-values
 ============
-Correct interpretations:
+Correct interpretations:  
 
-- If p < $\alpha$: We found a p-value of p = [p-value]. This is less than our cut-off value of $\alpha$ = [$\alpha$]. So we reject the null hypothesis that [null hypothesis] and have evidence to support the alternative hypothesis that [alternative hypothesis]
+- If p < $\alpha$: We found a p-value of p = [p-value]. This is less than our cut-off value of $\alpha$ = [$\alpha$]. So we reject the null hypothesis that [null hypothesis] and have evidence to support the alternative hypothesis that [alternative hypothesis]  
 
-- If p > $\alpha$: We found a p-value of p = [p-value]. This is greater than our cut-off value of $\alpha$ = [$\alpha$]. so we fail to reject the null hypothesis that [null hypothesis] and do not have evidence to support the alternative hypothesis that [alternative hypothesis].
+- If p > $\alpha$: We found a p-value of p = [p-value]. This is greater than our cut-off value of $\alpha$ = [$\alpha$]. so we fail to reject the null hypothesis that [null hypothesis] and do not have evidence to support the alternative hypothesis that [alternative hypothesis].  
 
 Example (try on your own)
 ============
