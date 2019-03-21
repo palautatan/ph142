@@ -158,8 +158,8 @@ sample_2
 
 ```
   Sepal.Length Sepal.Width Petal.Length Petal.Width   Species
-1          5.4         3.4          1.5         0.4    setosa
-2          6.7         2.5          5.8         1.8 virginica
+1          4.6         3.2          1.4         0.2    setosa
+2          6.9         3.1          5.1         2.3 virginica
 ```
 
 
@@ -174,12 +174,12 @@ sample_6
 
 ```
   Sepal.Length Sepal.Width Petal.Length Petal.Width    Species
-1          5.4         3.9          1.7         0.4     setosa
-2          6.0         3.4          4.5         1.6 versicolor
-3          5.0         3.4          1.6         0.4     setosa
-4          5.9         3.2          4.8         1.8 versicolor
-5          6.5         3.2          5.1         2.0  virginica
-6          5.8         2.7          4.1         1.0 versicolor
+1          5.7         3.8          1.7         0.3     setosa
+2          5.1         2.5          3.0         1.1 versicolor
+3          5.0         3.5          1.6         0.6     setosa
+4          5.7         3.0          4.2         1.2 versicolor
+5          5.2         4.1          1.5         0.1     setosa
+6          4.6         3.1          1.5         0.2     setosa
 ```
 
 
@@ -524,7 +524,7 @@ sample_means_2 %>% summarize(sampling_mean=mean(mean_salary))
 
 ```
   sampling_mean
-1      6.588336
+1      7.243937
 ```
 
 Law of Large Numbers
@@ -538,7 +538,7 @@ sample_means_5 %>% summarize(sampling_mean=mean(mean_salary))
 
 ```
   sampling_mean
-1       5.87394
+1      6.781683
 ```
 
 Law of Large Numbers
@@ -552,7 +552,7 @@ sample_means_30 %>% summarize(sampling_mean=mean(mean_salary))
 
 ```
   sampling_mean
-1      6.508553
+1      6.401313
 ```
 
 Central Limit Theorem
@@ -830,7 +830,7 @@ Correct interpretations:
 
 - If p < $\alpha$: We found a p-value of p = [p-value]. This is less than our cut-off value of $\alpha$ = [$\alpha$]. So we reject the null hypothesis that [null hypothesis] and have evidence to support the alternative hypothesis that [alternative hypothesis]  
 
-- If p > $\alpha$: We found a p-value of p = [p-value]. This is greater than our cut-off value of $\alpha$ = [$\alpha$]. so we fail to reject the null hypothesis that [null hypothesis] and do not have evidence to support the alternative hypothesis that [alternative hypothesis].  
+- If p $\geq \alpha$: We found a p-value of p = [p-value]. This is greater than our cut-off value of $\alpha$ = [$\alpha$]. so we fail to reject the null hypothesis that [null hypothesis] and do not have evidence to support the alternative hypothesis that [alternative hypothesis].  
 
 Example (try on your own)
 ============

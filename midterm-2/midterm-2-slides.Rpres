@@ -737,7 +737,7 @@ Correct interpretations:
 
 - If p < $\alpha$: We found a p-value of p = [p-value]. This is less than our cut-off value of $\alpha$ = [$\alpha$]. So we reject the null hypothesis that [null hypothesis] and have evidence to support the alternative hypothesis that [alternative hypothesis]  
 
-- If p > $\alpha$: We found a p-value of p = [p-value]. This is greater than our cut-off value of $\alpha$ = [$\alpha$]. so we fail to reject the null hypothesis that [null hypothesis] and do not have evidence to support the alternative hypothesis that [alternative hypothesis].  
+- If p $\geq \alpha$: We found a p-value of p = [p-value]. This is greater than our cut-off value of $\alpha$ = [$\alpha$]. so we fail to reject the null hypothesis that [null hypothesis] and do not have evidence to support the alternative hypothesis that [alternative hypothesis].  
 
 Example (try on your own)
 ============
