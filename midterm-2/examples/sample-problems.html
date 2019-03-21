@@ -276,8 +276,8 @@ Binomial</p></li>
 <li><p>We can approximate the value from part (e) with a distribution. Verify the assumptions, and name the distribution with its paramters. Write R code to calculate the value.</p></li>
 </ol>
 <p>We verify <span class="math inline">\(np=10000(0.67)=6700\)</span> and <span class="math inline">\(n(1-p)=10000(0.33)=3300\)</span>.<br />
-The distribution <span class="math inline">\(N(np, n(1-p))\)</span> in this case is <span class="math inline">\(N(6700, 3300)\)</span>.<br />
-The R code is <code>1-pbinom(5000, 6700, 3300)</code>.</p>
+The distribution <span class="math inline">\(N(np, \sqrt{np(1-p)})\)</span> in this case is <span class="math inline">\(N(6700, \sqrt{10000 \times0.67 \times 0.33})\)</span>.<br />
+The R code is <code>1-pnorm(5000, 6700, 47.02127)</code>.</p>
 </div>
 <div id="problem-2-1" class="section level2">
 <h2>Problem 2</h2>

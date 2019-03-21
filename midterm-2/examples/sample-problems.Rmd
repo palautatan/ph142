@@ -132,8 +132,8 @@ $$P(X\geq 5001)=\Sigma_{k=5001}^{10000} \binom{100000}{k}(0.67)^{k}(0.33)^{10000
 f. We can approximate the value from part (e) with a distribution. Verify the assumptions, and name the distribution with its paramters.  Write R code to calculate the value.  
 
 We verify $np=10000(0.67)=6700$ and $n(1-p)=10000(0.33)=3300$.  
-The distribution $N(np, n(1-p))$ in this case is $N(6700, 3300)$.  
-The R code is `1-pbinom(5000, 6700, 3300)`.  
+The distribution $N(np, \sqrt{np(1-p)})$ in this case is $N(6700, \sqrt{10000 \times0.67 \times 0.33})$.  
+The R code is `1-pnorm(5000, 6700, 47.02127)`.  
 
 
 ## Problem 2
