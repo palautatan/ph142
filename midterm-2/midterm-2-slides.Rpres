@@ -720,10 +720,7 @@ Use pnorm() functions to calculate your p-value. Remember we are working with a 
 
 Step 4: Interpreting p-values
 ============
-
-Once we have our p-values, we can relate these back to our hypotheses and come to a conclusion. Be careful interpreting p-values! 
-
-The p-value represents the probability, assuming that $H_0$ is true, that the test statistic would take a value at least as extreme (in the direction of $H_a$) as that actually observed. Note that the p-value is **NOT** the probability that the null hypothesis is true. 
+Once we have our p-values, we can relate these back to our hypotheses and come to a conclusion. Be careful interpreting p-values! The p-value represents the probability, assuming that $H_0$ is true, that the test statistic would take a value at least as extreme (in the direction of $H_a$) as that actually observed. Note that the p-value is **NOT** the probability that the null hypothesis is true.
 
 The smaller the p-value, the stronger the evidence against $H_0$ provided by the data.
 

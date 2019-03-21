@@ -157,9 +157,9 @@ sample_2
 ```
 
 ```
-  Sepal.Length Sepal.Width Petal.Length Petal.Width    Species
-1          6.9         3.1          5.4         2.1  virginica
-2          5.9         3.0          4.2         1.5 versicolor
+  Sepal.Length Sepal.Width Petal.Length Petal.Width   Species
+1          5.4         3.4          1.5         0.4    setosa
+2          6.7         2.5          5.8         1.8 virginica
 ```
 
 
@@ -174,12 +174,12 @@ sample_6
 
 ```
   Sepal.Length Sepal.Width Petal.Length Petal.Width    Species
-1          5.4         3.7          1.5         0.2     setosa
-2          6.9         3.1          5.4         2.1  virginica
-3          5.7         3.8          1.7         0.3     setosa
-4          5.4         3.9          1.3         0.4     setosa
-5          6.1         2.9          4.7         1.4 versicolor
-6          5.2         4.1          1.5         0.1     setosa
+1          5.4         3.9          1.7         0.4     setosa
+2          6.0         3.4          4.5         1.6 versicolor
+3          5.0         3.4          1.6         0.4     setosa
+4          5.9         3.2          4.8         1.8 versicolor
+5          6.5         3.2          5.1         2.0  virginica
+6          5.8         2.7          4.1         1.0 versicolor
 ```
 
 
@@ -524,7 +524,7 @@ sample_means_2 %>% summarize(sampling_mean=mean(mean_salary))
 
 ```
   sampling_mean
-1      7.274047
+1      6.588336
 ```
 
 Law of Large Numbers
@@ -538,7 +538,7 @@ sample_means_5 %>% summarize(sampling_mean=mean(mean_salary))
 
 ```
   sampling_mean
-1      6.932385
+1       5.87394
 ```
 
 Law of Large Numbers
@@ -552,7 +552,7 @@ sample_means_30 %>% summarize(sampling_mean=mean(mean_salary))
 
 ```
   sampling_mean
-1      6.476422
+1      6.508553
 ```
 
 Central Limit Theorem
@@ -813,10 +813,7 @@ Use pnorm() functions to calculate your p-value. Remember we are working with a 
 
 Step 4: Interpreting p-values
 ============
-
-Once we have our p-values, we can relate these back to our hypotheses and come to a conclusion. Be careful interpreting p-values! 
-
-The p-value represents the probability, assuming that $H_0$ is true, that the test statistic would take a value at least as extreme (in the direction of $H_a$) as that actually observed. Note that the p-value is **NOT** the probability that the null hypothesis is true. 
+Once we have our p-values, we can relate these back to our hypotheses and come to a conclusion. Be careful interpreting p-values! The p-value represents the probability, assuming that $H_0$ is true, that the test statistic would take a value at least as extreme (in the direction of $H_a$) as that actually observed. Note that the p-value is **NOT** the probability that the null hypothesis is true.
 
 The smaller the p-value, the stronger the evidence against $H_0$ provided by the data.
 
