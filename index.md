@@ -28,7 +28,8 @@ In Part 1, we learn how to summarize, manipulate, and and visualize data. We als
 <a href="notes/distributions/distributions.pdf">v. All distributions</a>  
 
 #### Part 3 | Formal testing  
-vi. CI's and the z-test <a href="notes/testing/intro-to-testing.pdf">slides</a> and example <a href="notes/testing/ci-pvalue-examples.pdf">set 1</a>  and <a href="notes/testing/ci-and-z.pdf">set 2</a>
+vi. CI's and the z-test <a href="notes/testing/intro-to-testing.pdf">slides</a> and example <a href="notes/testing/ci-pvalue-examples.pdf">set 1</a>  and <a href="notes/testing/ci-and-z.pdf">set 2</a>  
+vii. Bob the Builder (One sample t-test) <a href="notes/testing/bob-the-builder.pdf">prompt and solutions pdf</a> and <a href="notes/testing/bob-the-builder.html">solutions html</a>  
 
 ### Lab Demos
 <a href="lab-demos/lab-1/lab-1.html">i. Lab 1, Crash course intro to R</a>  
@@ -36,14 +37,18 @@ vi. CI's and the z-test <a href="notes/testing/intro-to-testing.pdf">slides</a> 
 <a href="lab-demos/lab-3/lab-3.html"> iii. Lab 3, Sampling</a>  
 <a href="lab-demos/lab-4/lab-4.html">iv. Lab 4, Conditional Probability</a>  
 <a href="lab-demos/lab-5/lab-5.html"> v. Lab 5, Probability functions in R</a>  
- vi. Lab 6, Sampling distribution <a href="lab-demos/lab-6/lab-6-condensed.pdf">slides</a> and <a href="lab-demos/lab-6/code/lab-6.html">animated notes</a>  
+vi. Lab 6, Sampling distribution <a href="lab-demos/lab-6/lab-6-condensed.pdf">slides</a> and <a href="lab-demos/lab-6/code/lab-6.html">animated notes</a>  
+vii. Lab 8, Tea-test <a href="lab-demos/lab-8/lab-8.html">boba / bubble tea example</a>
 
 
 ### Exam Material
 i. Midterm 1 <a href="midterm-1/midterm-1-review.pdf">review notes</a> and <a href="midterm-1/examples/example-problem.pdf">sample problems</a>  
 ii. Midterm 2 <a href="midterm-2/midterm-2-slides.html">review slides</a> and <a href="midterm-2/examples/sample-problems.html">sample problems</a>  
 
-### Supplementary
+### Resources
+<a href="resources/inference-cheat-sheet.pdf">i. The best statistical inference cheat sheet for zee and tea</a> (I did not make this, credit to whomever did - thank you!)  
+
+### Rappers Dataset (Supplementary)
 If you need more information about topics, read these too. I wrote them to give you some more examples/clarity.  
 <a href="notes/rappers/code/01-rappers-eda.html">i. Exploring the rappers dataset</a>  
 <a href="notes/rappers/code/02-rappers-regression.html">ii. Regression with rappers</a>  
