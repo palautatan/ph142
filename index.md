@@ -29,7 +29,7 @@ In Part 1, we learn how to summarize, manipulate, and and visualize data. We als
 
 #### Part 3 | Formal testing  
 vi. CI's and the z-test <a href="notes/testing/intro-to-testing.pdf">slides</a> and example <a href="notes/testing/ci-pvalue-examples.pdf">set 1</a>  and <a href="notes/testing/ci-and-z.pdf">set 2</a>  
-vii. Bob the Builder (One sample t-test) <a href="notes/testing/bob-the-builder.pdf">prompt and solutions pdf</a> and <a href="notes/testing/bob-the-builder.html">solutions html</a>  
+vii. Bob the Builder (One sample t-test) <a href="notes/testing/bob-the-builder.pdf">prompt and solutions (pdf)</a> and <a href="notes/testing/bob-the-builder.html">solutions (html)</a>  
 
 ### Lab Demos
 <a href="lab-demos/lab-1/lab-1.html">i. Lab 1, Crash course intro to R</a>  
