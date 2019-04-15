@@ -18,7 +18,180 @@ trial_1 <- round(trial_1) / 60
 trial_2 <- round(trial_2) / 33
 ```
 
+We are working with the following data. (This is the `head()` of the data.)
+
 ```{r}
 trials <- data.frame(cbind(trial_1, trial_2))
 head(trials, 10)
 ```
+
+Recall that Wilcoxon Rank Sign tests for whether pairwise differences are 0 or not. Therefore, like how we did in a paired t-test, we will need to take a difference between the two trials.
+
+```{r, warning=FALSE, message=FALSE}
+library(dplyr)
+trials <- trials %>% mutate(d=trial_2-trial_1)
+head(trials, 10)
+```
+
+
+## Visuals
+Recall that we need not focus on the shape of our underlying distribution since we are using a *nonparametric test*. But out of interest, let's look at the histograms and boxplots.
+
+```{r histograms, warning=FALSE, message=FALSE}
+library(ggplot2)
+library(reshape2)
+ggplot(data=melt(trials) %>% filter(variable!="d"), aes(x=value, fill=variable)) + 
+  geom_histogram(col="white", lwd=0.2, binwidth=0.05) +
+  ggtitle("Stacked Histogram of Trials 1 and 2")
+```
+
+```{r boxplots, warning=FALSE, message=FALSE}
+ggplot(data=melt(trials) %>% filter(variable!="d"), aes(y=value, x=variable, fill=variable)) + 
+  geom_boxplot() +
+  ggtitle("Boxplot of Trials 1 and 2")
+```
+
+Here is the histogram of the differences. I put a vertical line at $x=0$ to show what we are testing. Are there significantly more data above or below the line? Is this statistically important?
+
+```{r}
+ggplot(data=trials, aes(x=d)) + 
+  geom_histogram(binwidth=0.05, col="white", lwd=0.2) +
+  geom_vline(xintercept=0, col="salmon", lwd=2, alpha=0.5) +
+  ggtitle("Histogram of differences")
+```
+
+We see that our data for the most part are wound around a center near 0.
+
+# 1. The Long, Step-By-Step Way
+
+## Put differences in order of absolute value
+I am using the `arrange()` function.
+```{r}
+trials <- trials %>% arrange(abs(d))
+head(trials, 10)
+```
+
+Be sure to remove rows that have a difference of 0. The code to do this is:
+```{r}
+trials <- trials %>% filter(d!=0)
+```
+
+Since we have no rows that have a difference of 0, the above code does nothing to our dataset.
+
+## Assign ranks with the below code
+
+```{r}
+assign_wrs <- function(diffs) {
+  ranks <- c()            # * CREATE EMPTY VECTOR TO SAVE RANKS
+  this_rank <- 1          # * START WITH RANK 1
+  
+  # * FOR EACH OF THE UNIQUE VALUES OF DIFFERENCES
+  for(ix in 1:length(unique(diffs))) {
+    
+    # * CHECK IF THERE ARE DUPLICATED DIFFERENCES
+    these_ix <- which(diffs == unique(diffs)[ix])
+    
+      # * IF THERE ARE NO DUPLICATES, ASSIGN STANDARD RANK
+      if (length(these_ix)==1) {
+        ranks <- c(ranks, this_rank)
+        this_rank <- length(ranks) + 1
+      
+      # * IF THERE ARE DUPLICATES, ASSIGN AN AVERAGED RANK
+      } else {
+          these_ranks <- rep(mean(c(this_rank, this_rank+length(these_ix)-1)), length(these_ix))
+          ranks <- c(ranks, these_ranks)
+          this_rank <- length(ranks) + 1
+      }
+  }
+  
+  # * OUTPUT RANKS
+  ranks
+}
+
+# * APPLY FUNCTION USING MUTATE
+trials <- trials %>% mutate(rank=assign_wrs(d))
+head(trials, 10)
+```
+
+## Sum for negatives
+
+```{r}
+trials %>% filter(d<0) %>% summarize(sum(rank))
+```
+
+## Sum for positives
+```{r}
+trials %>% filter(d>0) %>% summarize(sum(rank))
+```
+
+## Use formulas to calculate $\mu_T$ and $\sigma_T$
+
+### Calculating the average
+$$
+\mu_T = \frac{n(n+1)}{4} = 
+$$
+
+```{r}
+nrow(trials)
+```
+
+$$
+\mu_T = \frac{n(n+1)}{4} = \frac{33(34)}{4}
+$$
+
+### Calculating the standard deviation
+$$
+\sigma_T = \sqrt{\frac{n(n+1)(2n+1)}{24}} = \sqrt{\frac{33(34)(2*33+1)}{24}}
+$$
+
+## Calculating $z$
+
+$$
+Z_T = \frac{T-\mu_T}{\sigma_T}
+$$
+
+where $T=\text{min}\{283,278\}$, the two signed sums.  
+
+```{r}
+trials %>% summarize(n=n(),
+                     mu_t=(n*(n+1))/4,
+                     sigma_t=sqrt((n*(n+1)*(2*n+1))/24),
+                     z_t=(278-mu_t)/sigma_t)
+```
+
+## Calculate p-value
+Because our $Z_t=-0.04457$ is negative, we can use pnorm with `lower.tail=TRUE`
+
+```{r}
+2*pnorm(q=-0.04466957, lower.tail=TRUE)
+```
+
+or do other equivalent calculations based on the symmetry of the normal distribution like this
+
+```{r}
+pnorm(q=-0.04466957, lower.tail=TRUE) + pnorm(q=0.04466957, lower.tail=FALSE)
+```
+
+or this,
+
+```{r}
+2*(1-pnorm(q=0.04466957, lower.tail=FALSE))
+```
+
+although the first calculation is the most straightfoward.
+
+## Interpretations and conclusion
+Our p-value is ginormous. Given that all the pairwise differences are 0, we would expect to observe our data or more extreme about 96.44% of the time. That is, we would expect to see data like ours 96.44% of the time if there were truly no pairwise differences between trial 1 and trial 2.
+
+We conclude that $H_0$ cannot be rejected. We have evidence in favor of $H_0$ which states that the pairwise differences are centered around 0. Neither of the tests seem more difficult than the other based on our sample.
+
+This matches our original intuition from the histograms we looked at where the data look like they fall mostly around 0.
+
+# 2. The `R` Shortcut
+Instead of doing the above, we can use this. The `correct=TRUE` means that we are using a normal distribution to calculate our p-value like we did above in the step-by-step (using `rnorm`).
+
+```{r}
+wilcox.test(x=trial_1, y=trial_2, data=trials, paired=TRUE, correct=TRUE)
+```
+
+The interpretation and conclusions above still stand.
