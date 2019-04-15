@@ -1,0 +1,183 @@
+---
+title: "Mann-Whitney U Test"
+output: html_document
+---
+
+*This test is called the "Wilcoxon Rank-Sum Test" in lecture, but I prefer Mann-Whitney because using the name makes it more distinguishable (at least for me) than the "Wilcoxon Rank-Sign Test".*
+
+The Mann-Whitney test is the nonparametric cousin of the two sample t-test. That means in order to use the Mann-Whitney test, we don't care for any distributional assumptions on our data. We still care, of course, about the randomness of our dataset!
+
+They hypotheses we are interested in testing are
+$$
+H_0: \mu_1 = \mu_2 
+\text{  versus  }
+H_1: \mu_1 \neq \mu_2
+$$
+
+## Deriving our question
+We have the following dataset on <a href="https://www.modcloth.com/">Modcloth</a> clothing fit data. While we can ask many interesting questions about this dataset, we need to ask a question about means of two populations.
+
+```{r, message=FALSE, warning=FALSE}
+library(readr)
+library(dplyr)
+modcloth_sample <- read_csv("data/modcloth_sample.csv")[,-1] %>% select(-user_name)
+head(modcloth_sample, 10)
+```
+
+Here are the counts of clothing fits. We see that most of the clothes sent out fit (wow, that's nice!) and the next largest group was that the clothing fit was large. However, the group who has a small fit had a count not too far from the large fit.
+
+```{r}
+table(modcloth_sample$fit)
+```
+
+This leads me to try and understand the clothes that do not fit.
+
+```{r}
+not_fit <- modcloth_sample %>% filter(fit != "fit")
+head(not_fit, 10)
+```
+
+While again there are many interesting questions that we may ask of this dataset, let's study these hypotheses.  
+
+$$
+H_0: \mu_L=\mu_S \text{  versus  } H_1: \mu_L \neq \mu_S
+$$
+
+where $\mu$ is the mean of the `hips` column.
+
+## Visualizing our data
+```{r histograms, message=FALSE, warning=FALSE}
+library(ggplot2)
+not_fit <- not_fit %>% filter(!is.na(hips)) %>% filter(!is.na(fit))
+ggplot(not_fit, aes(x=hips, fill=fit)) + 
+  geom_histogram(col="black", lwd=0.2, binwidth=1.5) + 
+  ggtitle("Histogram of hip size")
+```
+
+```{r boxplots}
+not_fit <- not_fit %>% filter(!is.na(hips)) %>% filter(!is.na(fit))
+ggplot(not_fit, aes(y=hips, x=fit, fill=fit)) + 
+  geom_boxplot(lwd=0.5) + 
+  ggtitle("Histogram of hip size")
+```
+
+# 1. The long, step-by-step way
+
+## Arranging our data
+We first want to use `arrange` on the `hips` column. I also used `select` to grab only the columns we are interested in right now.
+
+```{r}
+not_fit <- not_fit %>% select(fit, hips) %>% arrange(hips)
+head(not_fit, 10)
+```
+
+## Assign ranks using function
+Don't worry about how to create a function. Just understand the process of what it is doing. I commented below. The process is how you would do it by hand.
+
+```{r}
+assign_wrs <- function(obs) {
+  ranks <- c()            # * CREATE EMPTY VECTOR TO SAVE RANKS
+  this_rank <- 1          # * START WITH RANK 1
+  
+  # * FOR EACH OF THE UNIQUE VALUES OF OBSERVATIONS
+  for(ix in 1:length(unique(obs))) {
+    
+    # * CHECK IF THERE ARE DUPLICATED OBSERVATIONS
+    these_ix <- which(obs == unique(obs)[ix])
+    
+      # * IF THERE ARE NO DUPLICATES, ASSIGN STANDARD RANK
+      if (length(these_ix)==1) {
+        ranks <- c(ranks, this_rank)
+        this_rank <- length(ranks) + 1
+      
+      # * IF THERE ARE DUPLICATES, ASSIGN AN AVERAGED RANK
+      } else {
+          these_ranks <- rep(mean(c(this_rank, this_rank+length(these_ix)-1)), length(these_ix))
+          ranks <- c(ranks, these_ranks)
+          this_rank <- length(ranks) + 1
+      }
+  }
+  
+  # * OUTPUT RANKS
+  ranks
+}
+```
+
+I will use `mutate` to apply the function I wrote above to assign ranks to each of the hip sizes.
+
+```{r}
+# * APPLY FUNCTION USING MUTATE
+not_fit <- not_fit %>% mutate(rank=assign_wrs(hips))
+head(not_fit, 10)
+```
+
+
+## Sum up the ranks for large
+```{r}
+not_fit %>% filter(fit=="large") %>% summarize(sum(rank))
+```
+
+## Sum up the ranks for small
+```{r}
+not_fit %>% filter(fit=="small") %>% summarize(sum(rank))
+```
+
+## Compare the sums in a standardized way
+
+Below is our test statistic $Z_W$.
+$$
+Z_W = \frac{W-\mu_W}{\sigma_W}
+$$
+
+where the mean is
+
+$$
+\mu_W = \frac{n_S(n_S+n_L+1)}{2}
+$$
+and the standard deviation is
+
+$$
+\sigma_W = \sqrt{\frac{n_Sn_L(n_S+n_L+1)}{12}}
+$$
+
+and we have $W=min{3261.5, 1688.5}$. We can calculate this in `R`.
+
+```{r}
+not_fit %>% group_by(fit) %>% summarize(n=n())
+```
+
+```{r}
+n_l <- 62
+n_s <- 37
+not_fit %>% summarize(mu_w=n_s*(n_s+n_l+1)/2,
+                      sigma_w=sqrt(n_s*n_l*(n_s+n_l+1)/12),
+                      z_w=(1688.5-mu_w)/sigma_w)
+```
+
+```{r}
+2*pnorm(-1.168063, lower.tail=TRUE)
+```
+
+## Interpretations and conclusion
+Given that $\mu_L=\mu_S$, we expect to see data like ours or more extreme (more deviant from the mean) 24.28% of the time.
+
+We fail to reject $H_0$, the notion that the large fit hip size is the same as the small fit hip size.
+
+# 2. The `R` shortcut
+We can verify our result using the `wilcox.test` function in `R` with these parameters.
+```{r}
+wilcox.test(x=not_fit %>% filter(fit=="large") %>% pull(hips),
+            y=not_fit %>% filter(fit=="small") %>% pull(hips),
+            paired=FALSE, correct=TRUE)
+```
+
+# 3. Comparison to the two sample t-test
+Because we have data from similarly shaped distributions that don't have many outliers and large enough $n_L$ and $n_S$, we should be interested in using a two sample t-test. Recall the assumptions of a two sample t-test.
+
+```{r}
+t.test(x=not_fit %>% filter(fit=="large") %>% pull(hips),
+       y=not_fit %>% filter(fit=="small") %>% pull(hips),
+       paired=FALSE)
+```
+
+Our p-value here (0.2206) is close to what we calculated earlier (0.2431). Both of the p-values would lead to the same conclusion.
