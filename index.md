@@ -11,7 +11,7 @@ Statistics is really everywhere! Let's start pinpointing where and grow this lis
 **Fashion**
 <a href="https://www.youtube.com/watch?v=bkcAmCqIaao">ZARA Analytics</a>.
 
-### Notes
+## Notes
 #### Part 0 | The Kickoff
 Before we get deep into the class, here are a few helper documents.  
 <a href="notes/formatting/formatting.html">i. Homework Formatting</a>  
@@ -35,7 +35,7 @@ vii. Bob the Builder (One sample t-test) <a href="notes/testing/bob-the-builder.
 viii. Mann-Whitney (Rank Sum) <a href="notes/nonparametrics/mann-whitney.html">code walkthrough</a>  
 ix. Wilcoxon Rank Sign Test <a href="notes/nonparametrics/rank-sign.html">code walkthrough</a>
 
-### Lab Demos
+## Lab Demos
 <a href="lab-demos/lab-1/lab-1.html">i. Lab 1, Crash course intro to R</a>  
 <a href="lab-demos/lab-2/lab-2.html">ii. Lab 2, Regression</a>  
 <a href="lab-demos/lab-3/lab-3.html"> iii. Lab 3, Sampling</a>  
@@ -46,11 +46,12 @@ vii. Lab 8, Tea-test <a href="lab-demos/lab-8/lab-8.html">boba / bubble tea exam
 <a href="lab-demos/lab-9/lab-9.html">viii. Lab 9, ANOVA, Tukey's HSD, and Regression</a>  
 
 
-### Exam Material
+## Exam Material
 i. Midterm 1 <a href="midterm-1/midterm-1-review.pdf">review notes</a> and <a href="midterm-1/examples/example-problem.pdf">sample problems</a>  
 ii. Midterm 2 <a href="midterm-2/midterm-2-slides.html">review slides</a> and <a href="midterm-2/examples/sample-problems.html">sample problems</a>  
 
-### Resources
+## Resources
+### External  
 <a href="resources/inference-cheat-sheet.pdf">i. The best statistical inference cheat sheet for zee and tea</a> (I did not make this, credit to whomever did - thank you!)  
 
 ### Rappers Dataset (Supplementary)
