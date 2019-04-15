@@ -32,8 +32,8 @@ vi. CI's and the z-test <a href="notes/testing/intro-to-testing.pdf">slides</a> 
 vii. Bob the Builder (One sample t-test) <a href="notes/testing/bob-the-builder.pdf">prompt and solutions (pdf)</a> and <a href="notes/testing/bob-the-builder.html">solutions (html)</a>  
 
 #### Part 3.2 | Nonparametric testing
-viii. Mann-Whitney (Rank Sum) <a href="notes/nonparametrics/mann-whitney.html">code walkthrough</a>  
-ix. Wilcoxon Rank Sign Test <a href="notes/nonparametrics/rank-sign.html">code walkthrough</a>
+viii. Mann-Whitney (Rank Sum) <a href="notes/nonparametrics/mann-whitney.html">code walkthrough</a> (Clothing fit)   
+ix. Wilcoxon Rank Sign Test <a href="notes/nonparametrics/rank-sign.html">code walkthrough</a> (Exam scores)  
 
 ## Lab Demos
 <a href="lab-demos/lab-1/lab-1.html">i. Lab 1, Crash course intro to R</a>  
