@@ -54,7 +54,7 @@ ii. Midterm 2 <a href="midterm-2/midterm-2-slides.html">review slides</a> and <a
 ### External  
 <a href="resources/inference-cheat-sheet.pdf">i. The best statistical inference cheat sheet for zee and tea</a> (I did not make this, credit to whomever did - thank you!)  
 
-### Rappers Dataset (Supplementary)
+### Rappers Dataset
 If you need more information about topics, read these too. I wrote them to give you some more examples/clarity.  
 <a href="notes/rappers/code/01-rappers-eda.html">i. Exploring the rappers dataset</a>  
 <a href="notes/rappers/code/02-rappers-regression.html">ii. Regression with rappers</a>  
