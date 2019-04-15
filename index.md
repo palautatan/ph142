@@ -38,7 +38,8 @@ vii. Bob the Builder (One sample t-test) <a href="notes/testing/bob-the-builder.
 <a href="lab-demos/lab-4/lab-4.html">iv. Lab 4, Conditional Probability</a>  
 <a href="lab-demos/lab-5/lab-5.html"> v. Lab 5, Probability functions in R</a>  
 vi. Lab 6, Sampling distribution <a href="lab-demos/lab-6/lab-6-condensed.pdf">slides</a> and <a href="lab-demos/lab-6/code/lab-6.html">animated notes</a>  
-vii. Lab 8, Tea-test <a href="lab-demos/lab-8/lab-8.html">boba / bubble tea example</a>
+vii. Lab 8, Tea-test <a href="lab-demos/lab-8/lab-8.html">boba / bubble tea example</a>  
+<a href="lab-demos/lab-9/lab-9.html">viii. Lab 9, ANOVA, Tukey's HSD, and Regression</a>  
 
 
 ### Exam Material

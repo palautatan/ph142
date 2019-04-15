@@ -1,0 +1,24 @@
+---
+title: "Wilcoxon Rank Sign Test"
+output: html_document
+---
+
+This test is used in place of paired t-tests to test the null hypothesis of whether the pairwise differences are 0 or not between two paired groups. Imagine now that we have two tests and we want to see which test was more difficult. That is, we want to test
+
+$H_0: D_i=0 \,$ for all observations $i$. ($D_i$ are pairwise differences.)  
+
+The alternative would be that at least one pair is nonzero.
+
+```{r, include=FALSE}
+trial_1 <- c(59.5, 58.75, 57, 56.25, 56.25, 54.084, 53.73, 52.75, 51.334, 51.047, 50.95, 50.767, 50.375, 49.25, 48.75, 47.709, 47.45, 45.85, 45.75, 45.6, 45.109, 44.25, 42.717, 41.8, 41.684, 41.25, 38, 31.184, 30.517, 30.15, 29.75, 25.917, 24.125)
+
+trial_2 <- c(24.5, 31.5, 28.75, 29.5, 27.75, 28, 29.75, 29.5, 30.5, 25.5, 27, 25, 32, 0, 31.75, 22.75, 26.75, 30.5, 31.75, 30.25, 0, 28, 26.5, 22.75, 24.5, 13.125, 13, 18.25, 15.75, 19.5, 19.5, 15.5, 13.5)
+
+trial_1 <- round(trial_1) / 60
+trial_2 <- round(trial_2) / 33
+```
+
+```{r}
+trials <- data.frame(cbind(trial_1, trial_2))
+head(trials, 10)
+```
