@@ -1,0 +1,326 @@
+---
+title: "Permutation Test"
+output: html_document
+---
+
+The **permutation test** is based off of simulating a null distribution. From that null distribution, we are going to calculate a p-value.
+
+# 1. Theoretical Example
+Say the hypotheses we wish to test are
+$$
+H_0: \mu_1=\mu_2 \text{  versus  } H_1: \mu_1 \neq \mu_2
+$$
+
+for some population 1 and 2.
+
+## The null distribution
+Your null distribution is governed by your null hypothesis. Our null says, "Mean 1 equals mean 2". So, we say, "Yes, sir, Ms. Null. Mean 1 will equal mean 2 in our simulation."
+
+For a given dataset, if the means of both of the distributions were the same, then any of the data we have could have been from either population 1 or population 2. Imagine you have two datasets pulled from $N(0,0.5)$ distributions, i.e. we know that $\mu_1=\mu_2$.
+
+We are going to show that we can use the steps in a permutation test with the expectation of failing to reject the null hypothesis.
+
+```{r}
+set.seed(142)
+sample_1 <- rnorm(n=10, mean=0, sd=0.5)
+sample_2 <- rnorm(n=10, mean=0, sd=0.5)
+samples <- data.frame(cbind(sample_1, sample_2))
+samples
+```
+
+Let's `melt` the dataframe into long format where instead of having two columns corresponding to each sample, we will have one column denoting whether the value came from which sample and the value itself.
+
+```{r}
+library(reshape2)
+long_samples <- melt(samples, id.vars=NULL)
+
+library(dplyr)
+long_samples %>% sample_n(10)
+```
+
+Let's visualize this now.
+
+```{r}
+library(ggplot2)
+ggplot(long_samples, aes(x=variable, y=value, fill=variable)) +
+  geom_boxplot(lwd=0.4)
+```
+
+```{r}
+ggplot(long_samples, aes(x=value, fill=variable)) +
+  geom_histogram(binwidth=0.1, col="black", lwd=0.2)
+```
+
+
+```{r}
+ggplot(long_samples, aes(x=value, fill=variable)) +
+  geom_histogram(binwidth=0.1, col="black", lwd=0.2) +
+  facet_wrap(~variable)
+```
+
+Both of the distributions are close to 0, but sample 2 has wider variance. This is not due to the underlying distribution. Both of them were simulated from $N(0,0.5)$. This is due to sampling (sample size is only 10 for both). Based on our dataset, we see these statistics.
+
+```{r}
+long_samples %>% group_by(variable) %>% summarize(x_bar=mean(value), s=sd(value))
+```
+
+Typically, in order to test something like the above, we'd want to use a two sample t-test for the comparison of two means or a Mann-Whitney test. But our small sample size makes both of these tests work less than optimally.
+
+Recall, for a t-test we would have:
+
+$$
+T= \frac{\bar{x_1}-\bar{x_2}}{\hat{SE}(\bar{x_1}-\bar{x_2})}
+$$
+
+And for Mann-Whitney, we would use values dependent on $n_1$ and $n_2$. But again, none of these estimates are quite robust to sample size.
+
+We'll take this time now to calculate our observed mean difference.
+
+```{r}
+means <- long_samples %>% group_by(variable) %>% summarize(mean(value)) %>% pull()
+obs_diff <- means[2]-means[1]
+obs_diff
+```
+
+## Fixing the low sample size problem
+Because we have a low sample size, our $\bar{x}$ is expected to be imprecise for both of our samples.(And they are; 0.532 and -0.206 are not demonstrative of $\mu=0$ which we set to be true at the beginning of the dataset.)
+
+If it is true that $\mu_1=\mu_2$, then we can shuffle our labels on our data. I am going to use this function to generate new labels.
+
+```{r}
+# * FUNCTION TO CREATE LABELS
+generate_labels <- function(labels, repetitions) {
+    relabels <- do.call(cbind, 
+                        lapply(1:repetitions, function(x) 
+                          sample(as.character(labels), 
+                                 length(labels), 
+                                 replace=FALSE)))
+    relabels <- data.frame(data=relabels)
+    names(relabels) <- paste0("relabel_", 1:repetitions)
+    relabels
+}
+
+# * APPLY FUNCTION
+relabels <- generate_labels(long_samples %>% pull(variable), 1000)
+head(relabels[,1:6])
+```
+
+How does this help? Well, now we can try to make a null distribution. We want to take the sample means from both of these values and subtract one from another because...
+
+$$
+H_0: \mu_1=\mu_2 \implies H_0: \mu_2-\mu_1=0
+$$
+
+Remember, if our null were true, then we would see our distribution wind up around a near 0 center. We'll use the below function.
+
+```{r}
+# * FUNCTION TO CALCULATE SAMPLE MEAN DIFFERENCES
+calculate_sample_mean_diffs <- function(value_col, relabel_df) {
+  # * CREATE A "NOTE TAKER"
+  calculated_diffs <- c()
+
+  # * FOR EACH OF THE RELABELS
+  for (ix in 1:ncol(relabel_df)) {
+    # * CALCULATE THE DIFFERENCE IN MEANS
+    tmp_df <- data.frame(cbind(value=value_col, relabel=relabel_df[,ix]))
+    means <- tmp_df %>% group_by(relabel) %>% summarize(mean(value)) %>% pull()
+    calculated_diffs <- c(calculated_diffs, means[2]-means[1])
+  }
+  
+  calculated_diffs
+}
+
+# * APPLYING THE FUNCTION
+calculated_diffs <- calculate_sample_mean_diffs(long_samples %>% select(value), relabels)
+```
+
+So here's our simulated null distribution. So, normally we would have calculated some test statistic and compare it to a known distribution like normal, student-t, F distribution, or chi-squared to derive a p-value. This time, we're going to use this distribution to get a p-value.
+
+```{r}
+ggplot(data.frame(calculated_diffs), aes(x=calculated_diffs)) + 
+  geom_histogram(binwidth=0.05, fill="cornflowerblue", col="black", lwd=0.2) +
+  geom_vline(xintercept=obs_diff, lwd=1.5)
+```
+
+Our black line is our observed difference. We will take 2 times the fraction of the points that lie below our observed difference to be our p-value. We'll use a function to formalize this as well.
+
+```{r}
+# * FUNCTION TO CALCULATE P-VALUE
+calculate_pvalue <- function(observed, simulated) {
+  if (observed < 0) {
+    p_value <- 2*(length(which(simulated<=observed))/length(simulated))
+  } else {
+    p_value <- 2*(length(which(simulated>=observed))/length(simulated))
+  }
+  p_value
+}
+
+# * APPLYING THE FUNCTION
+calculate_pvalue(obs_diff, calculated_diffs)
+```
+
+With a p-value like the one above, we have evidence in support of $H_0$. We pretty much showed that when two distributions are the same, the permutation test works.
+
+# 2. Real data example
+Now, how would this work on real data? One thing will definitely change for us in this setting.
+
+*We do not know in fact that the means between two groups are equal to each other. We only knew that they were equal to each other earlier because we set them to be through simulation.*  
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+set.seed(142)
+library(readr)
+spotify <- read_csv("data/spotify.csv")[,-1]
+
+library(dplyr)
+spotify <- spotify %>% select(artist, song_title, danceability, tempo)
+spotify_subset <- spotify %>% sample_n(28)
+```
+
+Say that I was interested in testing
+
+$$
+H_0: \mu_{\text{(Danceability|Above mean tempo)}} = \mu_{\text{(Danceability|Below mean tempo)}}
+$$
+ versus
+ 
+$$
+H_1: \mu_{\text{(Danceability|Above mean tempo)}} \neq \mu_{\text{(Danceability|Less than or equal to mean tempo)}}
+$$
+
+for the following dataset
+
+```{r}
+spotify_subset <- spotify_subset %>% mutate(tempo=ifelse(tempo>mean(tempo), "above", "below"))
+head(spotify_subset)
+```
+
+Let's see how many fall above and below the mean tempo.
+
+```{r}
+spotify_subset %>% group_by(tempo) %>% summarize(n())
+```
+
+Let's take a look at how the danceability behaves for above and below (or equal to) Q1 tempo.
+
+```{r}
+ggplot(spotify_subset, aes(y=danceability, x=tempo, fill=tempo)) +
+  geom_boxplot(lwd=0.4)
+```
+
+```{r}
+ggplot(spotify_subset, aes(x=danceability, fill=tempo)) +
+  geom_histogram(binwidth=0.03, col="black", lwd=0.4)
+```
+
+```{r}
+ggplot(spotify_subset, aes(x=danceability, fill=tempo)) +
+  geom_histogram(binwidth=0.03, col="black", lwd=0.4) +
+  facet_wrap(~tempo)
+```
+
+What is our observed difference in means?
+
+```{r}
+means <- spotify_subset %>% group_by(tempo) %>% summarize(mean(danceability)) %>% pull()
+obs_diff <- means[2]-means[1]
+obs_diff
+```
+
+It's pretty small! And like earlier, **under the impression that the means are the same**, we can reshuffle the labels. So, let's use the function to generate labels.
+
+```{r}
+spotify_relabels <- generate_labels(spotify_subset %>% pull(tempo), 1000)
+head(spotify_relabels[,1:6])
+```
+
+And then calculate the difference in sample means given all of these relabels. We will show these in a histogram with a vertical line representing our observed difference in means.
+
+```{r}
+calculated_diffs <- calculate_sample_mean_diffs(spotify_subset %>% pull(danceability), spotify_relabels)
+```
+
+```{r}
+ggplot(data.frame(calculated_diffs), aes(x=calculated_diffs)) + 
+  geom_histogram(binwidth=0.01, fill="cornflowerblue", col="black", lwd=0.2) +
+  geom_vline(xintercept=obs_diff, lwd=1.5)
+```
+
+And here, we'll calculate our p-value.
+
+```{r}
+calculate_pvalue(obs_diff, calculated_diffs)
+```
+
+For this example as well, we fail to reject $H_0$. The means of the two groups are seemingly the same.
+
+# 3. Theoretical example to show the rejection of $H_0$
+Here, I'll show an example where we will reject $H_0$ just because we failed to reject above twice, and you should see it once. I will not comment as much below. We are testing the same hypotheses and using the same functions.
+
+```{r}
+set.seed(142)
+sample_1 <- runif(n=10, min=-2, max=0)
+sample_2 <- runif(n=10, min=2, max=4)
+samples <- data.frame(cbind(sample_1, sample_2))
+samples
+```
+
+Putting data in long format for ease.
+
+```{r}
+long_samples <- melt(samples, id.vars=NULL)
+long_samples %>% sample_n(10)   # * TO PREVIEW THE DATA
+```
+
+Providing visuals.
+
+```{r}
+ggplot(long_samples, aes(x=variable, y=value, fill=variable)) +
+  geom_boxplot(lwd=0.4)
+```
+
+```{r}
+ggplot(long_samples, aes(x=value, fill=variable)) +
+  geom_histogram(binwidth=0.1, col="black", lwd=0.2)
+```
+
+Looking at sample statistics.
+
+```{r}
+long_samples %>% group_by(variable) %>% summarize(x_bar=mean(value), s=sd(value))
+```
+
+Calculating our observed difference in means.
+
+```{r}
+means <- long_samples %>% group_by(variable) %>% summarize(mean(value)) %>% pull()
+obs_diff <- means[2]-means[1]
+obs_diff
+```
+
+Creating relabels.
+
+```{r}
+relabels <- generate_labels(long_samples %>% pull(variable), 1000)
+head(relabels[,1:6])
+```
+
+Calculating differences in sample means.
+
+```{r}
+calculated_diffs <- calculate_sample_mean_diffs(long_samples %>% select(value), relabels)
+```
+
+Plotting the simulated null distribution.
+
+```{r}
+ggplot(data.frame(calculated_diffs), aes(x=calculated_diffs)) + 
+  geom_histogram(binwidth=0.2, fill="cornflowerblue", col="black", lwd=0.2) +
+  geom_vline(xintercept=obs_diff, lwd=1.5)
+```
+
+Calculating our p-value.
+
+```{r}
+calculate_pvalue(obs_diff, calculated_diffs)
+```
+
+Based on this p-value, we would reject the null hypothesis. This is how it should be as we simulated the data from non-overlapping distributions.
