@@ -220,17 +220,8 @@ samples</code></pre>
 <pre class="r"><code>library(reshape2)
 long_samples &lt;- melt(samples, id.vars=NULL)
 
-library(dplyr)</code></pre>
-<pre><code>## Warning: package 'dplyr' was built under R version 3.5.2</code></pre>
-<pre><code>## 
-## Attaching package: 'dplyr'</code></pre>
-<pre><code>## The following objects are masked from 'package:stats':
-## 
-##     filter, lag</code></pre>
-<pre><code>## The following objects are masked from 'package:base':
-## 
-##     intersect, setdiff, setequal, union</code></pre>
-<pre class="r"><code>long_samples %&gt;% sample_n(10)</code></pre>
+library(dplyr)
+long_samples %&gt;% sample_n(10)</code></pre>
 <pre><code>##    variable       value
 ## 1  sample_1  0.85204271
 ## 2  sample_1 -0.08459428
@@ -261,12 +252,11 @@ ggplot(long_samples, aes(x=variable, y=value, fill=variable)) +
 ##   &lt;fct&gt;     &lt;dbl&gt; &lt;dbl&gt;
 ## 1 sample_1 0.204  0.433
 ## 2 sample_2 0.0819 0.502</code></pre>
-<p>Typically, in order to test something like the above, we’d want to use a two sample t-test for the comparison of two means or a Mann-Whitney test. But our small sample size makes both of these tests work less than optimally.</p>
-<p>Recall, for a t-test we would have:</p>
+<p>Typically, in order to test something like the above, we’d want to use a two sample t-test for the comparison of two means.</p>
+<p>Recall, for your comparison as we continue, a t-test we would have:</p>
 <p><span class="math display">\[
 T= \frac{\bar{x_1}-\bar{x_2}}{\hat{SE}(\bar{x_1}-\bar{x_2})}
 \]</span></p>
-<p>And for Mann-Whitney, we would use values dependent on <span class="math inline">\(n_1\)</span> and <span class="math inline">\(n_2\)</span>. But again, none of these estimates are quite robust to sample size.</p>
 <p>We’ll take this time now to calculate our observed mean difference.</p>
 <pre class="r"><code>means &lt;- long_samples %&gt;% group_by(variable) %&gt;% summarize(mean(value)) %&gt;% pull()
 obs_diff &lt;- means[2]-means[1]
@@ -275,7 +265,7 @@ obs_diff</code></pre>
 </div>
 <div id="fixing-the-low-sample-size-problem" class="section level2">
 <h2>Fixing the low sample size problem</h2>
-<p>Because we have a low sample size, our <span class="math inline">\(\bar{x}\)</span> is expected to be imprecise for both of our samples.(And they are; 0.532 and -0.206 are not demonstrative of <span class="math inline">\(\mu=0\)</span> which we set to be true at the beginning of the dataset.)</p>
+<p>Because we have a low sample size, our <span class="math inline">\(\bar{x}\)</span> is expected to be imprecise for both of our samples. (And they are; 0.532 and -0.206 are not demonstrative of <span class="math inline">\(\mu=0\)</span> which we set to be true at the beginning of the dataset.)</p>
 <p>If it is true that <span class="math inline">\(\mu_1=\mu_2\)</span>, then we can shuffle our labels on our data. I am going to use this function to generate new labels.</p>
 <pre class="r"><code># * FUNCTION TO CREATE LABELS
 generate_labels &lt;- function(labels, repetitions) {
@@ -484,6 +474,100 @@ head(relabels[,1:6])</code></pre>
 <pre class="r"><code>calculate_pvalue(obs_diff, calculated_diffs)</code></pre>
 <pre><code>## [1] 0</code></pre>
 <p>Based on this p-value, we would reject the null hypothesis. This is how it should be as we simulated the data from non-overlapping distributions.</p>
+</div>
+<div id="comparisons" class="section level1">
+<h1>4. Comparisons</h1>
+<p>We are going to see how competing tests perform on the data from part 2 and from part 3.</p>
+<div id="to-the-two-sample-t-test" class="section level2">
+<h2>To the two sample t-test</h2>
+<p>Under certain assumptions, we can use a two sample t-test. We assume independence between the groups and the distributions we are working with have similar shapes.</p>
+<div id="spotify-data-from-part-2" class="section level3">
+<h3>Spotify data from part 2</h3>
+<pre class="r"><code>t.test(x=spotify_subset %&gt;% filter(tempo==&quot;above&quot;) %&gt;% pull(danceability),
+       y=spotify_subset %&gt;% filter(tempo==&quot;below&quot;) %&gt;% pull(danceability),
+       paired=FALSE)</code></pre>
+<pre><code>## 
+##  Welch Two Sample t-test
+## 
+## data:  spotify_subset %&gt;% filter(tempo == &quot;above&quot;) %&gt;% pull(danceability) and spotify_subset %&gt;% filter(tempo == &quot;below&quot;) %&gt;% pull(danceability)
+## t = -0.069968, df = 25.529, p-value = 0.9448
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  -0.1192801  0.1114340
+## sample estimates:
+## mean of x mean of y 
+## 0.6150769 0.6190000</code></pre>
+</div>
+<div id="theoretical-data-from-part-3" class="section level3">
+<h3>Theoretical data from part 3</h3>
+<pre class="r"><code>t.test(x=sample_1, y=sample_2, data=samples, paired=FALSE)</code></pre>
+<pre><code>## 
+##  Welch Two Sample t-test
+## 
+## data:  sample_1 and sample_2
+## t = -17.796, df = 17.875, p-value = 8.124e-13
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  -4.239612 -3.343893
+## sample estimates:
+##  mean of x  mean of y 
+## -0.6762395  3.1155126</code></pre>
+</div>
+</div>
+<div id="to-the-mann-whitney-u-test" class="section level2">
+<h2>To the Mann-Whitney U Test</h2>
+<p>We have also studied the Mann-Whitney (Wilcoxon Rank Sum) test to test these same hypotheses. Let’s run the test on our data to compare.</p>
+<div id="spotify-data-from-part-2-1" class="section level3">
+<h3>Spotify data from part 2</h3>
+<pre class="r"><code>wilcox.test(x=spotify_subset %&gt;% filter(tempo==&quot;above&quot;) %&gt;% pull(danceability),
+            y=spotify_subset %&gt;% filter(tempo==&quot;below&quot;) %&gt;% pull(danceability),
+            paired=FALSE)</code></pre>
+<pre><code>## 
+##  Wilcoxon rank sum test
+## 
+## data:  spotify_subset %&gt;% filter(tempo == &quot;above&quot;) %&gt;% pull(danceability) and spotify_subset %&gt;% filter(tempo == &quot;below&quot;) %&gt;% pull(danceability)
+## W = 86, p-value = 0.6177
+## alternative hypothesis: true location shift is not equal to 0</code></pre>
+</div>
+<div id="theoretical-data-from-part-3-1" class="section level3">
+<h3>Theoretical data from part 3</h3>
+<pre class="r"><code>wilcox.test(x=sample_1, y=sample_2, data=samples, paired=FALSE)</code></pre>
+<pre><code>## 
+##  Wilcoxon rank sum test
+## 
+## data:  sample_1 and sample_2
+## W = 0, p-value = 1.083e-05
+## alternative hypothesis: true location shift is not equal to 0</code></pre>
+</div>
+</div>
+<div id="comparison-table" class="section level2">
+<h2>Comparison table</h2>
+<p>For these two data scenarios (Spotify and theoretical), all decisions were the same. The two sample t-test gives the most extreme p-values (sans the information for the permutation test’s exact theoretical p-value). The test gave definitive numbers for failing to reject and rejecting the null.</p>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th>Permutation test</th>
+<th>Two sample t-test</th>
+<th>Wilcoxon Rank-Sign Test</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Spotify</td>
+<td>0.882</td>
+<td>0.9448</td>
+<td>0.6177</td>
+</tr>
+<tr class="even">
+<td>Theoretical</td>
+<td>0 (Rounded)</td>
+<td>8.124e-13</td>
+<td>1.083e-05</td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 
 

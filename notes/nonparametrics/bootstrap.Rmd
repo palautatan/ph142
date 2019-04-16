@@ -3,3 +3,6 @@ title: "Bootstrap"
 output: html_document
 ---
 
+Sometimes, we have a statistic that we don't have a theoretical distribution for. (What. did. you. just. say. ?!) Okay. Everything that we've been testing till this point has been some function of the data. Think about it. To get a mean, we sum up all of the data, then divide by the number of data points we have ($n$. To get a proportion, we count up all of the values that have a trait, then divide by $n$.
+
+Recall your **IQR**. How did we calculate that? We took the number of data points above and below to make sure there were 25% above and below. While this does have to do with $n$, our calculation of Q1, Q2, and Q3 have nothing to do with what values the data points represent. The calculations only have to do with their positioning.

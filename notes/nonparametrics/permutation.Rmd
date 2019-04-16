@@ -30,7 +30,7 @@ samples
 
 Let's `melt` the dataframe into long format where instead of having two columns corresponding to each sample, we will have one column denoting whether the value came from which sample and the value itself.
 
-```{r}
+```{r, warning=FALSE, message=FALSE}
 library(reshape2)
 long_samples <- melt(samples, id.vars=NULL)
 
@@ -64,15 +64,13 @@ Both of the distributions are close to 0, but sample 2 has wider variance. This 
 long_samples %>% group_by(variable) %>% summarize(x_bar=mean(value), s=sd(value))
 ```
 
-Typically, in order to test something like the above, we'd want to use a two sample t-test for the comparison of two means or a Mann-Whitney test. But our small sample size makes both of these tests work less than optimally.
+Typically, in order to test something like the above, we'd want to use a two sample t-test for the comparison of two means.
 
-Recall, for a t-test we would have:
+Recall, for your comparison as we continue, a t-test we would have:
 
 $$
 T= \frac{\bar{x_1}-\bar{x_2}}{\hat{SE}(\bar{x_1}-\bar{x_2})}
 $$
-
-And for Mann-Whitney, we would use values dependent on $n_1$ and $n_2$. But again, none of these estimates are quite robust to sample size.
 
 We'll take this time now to calculate our observed mean difference.
 
@@ -83,7 +81,7 @@ obs_diff
 ```
 
 ## Fixing the low sample size problem
-Because we have a low sample size, our $\bar{x}$ is expected to be imprecise for both of our samples.(And they are; 0.532 and -0.206 are not demonstrative of $\mu=0$ which we set to be true at the beginning of the dataset.)
+Because we have a low sample size, our $\bar{x}$ is expected to be imprecise for both of our samples. (And they are; 0.532 and -0.206 are not demonstrative of $\mu=0$ which we set to be true at the beginning of the dataset.)
 
 If it is true that $\mu_1=\mu_2$, then we can shuffle our labels on our data. I am going to use this function to generate new labels.
 
@@ -324,3 +322,45 @@ calculate_pvalue(obs_diff, calculated_diffs)
 ```
 
 Based on this p-value, we would reject the null hypothesis. This is how it should be as we simulated the data from non-overlapping distributions.
+
+
+# 4. Comparisons 
+We are going to see how competing tests perform on the data from part 2 and from part 3.
+
+## To the two sample t-test
+Under certain assumptions, we can use a two sample t-test. We assume independence between the groups and the distributions we are working with have similar shapes.
+
+### Spotify data from part 2
+```{r}
+t.test(x=spotify_subset %>% filter(tempo=="above") %>% pull(danceability),
+       y=spotify_subset %>% filter(tempo=="below") %>% pull(danceability),
+       paired=FALSE)
+```
+
+### Theoretical data from part 3
+```{r}
+t.test(x=sample_1, y=sample_2, data=samples, paired=FALSE)
+```
+
+## To the Mann-Whitney U Test
+We have also studied the Mann-Whitney (Wilcoxon Rank Sum) test to test these same hypotheses. Let's run the test on our data to compare.
+
+### Spotify data from part 2
+```{r}
+wilcox.test(x=spotify_subset %>% filter(tempo=="above") %>% pull(danceability),
+            y=spotify_subset %>% filter(tempo=="below") %>% pull(danceability),
+            paired=FALSE)
+```
+
+### Theoretical data from part 3
+```{r}
+wilcox.test(x=sample_1, y=sample_2, data=samples, paired=FALSE)
+```
+
+## Comparison table
+For these two data scenarios (Spotify and theoretical), all decisions were the same. The two sample t-test gives the most extreme p-values (sans the information for the permutation test's exact theoretical p-value). The test gave definitive numbers for failing to reject and rejecting the null.
+
+|            | Permutation test | Two sample t-test | Wilcoxon Rank-Sign Test |
+|------------|------------------|-------------------|-------------------------|
+|Spotify     | 0.882            |  0.9448           |  0.6177                 |
+|Theoretical | 0 (Rounded)      |  8.124e-13        |  1.083e-05              |
