@@ -41,7 +41,7 @@ Recall that we need not focus on the shape of our underlying distribution since 
 library(ggplot2)
 library(reshape2)
 ggplot(data=melt(trials) %>% filter(variable!="d"), aes(x=value, fill=variable)) + 
-  geom_histogram(col="white", lwd=0.2, binwidth=0.05) +
+  geom_histogram(col="black", lwd=0.2, binwidth=0.05) +
   ggtitle("Stacked Histogram of Trials 1 and 2")
 ```
 
@@ -55,7 +55,7 @@ Here is the histogram of the differences. I put a vertical line at $x=0$ to show
 
 ```{r}
 ggplot(data=trials, aes(x=d)) + 
-  geom_histogram(binwidth=0.05, col="white", lwd=0.2) +
+  geom_histogram(binwidth=0.05, col="black", lwd=0.2) +
   geom_vline(xintercept=0, col="salmon", lwd=2, alpha=0.5) +
   ggtitle("Histogram of differences")
 ```
