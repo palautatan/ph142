@@ -140,7 +140,7 @@ $$
 \sigma_W = \sqrt{\frac{n_Sn_L(n_S+n_L+1)}{12}}
 $$
 
-and we have $W=min{3261.5, 1688.5}$. We can calculate this in `R`.
+and we have $W=min\{3261.5, 1688.5\}$. We can calculate this in `R`.
 
 ```{r}
 not_fit %>% group_by(fit) %>% summarize(n=n())

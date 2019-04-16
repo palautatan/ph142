@@ -358,7 +358,7 @@ Z_W = \frac{W-\mu_W}{\sigma_W}
 <p><span class="math display">\[
 \sigma_W = \sqrt{\frac{n_Sn_L(n_S+n_L+1)}{12}}
 \]</span></p>
-<p>and we have <span class="math inline">\(W=min{3261.5, 1688.5}\)</span>. We can calculate this in <code>R</code>.</p>
+<p>and we have <span class="math inline">\(W=min\{3261.5, 1688.5\}\)</span>. We can calculate this in <code>R</code>.</p>
 <pre class="r"><code>not_fit %&gt;% group_by(fit) %&gt;% summarize(n=n())</code></pre>
 <pre><code>## # A tibble: 2 x 2
 ##   fit       n
