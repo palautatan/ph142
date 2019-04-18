@@ -52,8 +52,9 @@ i. Midterm 1 <a href="midterm-1/midterm-1-review.pdf">review notes</a> and <a hr
 ii. Midterm 2 <a href="midterm-2/midterm-2-slides.html">review slides</a> and <a href="midterm-2/examples/sample-problems.html">sample problems</a>  
 
 ## Resources
-### External  
+### Cheat sheets
 <a href="resources/inference-cheat-sheet.pdf">i. The best statistical inference cheat sheet for zee and tea</a> (I did not make this, credit to whomever did - thank you!)  
+<a href="https://docs.google.com/document/d/16l_gDma-u5_ri-KEIrmiVrXGVYt4NmZMSsIjKKsgQxQ/edit?usp=sharing">ii. All PH142 tests cheat sheet</a> (Work in progress, please contribute!)
 
 ### Rappers Dataset
 If you need more information about topics, read these too. I wrote them to give you some more examples/clarity.  
