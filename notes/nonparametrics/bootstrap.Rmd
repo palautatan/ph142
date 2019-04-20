@@ -3,6 +3,280 @@ title: "Bootstrap"
 output: html_document
 ---
 
-Sometimes, we have a statistic that we don't have a theoretical distribution for. (What. did. you. just. say. ?!) Okay. Everything that we've been testing till this point has been some function of the data. Think about it. To get a mean, we sum up all of the data, then divide by the number of data points we have ($n$. To get a proportion, we count up all of the values that have a trait, then divide by $n$.
+Sometimes, we have a statistic that we don't have a theoretical distribution for. (What. did. you. just. say. ?!) Okay. Let's rewind.
+
+Everything that we've been testing till this point has been some function of the data. Think about it. To get a mean, we sum up all of the data, then divide by the number of data points we have ($n$. To get a proportion, we count up all of the values that have a trait, then divide by $n$.
 
 Recall your **IQR**. How did we calculate that? We took the number of data points above and below to make sure there were 25% above and below. While this does have to do with $n$, our calculation of Q1, Q2, and Q3 have nothing to do with what values the data points represent. The calculations only have to do with their positioning.
+
+When we made confidence intervals, we were using the sampling distribution of a statistic to create them (whether you knew it or not!). Let's make a confidence interval just to prove a point.
+
+## 95% confidence interval for $\mu$
+Imagine we have these data. Say that we *know* the population standard deviation is 1.
+
+```{r}
+set.seed(1420)
+
+# * RANDOMLY SELECT SOME VALUES TO TEST
+our_random_data <- c(runif(n=15, min=-1, max=1),
+                     rnorm(n=25, mean=0, sd=1),
+                     rpois(n=5, lambda=1))
+
+# * PUT THEM INTO A DATAFRAME
+our_random_data <- data.frame(observations=our_random_data)
+
+# * PREVIEW THE DATA
+head(our_random_data, 10)
+```
+
+Let's look at the histogram of these data to test some assumptions. We are interested in using a normal-based confidence interval on these data because (1) we are assuming they are an SRS, (2) they are independent from one another, and (3) we know the population standard deviation $\sigma=1$.
+
+```{r}
+library(ggplot2)
+ggplot(our_random_data, aes(x=observations)) + 
+  geom_histogram(binwidth=0.2, col="black", fill="cyan3", lwd=0.2) +
+  ggtitle("Our observations on a histogram") +
+  theme_minimal()
+```
+
+These data can pass for normal.
+
+```{r}
+ggplot(our_random_data, aes(y=observations)) + 
+  geom_boxplot(col="black", fill="cyan3", lwd=0.2) +
+  ggtitle("Our observations on a boxplot") +
+  theme_minimal()
+```
+
+We're now pretty confident about testing the hypotheses using a normal-based interval.
+
+$$
+H_0: \mu = 1
+$$
+versus
+
+$$
+H_1: \mu \neq 1
+$$
+
+Let's go ahead with the confidence interval.
+
+```{r, warning=FALSE, message=FALSE}
+library(dplyr)
+n    <- nrow(our_random_data)
+mean <- mean(our_random_data %>% pull(observations))
+s    <- sd(our_random_data %>% pull(observations))
+crit <- qnorm(p=0.975)
+```
+
+With the above calculated values, we can use the following information from a sampling distribution of $\mu$ which is, under the right conditions, $N(\mu, \sigma^2/n)$. That is,
+
+$$
+E(\bar{x}) = \mu
+$$
+
+and
+
+$$
+SD(\bar{x}) = \hat{SE} = \frac{\sigma}{\sqrt{n}} = \frac{1}{\sqrt{n}}.
+$$
+
+Thus, our 95% confidence interval is of the form
+
+$$
+\bar{x} \pm z_{\alpha/2}\frac{\sigma}{\sqrt{n}}
+$$
+
+And we calculate it to be
+
+```{r}
+n     <- nrow(our_random_data)
+sigma <- 1
+z     <- qnorm(p=0.975)
+x_bar <- mean(our_random_data$observations)
+
+# * STANDARD ERROR
+se    <- sigma / sqrt(n)
+
+# * MARGIN OF ERROR
+me    <- z*se
+
+# * INTERVAL
+c(x_bar-me, x_bar+me)
+```
+
+We hypothesized that $\mu=1$. As we see in the plot below, this value is way outside of our 95% normal-based confidence interval.
+
+```{r}
+# * CREATE FORMATTED OBJECT TO PLOT
+library(tibble)
+CI <- tibble(method   = "95% normal-based CI", 
+             lower = -0.2633498,
+             upper = 0.3209986,
+             estimate = x_bar)
+
+# * PLOT
+ggplot(data = CI, aes(x = method, y = estimate)) + 
+  geom_point() +
+  geom_segment(aes(x = method, xend = method, y = lower, yend = upper)) +
+  labs(y = "estimates") +
+  geom_hline(aes(yintercept = 1), lwd=2, col="cyan3", alpha=0.75)
+```
+
+We have evidence here to reject $H_0$ because $1 \notin (-0.2633498, 0.3209986)$. Our corresponding $\alpha=0.05$ level hypothesis test would yield the same conclusion; the p-value for this correspoding HT would be smaller that 0.05.
+
+
+
+## 95% confidence interval for $m$
+What if we wanted to test
+
+$$
+H_0: m = 1
+$$
+versus
+
+$$
+H_1: m \neq 1
+$$
+
+where $m$ is the median. Then, we'd definitely be interested in creating one of these bad boys
+
+$$
+\bar{x} \pm z_{\alpha/2}\frac{\sigma}{\sqrt{n}}
+$$
+
+for $m$. How would we do that? Certainly, we would replace $\bar{x}$ for $\hat{m}$ (our sample median), but after that, I don't know what we'd use for our margin of error because we don't have a theoretical sampling distribution for $m$ like we do for $\bar{x}$ or $p$. But what do we always do when we don't have the truth? We estimate it the best we can. This is statistics after all!
+
+**For statistics like the median that we do not have a theoretical sampling distribution for, we can use resampling to SIMULATE a sampling distribution**!
+
+First, let's use our *original sample* to calculate a median.
+
+```{r}
+observed_median <- median(our_random_data %>% pull(observations))
+observed_median
+```
+
+Now, let's **simulate a new dataset**. Because we have assumed that our sampling practices have given us a sample *representative* of our population of interest, we can create a new sample from our original one. We do this by sampling from our original *with replacement*. We use the following code to do this.
+
+```{r}
+resample_ex <- our_random_data %>% sample_n(nrow(our_random_data), replace=TRUE)
+head(resample_ex)
+```
+
+Notice that
+
+```{r}
+dim(resample_ex)
+```
+
+and
+
+```{r}
+dim(our_random_data)
+```
+
+give the same output. That is, we have the same number of observations in our original sample as our simulated resample. Now, we'll calculate the median.
+
+```{r}
+median(resample_ex %>% pull(observations))
+```
+
+If we keep (1) creating a new sample from our original sample and (2) calculating a sample median, then we can use all of the medians we calculate to simulate a sampling distribution. Recall that we previously created sampling distributions for $\mu$ by calculating a bunch of $\bar{x}$ and visualizing them with a histogram.
+
+I'm going to use the following function to take many resamples and calculate the median of my original data with replacement.
+
+```{r}
+# * FUNCTION FOR RESAMPLE + MEDIAN CALCULATION
+bootstrap_medians <- function(original_dataset, number_resamples) {
+  sapply(1:number_resamples, function(x) {
+    this_resample <- original_dataset %>% sample_n(nrow(original_dataset), replace=TRUE)
+    median(this_resample %>% pull(observations))
+  })
+}
+
+# * APPLY FUNCTION
+medians <- bootstrap_medians(our_random_data, 9000)
+```
+
+Now that we have done a bunch of calculations, we will plot our sampling distribution on a histogram.
+
+```{r}
+simulated_sampling_dist <- data.frame(medians)
+ggplot(simulated_sampling_dist, aes(x=medians)) +
+  geom_histogram(binwidth=0.07, col="black", fill="cyan3") +
+  ggtitle("Simulated sampling distribution of the median")
+```
+
+### In a normal scenario
+To create a confidence interval, we need to think about what the margin of error is in a normal-based confidence interval. The margin of error uses two pieces (1) critical z-value and (2) your standard error. Recall for a $(1-\alpha)100\%=95\%$ confidence interval, we use the critical z-value of 1.96.
+
+```{r}
+alpha <- 0.05
+z     <- qnorm(1-(alpha/2))
+round(z, 2)
+```
+
+We get this value by asking `R`, which x-value along a standard normal distribution $N(0,1)$ will give us 2.5% probability above it? Likewise, we can think of the other side of things. What x-value will give us 2.5% probability below it on a $N(0,1)$?
+
+```{r}
+minus_z <- qnorm(alpha/2)
+round(minus_z, 2)
+```
+
+Now that we have the two values that will give us 5% in the tails, we want to *multiply by our standard error*. Remember how we use standardization techniques to go from a normal distribution with arbitrary $\mu_A$ and $\sigma_A$ to $N(0,1)$ by using $z=\frac{x-\mu_A}{\sigma_A}$? This is like going backwards. We want to know which x-value along our SAMPLING DISTRIBUTION will give us 2.5% probability above/below it. Multiplying our critical z by our standard error allows us to calculate this.
+
+From there, we could calculate our lower and upper bound by adding to our sample mean:
+
+$$
+\bar{x} + (-1.96)\frac{\sigma}{\sqrt{n}}
+$$
+
+and
+
+$$
+\bar{x} + (1.96)\frac{\sigma}{\sqrt{n}}
+$$
+
+which gives us
+
+$$
+\bar{x} \pm (1.96)\frac{\sigma}{\sqrt{n}}
+$$
+
+which looks all too familiar at this point. But, remember... we're not working in a setting where we (1) don't have population $\sigma$ known to us and (2) don't have the normal distribution at our disposal.
+
+### In a non-normal, non-parametric scenario
+We can't calculate a critical z for our simulated sampling distribution. However, we can instead use quantiles to estimate our lower and upper bounds!
+
+```{r}
+ggplot(simulated_sampling_dist, aes(y=medians)) +
+  geom_boxplot(col="black", fill="cyan3", lwd=0.2) +
+  ggtitle("Boxplot of bootstrap medians")
+```
+
+We can use the `quantile()` function to ask for the data point that will give us 2.5% below it and the data point that will give us 2.5% above it.
+
+```{r}
+simulated_sampling_dist %>% summarize(lower=quantile(medians, 0.025),
+                                      upper=quantile(medians, 0.975))
+```
+
+From our output, we finally have our confidence interval! It is $(-0.320534,0.4223171)$! So, what about our test?
+
+```{r}
+# * CREATE FORMATTED OBJECT TO PLOT
+library(tibble)
+CI <- tibble(method   = "95% bootstrap CI", 
+             lower = -0.320534,
+             upper = 0.4223171,
+             estimate = observed_median)
+
+# * PLOT
+ggplot(data = CI, aes(x = method, y = estimate)) + 
+  geom_point() +
+  geom_segment(aes(x = method, xend = method, y = lower, yend = upper)) +
+  labs(y = "estimates") +
+  geom_hline(aes(yintercept = 1), lwd=2, col="cyan3", alpha=0.75)
+```
+
+We have evidence here to reject $H_0$ because $1 \notin (-0.2633498, 0.3209986)$! So, we have reason to think that $\mu \neq 1$.

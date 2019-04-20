@@ -1,0 +1,80 @@
+---
+title: "t-Tests for Proportions"
+output: html_document
+---
+
+## One Proportion
+
+### Large sample
+```{r}
+p_hat    <- 14/38
+se       <- sqrt(p_hat*(1-p_hat)/38)
+
+# * REPORT FINAL CI
+c(estimate=p_hat, lower=p_hat - 1.96*se, upper=p_hat + 1.96*se)
+```
+
+### Plus-four method (Simplification of Wilson Score)
+```{r}
+p_tilde  <- (14 + 2)/(38 + 4)
+se       <- sqrt(p_tilde*(1 - p_tilde)/42)
+
+c(estimate=p_hat, lower=p_tilde - 1.96*se, upper=p_tilde + 1.96*se)
+```
+
+### Wilson score
+```{r}
+prop.test(x=14, n=38, p=0.5)
+```
+
+### Binomial exact / Clopper-Pearson
+```{r}
+binom.test(x=14, n=38, p=0.5)
+```
+
+## Comparison of Two Proportions
+
+### Large sample
+```{r}
+n_1 <- 2992
+n_2 <- 578
+
+p_1 <- 656/n_1
+p_2 <- 96/n_2
+
+p_hat <- (656+96)/(2992+578)
+
+numerator <- (p_1-p_2)
+denominator <- sqrt(p_hat * (1-p_hat) * (1/n_1 + 1/n_2))
+z <- numerator/denominator
+
+# * WE DON'T MULTIPLY BY 2 BECAUSE OUR ALT HYPOTHESIS
+# * IS ONLY ONE WAY
+1-pnorm(z)
+```
+
+### Plus-four correction
+```{r}
+p1_p2 <- (18/51) - (5/47)
+
+# 99% CONFIDENCE ==> z*=qnorm(0.995)
+p_tilde_1 <- (18+1)/(51+2)
+p_tilde_2 <- (5+1)/(47+2)
+
+est <- p_tilde_1 - p_tilde_2
+
+se_pt_1 <- (p_tilde_1*(1-p_tilde_1)/53)
+se_pt_2 <- (p_tilde_2*(1-p_tilde_2)/49)
+se <- sqrt(se_pt_1 + se_pt_2)
+
+z <- qnorm(0.995)
+
+
+c(est - z*se, est + z*se)
+```
+
+### Wilson score
+```{r}
+# * THIS HAS A CONTINUITY CORRECTION
+prop.test(x=c(successes_1, successes_2), n=c(total_1, total_2))
+```

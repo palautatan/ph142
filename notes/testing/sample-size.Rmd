@@ -1,0 +1,18 @@
+---
+title: "Calculating sample size"
+output: html_document
+---
+
+## Based on confidence and width of confidence interval
+```{r}
+z      <- 1.96
+m      <- 0.05/2
+p_star <- 0.092
+
+n <- (z/m)^2 * p_star * (1-p_star)
+ceiling(n)
+```
+
+## For a hypothesis test based on significance and power
+```{r}
+```

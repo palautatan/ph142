@@ -34,7 +34,8 @@ vii. Bob the Builder (One sample t-test) <a href="notes/testing/bob-the-builder.
 #### Part 3.2 | Nonparametric testing
 viii. Mann-Whitney (Rank Sum) <a href="notes/nonparametrics/mann-whitney.html">code walkthrough</a> (Clothing fit)   
 ix. Wilcoxon Rank Sign Test <a href="notes/nonparametrics/rank-sign.html">code walkthrough</a> (Exam scores)  
-x. Permutation test <a href="notes/nonparametrics/permutation.html">tutorial</a> (Theoretical examples and Spotify data)
+x. Permutation test <a href="notes/nonparametrics/permutation.html">tutorial</a> (Theoretical examples and Spotify data)  
+xi. Bootstrap confidence intervals <a href="notes/nonparametrics/bootstrap.html">tutorial</a> (Mean versus median)
 
 ## Lab Demos
 <a href="lab-demos/lab-1/lab-1.html">i. Lab 1, Crash course intro to R</a>  
