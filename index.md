@@ -5,12 +5,6 @@ Welcome to the resource hub! My name is Edie Espejo, and I am one of the course 
 Professor Mi-Suk Kang Dufour  
 MWF 8:00-9:00, 245 Li Ka Shing  
 
-### "Statistics is Everywhere"
-Statistics is really everywhere! Let's start pinpointing where and grow this list out in the future.  
-
-**Fashion**
-<a href="https://www.youtube.com/watch?v=bkcAmCqIaao">ZARA Analytics</a>.
-
 ## Notes
 #### Part 0 | The Kickoff
 Before we get deep into the class, here are a few helper documents.  
