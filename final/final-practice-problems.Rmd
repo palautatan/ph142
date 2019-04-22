@@ -17,7 +17,7 @@ $\bigcirc$ Wilxocon Rank Sign Test
 
 $\bigcirc$ Bootstrap
 
-$\bigcirc$ Permutation Test
+$\bigcirc$ Kruskal-Wallis Test
 
 
 #### Part (b)
@@ -39,7 +39,18 @@ This method uses relabels to simulated the distribution under the null hypothesi
 
 $\bigcirc$ Permutation Test
 
-$\bigcirc$ Mann-Whitney Test
+$\bigcirc$ Kruskal-Wallis Test
+
+$\bigcirc$ Wilxocon Rank Sign Test
+
+$\bigcirc$ z-test
+
+#### Part (d)
+This nonparametric test is comparable to an ANOVA F-test.
+
+$\bigcirc$ Permutation Test
+
+$\bigcirc$ Kruskal-Wallis Test
 
 $\bigcirc$ Wilxocon Rank Sign Test
 
