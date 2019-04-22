@@ -52,6 +52,7 @@ vii. Lab 8, Tea-test <a href="lab-demos/lab-8/lab-8.html">boba / bubble tea exam
 ## Exam Material
 i. Midterm 1 <a href="midterm-1/midterm-1-review.pdf">review notes</a> and <a href="midterm-1/examples/example-problem.pdf">sample problems</a>  
 ii. Midterm 2 <a href="midterm-2/midterm-2-slides.html">review slides</a> and <a href="midterm-2/examples/sample-problems.html">sample problems</a>  
+iii. Final <a href="final/final-practice-problems.html">sample problems</a>
 
 ## Resources
 ### Cheat sheets

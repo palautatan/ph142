@@ -6,7 +6,7 @@ output: html_document
 ## One Proportion
 
 ### Large sample
-```{r}
+```{r, eval=FALSE}
 p_hat    <- 14/38
 se       <- sqrt(p_hat*(1-p_hat)/38)
 
@@ -15,7 +15,7 @@ c(estimate=p_hat, lower=p_hat - 1.96*se, upper=p_hat + 1.96*se)
 ```
 
 ### Plus-four method (Simplification of Wilson Score)
-```{r}
+```{r, eval=FALSE}
 p_tilde  <- (14 + 2)/(38 + 4)
 se       <- sqrt(p_tilde*(1 - p_tilde)/42)
 
@@ -23,19 +23,19 @@ c(estimate=p_hat, lower=p_tilde - 1.96*se, upper=p_tilde + 1.96*se)
 ```
 
 ### Wilson score
-```{r}
+```{r, eval=FALSE}
 prop.test(x=14, n=38, p=0.5)
 ```
 
 ### Binomial exact / Clopper-Pearson
-```{r}
+```{r, eval=FALSE}
 binom.test(x=14, n=38, p=0.5)
 ```
 
 ## Comparison of Two Proportions
 
 ### Large sample
-```{r}
+```{r, eval=FALSE}
 n_1 <- 2992
 n_2 <- 578
 
@@ -44,7 +44,7 @@ p_2 <- 96/n_2
 
 p_hat <- (656+96)/(2992+578)
 
-numerator <- (p_1-p_2)
+numerator   <- (p_1-p_2)
 denominator <- sqrt(p_hat * (1-p_hat) * (1/n_1 + 1/n_2))
 z <- numerator/denominator
 
@@ -54,27 +54,27 @@ z <- numerator/denominator
 ```
 
 ### Plus-four correction
-```{r}
+```{r, eval=FALSE}
 p1_p2 <- (18/51) - (5/47)
 
 # 99% CONFIDENCE ==> z*=qnorm(0.995)
 p_tilde_1 <- (18+1)/(51+2)
 p_tilde_2 <- (5+1)/(47+2)
 
-est <- p_tilde_1 - p_tilde_2
+est       <- p_tilde_1 - p_tilde_2
 
-se_pt_1 <- (p_tilde_1*(1-p_tilde_1)/53)
-se_pt_2 <- (p_tilde_2*(1-p_tilde_2)/49)
-se <- sqrt(se_pt_1 + se_pt_2)
+se_pt_1   <- (p_tilde_1*(1-p_tilde_1)/53)
+se_pt_2   <- (p_tilde_2*(1-p_tilde_2)/49)
+se        <- sqrt(se_pt_1 + se_pt_2)
 
-z <- qnorm(0.995)
+z         <- qnorm(0.995)
 
 
 c(est - z*se, est + z*se)
 ```
 
 ### Wilson score
-```{r}
+```{r, eval=FALSE}
 # * THIS HAS A CONTINUITY CORRECTION
 prop.test(x=c(successes_1, successes_2), n=c(total_1, total_2))
 ```

@@ -1,0 +1,352 @@
+---
+title: "Practice Final Problems"
+output: html_document
+---
+
+Use these problems to practice for your final exam. Good luck studying.
+
+### Problem 1.
+
+#### Part (a)
+This test does not require distributional assumptions. It uses ranks and is comparable to a paired t-test.  
+
+
+$\bigcirc$ Mann-Whitney Test
+
+$\bigcirc$ Wilxocon Rank Sign Test
+
+$\bigcirc$ Bootstrap
+
+$\bigcirc$ Permutation Test
+
+
+#### Part (b)
+This method allows us to create confidence intervals based off of a simulated sampling distribution. 
+
+
+$\bigcirc$ t-Test
+
+$\bigcirc$ Wilxocon Rank Sum Test
+
+$\bigcirc$ Bootstrap
+
+$\bigcirc$ Permutation Test
+
+
+
+#### Part (c)
+This method uses relabels to simulated the distribution under the null hypothesis. 
+
+$\bigcirc$ Permutation Test
+
+$\bigcirc$ Mann-Whitney Test
+
+$\bigcirc$ Wilxocon Rank Sign Test
+
+$\bigcirc$ z-test
+
+
+### Problem 2.
+*The following problem cites <a href="https://www.sciencedirect.com/science/article/pii/S2215036618301354">this study</a> (Mithoefer et al). You can learn more about the study's data <a href="https://clinicaltrials.gov/ct2/show/NCT01211405">here</a>.*
+
+The 2018 paper by Mithoefer et al studied the effect of MDMA (3,4-methylenedioxymethamphetamine) on military veterans, firefighters, and police officers with post-traumatic stress disorder. Each of the subjects (n=26) were given different doses of MDMA and a psychotherapy session, then had their Clinician-Administered PTSD scale score was measured.
+
+| Low dose MDMA | Medium dose MDMA | High dose MDMA |
+|---------------|------------------|----------------|
+| n=7           | n=7              | n=12           |
+| 30 mg         | 75 mg            | 125 mg         |
+
+The study used one an ANOVA test to test their hypotheses about whether these 3 groups had the same mean Clinician-Administered PTSD scale score. 
+
+Here is another table for more information.
+
+|                         | 30 mg         | 75 mg            | 125 mg         |
+|-------------------------|---------------|------------------|----------------|
+| Mean PTSD duration      | 68.9          | 58.3             | 110.9          |
+
+#### Part (a)
+The following is the start of a DAG for this study.
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+# devtools::install_github("malcolmbarrett/ggdag")
+# devtools::install_github("cran/dagitty")
+library(dagitty)
+library(ggdag)
+
+dag <- dagitty("dag{A -> Y}")
+ggdag(dag, layout="linear") + 
+  xlab("") +
+  ylab("") + 
+  theme_minimal()
+```
+
+**1. What is $A$ in the study?**  
+Your answer here.
+
+**2. What is $Y$ in the study?**  
+Your answer here.
+
+**3. Draw a confounder variable $W$. Name a possibility that $W$ can be.**  
+Your answer here.
+
+
+
+#### Part (b)
+Are the assumptions for this test completely satisfied? Choose an answer, then elaborate in the space below the answer.
+
+$\bigcirc$ Yes
+
+$\bigcirc$ No
+
+Elaborate here for part (a) here.  
+
+
+#### Part (c)
+We have the following table from the paper about group composition.
+
+|                         | 30 mg         | 75 mg            | 125 mg         |
+|-------------------------|---------------|------------------|----------------|
+| Men                     | 5             | 6                | 8              |
+| Women                   | 2             | 1                | 4              |
+
+Use a formal testing procedure to test whether the distribution of men and the distribution of women amongst the groups were the same. Follow the steps.
+
+
+**Is this a $\chi^2$ goodness-of-fit test or a $\chi^2$ independence test?**  
+
+$\bigcirc$ Goodness-of-fit
+
+$\bigcirc$ Independence
+
+
+**Calculate the $\chi^2$ test statistic.**  
+Your answer here.
+
+**What are the degrees of freedom for this test?**  
+Your answer here.
+
+
+**Shade in your p-value.**  
+Your answer here.
+
+
+**Write code to calculate your p-value.**  
+Your answer here.
+
+
+
+
+#### Part (d)
+Recall the study used an ANOVA test to find results. After the ANOVA test, they conducted pairwise t-tests afterward. Why would they do that?
+
+
+
+#### Part (e)
+After conducting corrected pairwise t-tests, the study found results that the (augmented) high dose 125 mg had significantly higher Clinician-Administered PTSD scale score results than the low dose group with a p-value of 0.01. Interpret this p-value. Is it statistically significant? What would you conclude?
+
+
+
+#### Part (f)
+And here is another table from the study. Do you feel comfortable generalizing this study to all with PTSD?
+
+|                         | 30 mg         | 75 mg            | 125 mg         |
+|-------------------------|---------------|------------------|----------------|
+| White                   | 6             | 4                | 12             |
+| Latino                  | 1             | 1                | 0              |
+| Native American         | 0             | 1                | 0              |
+| Native American & white | 0             | 1                | 0              |
+
+
+#### Part (g)
+Which Disney character does the DAG in Part (a) look like?
+
+### Problem 3.
+For a challenge, listen to this song as you do the following problem. 
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/H0fpuRPVVYY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+The Warriors played and won in the 2018 playoffs (reread this sentence a few times over if you've not yet understood this). The following contingency table contains information about Steph Curry.
+
+Stephen Curry is a basketball player on the Golden State Warriors (GSW) well-known for his impressive 3 point shot. During the 2018 playoffs, Curry's performance was jawdropping. Thus, we wanted to set up the following table to inspect some stats. This table contains counts of points corresponding to the last 4 playoff games.  
+
+| Points made by     | Points scored by 3pt shot      | All other points scored      | Totals |
+|--------------------|--------------------------------|------------------------------|--------|
+| Stephen Curry      | 66                             | 44                           | 110    |
+| All other Warriors | 87                             | y                            | 354    |
+| Totals             | 153                            | z                            | x      |
+
+#### Part (a)
+Based on the above and per your calculations, how many points total did GSW score during these 4 games?
+
+#### Part (b)
+What is the probability that Stephen Curry scored points from a 3 point shot?
+
+#### Part (c)
+What is the probability of all other Warriors scoring points from a 3 point shot?
+
+#### Part (d)
+Which probability does the value of $y/z$ from the table represent? [1 pt]  
+
+$\bigcirc \, \, \text{A.} \, \,$ Points were made by all other Warriors given the points were not scored from 3 point shots
+
+$\bigcirc \, \, \text{B.} \, \,$ Points scored were not from 3 point shots and the points were scored by all other Warriors
+
+$\bigcirc \, \, \text{C.} \, \,$ Points scored were not from 3 point shots given the points were scored by all other Warriors
+
+
+### Problem 4.
+Arya and Brienne are both awesome warriors. They took upon themselves to take on students. As a competition, they tested their students and gave them a battle competency grade (out of 100).
+
+This is a preview of the dataset.
+
+```{r, warning=FALSE, message=FALSE, echo=FALSE}
+arya     <- runif(n=30, min=50, max=90)
+brienne  <- runif(n=30, min=80, max=100)
+got      <- data.frame(cbind(arya, brienne))
+
+library(reshape2)
+got  <- melt(got, id=NULL)
+
+library(dplyr)
+knitr:::kable(got %>% sample_n(7))
+```
+
+#### Part (a)
+What kind of plot is this?
+
+```{r, echo=FALSE}
+library(ggplot2)
+ggplot(got, aes(x=value, fill=variable)) + 
+  geom_histogram(binwidth=3, col="black", lwd=0.2) +
+  theme_minimal()
+```
+
+
+#### Part (b)
+What kind of plot is this?
+
+```{r, echo=FALSE}
+ggplot(got, aes(y=value, fill=variable)) + 
+  geom_boxplot(col="black", lwd=0.2) +
+  theme_minimal()
+```
+
+We are interested in testing whether Arya's students or Brienne's students are more combat competent.
+
+#### Part (c)
+Write the relevant hypotheses.
+
+#### Part (d)
+Which tests can we **NOT** use to test these data?
+
+$\square$ Two sample z-test
+
+$\square$ Two sample t-test
+
+$\square$ Paired t-test
+
+$\square$ Permutation Test
+
+$\square$ Wilxocon Rank Sum Test
+
+$\square$ Wilxocon Rank Sign Test
+
+#### Part (e)
+We are going to use a permutation test to test these data. Do we have distributional assumptions to satisfy for this test?
+
+
+#### Part (f)
+Permutation tests require you to ____________ labels on your dataset to simulate a __________ distribution. To make statistical conclusions based on this dataset, we calculate the p-value which can be interpreted as the probability of _______________________________________________________________________________.
+
+
+#### Part (g)
+
+What is our observed difference between the groups?
+```{r, echo=FALSE}
+means <- got %>% group_by(variable) %>% summarize(mean(value))
+means
+```
+
+Based on this simulated distribution, what do you expect our p-value to be?
+
+```{r, echo=FALSE}
+means    <- means %>% pull()
+obs_diff <- means[2]-means[1]
+# obs_diff
+
+generate_labels <- function(labels, repetitions) {
+    relabels <- do.call(cbind, 
+                        lapply(1:repetitions, function(x) 
+                          sample(as.character(labels), 
+                                 length(labels), 
+                                 replace=FALSE)))
+    relabels <- data.frame(data=relabels)
+    names(relabels) <- paste0("relabel_", 1:repetitions)
+    relabels
+}
+
+calculate_sample_mean_diffs <- function(value_col, relabel_df) {
+  # * CREATE A "NOTE TAKER"
+  calculated_diffs <- c()
+
+  # * FOR EACH OF THE RELABELS
+  for (ix in 1:ncol(relabel_df)) {
+    # * CALCULATE THE DIFFERENCE IN MEANS
+    tmp_df <- data.frame(cbind(value=value_col, relabel=relabel_df[,ix]))
+    means <- tmp_df %>% group_by(relabel) %>% summarize(mean(value)) %>% pull()
+    calculated_diffs <- c(calculated_diffs, means[2]-means[1])
+  }
+  
+  calculated_diffs
+}
+
+# * APPLYING THE FUNCTIONS
+our_relabels     <- generate_labels(got %>% pull(variable), 1000)
+calculated_diffs <- calculate_sample_mean_diffs(got %>% select(value), our_relabels)
+
+ggplot(data.frame(calculated_diffs), aes(x=calculated_diffs)) + 
+  geom_histogram(binwidth=1, fill="cornflowerblue", col="black", lwd=0.2) +
+  xlab("simulated distribution") +
+  theme_minimal()
+```
+
+### Problem 5.
+
+#### Part (a)
+Why would you use a bootstrap confidence interval instead of a normal-based confidence interval for testing the following hypotheses for any arbitrary dataset?
+
+$$
+H_0: m=100
+$$
+
+versus
+
+$$
+H_1: m \neq 100
+$$
+
+where $m$ is the true median of our population.
+
+#### Part (b)
+Which of the following distributions do you simulate/estimate in order to create a bootstrap confidence interval?
+
+
+$\bigcirc$ Distribution under the $H_0$
+
+$\bigcirc$ Distribution under the alternative hypothesis
+
+$\bigcirc$ Sampling distribution of $m$
+
+$\bigcirc$ Normal curve
+
+
+#### Part (c)
+Which of the functions is used when finding the upper and lower bound for a bootstrap confidence interval?
+
+$\bigcirc$ `quantile()`
+
+$\bigcirc$ `bootstrap()`
+
+$\bigcirc$ `aov()`
+
+$\bigcirc$ `summary()`
