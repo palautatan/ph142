@@ -97,9 +97,6 @@ Your answer here.
 **2. What is $Y$ in the study?**  
 Your answer here.
 
-**3. Draw a confounder variable $W$. Name a possibility that $W$ can be.**  
-Your answer here.
-
 
 
 #### Part (b)
