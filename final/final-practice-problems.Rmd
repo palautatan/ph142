@@ -100,7 +100,7 @@ Your answer here.
 
 
 #### Part (b)
-Are the assumptions for this test completely satisfied? Choose an answer, then elaborate in the space below the answer.
+Can you tell if the assumptions for this test completely satisfied? Choose an answer, then elaborate in the space below the answer.
 
 $\bigcirc$ Yes
 
