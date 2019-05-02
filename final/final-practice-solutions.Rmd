@@ -3,7 +3,7 @@ title: "Practice Final Problems"
 output: html_document
 ---
 
-Use these problems to practice for your final exam. Good luck studying.
+Please contribute if you see any errors. Thanks.
 
 ### Problem 1.
 
@@ -13,7 +13,7 @@ This test does not require distributional assumptions. It uses ranks and is comp
 
 $\bigcirc$ Mann-Whitney Test
 
-$\bigcirc$ Wilxocon Rank Sign Test
+**ANSWER** Wilxocon Rank Sign Test
 
 $\bigcirc$ Bootstrap
 
@@ -28,7 +28,7 @@ $\bigcirc$ t-Test
 
 $\bigcirc$ Wilxocon Rank Sum Test
 
-$\bigcirc$ Bootstrap
+**ANSWER** Bootstrap
 
 $\bigcirc$ Permutation Test
 
@@ -37,7 +37,7 @@ $\bigcirc$ Permutation Test
 #### Part (c)
 This method uses relabels to simulated the distribution under the null hypothesis. 
 
-$\bigcirc$ Permutation Test
+**ANSWER** Permutation Test
 
 $\bigcirc$ Kruskal-Wallis Test
 
@@ -50,7 +50,7 @@ This nonparametric test is comparable to an ANOVA F-test.
 
 $\bigcirc$ Permutation Test
 
-$\bigcirc$ Kruskal-Wallis Test
+**ANSWER** Kruskal-Wallis Test
 
 $\bigcirc$ Wilxocon Rank Sign Test
 
@@ -102,7 +102,6 @@ Your answer here.
 
 **4. What test should this study use to test their hypotheses?**  
 Your answer here.
-
 
 #### Part (b)
 Can you tell if the assumptions for this test completely satisfied? Choose an answer, then elaborate in the space below the answer.
