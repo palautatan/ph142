@@ -395,7 +395,7 @@ presidents <- tibble(president = c(1732, 1735, 1743, 1751, 1758,
 
 library(dplyr)
 set.seed(142)
-presidents %>% sample_n(10)
+knitr:::kable(presidents %>% sample_n(10))
 ```
 
 **What kind of variables are in these columns?**  
