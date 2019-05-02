@@ -313,7 +313,7 @@ our_relabels     <- generate_labels(got %>% pull(variable), 1000)
 calculated_diffs <- calculate_sample_mean_diffs(got %>% select(value), our_relabels)
 
 ggplot(data.frame(calculated_diffs), aes(x=calculated_diffs)) + 
-  geom_histogram(binwidth=1, fill="cornflowerblue", col="black", lwd=0.2) +
+  geom_histogram(binwidth=0.7, fill="gold2", col="black", lwd=0.2) +
   xlab("simulated distribution") +
   theme_minimal()
 ```
@@ -358,3 +358,115 @@ $\bigcirc$ `bootstrap()`
 $\bigcirc$ `aov()`
 
 $\bigcirc$ `summary()`
+
+
+### Problem 6.
+Figure out the type of test you're going to use based on the problem. Then, carry out the test.
+
+#### Part (a)
+We have data on the birth years of US presidents and their first ladies. Here is a random sample of that data.
+
+```{r, echo=FALSE}
+library(tibble)
+presidents <- tibble(president = c(1732, 1735, 1743, 1751, 1758,
+                           1767, 1767, 1782, 1773, 1790, 
+                           1795, 1784, 1800, 1804, 1791, 
+                           1809, 1808, 1822, 1822, 1831, 
+                           1829, 1837, 1833, 1843, 1858, 
+                           1857, 1856, 1865, 1872, 1874, 
+                           1882, 1884, 1890, 1917, 1908, 
+                           1913, 1913, 1924, 1911, 1924, 
+                           1946, 1946, 1961, 1946),
+                     
+                     first_person = c(1731, 1744, 1748, 1768, 1768,
+                           1775, 1767, 1783, 1775, 1790,
+                           1803, 1788, 1798, 1806, 1830,
+                           1818, 1810, 1826, 1831, 1832,
+                           1837, 1864, 1832, 1847, 1861,
+                           1861, 1860, 1860, 1879, 1874, 
+                           1884, 1885, 1896, 1929, 1912, 
+                           1912, 1918, 1927, 1921, 1925,
+                           1947, 1946, 1964, 1970))
+
+library(dplyr)
+set.seed(142)
+presidents %>% sample_n(10)
+```
+
+**What kind of variables are in these columns?**  
+Your answer here.
+
+**We are interested in knowing whether the president tends to be older than their first person. What hypothesis might we test? It may be helpful to have the following output to answer the question.**  
+
+```{r}
+dim(presidents)
+```
+
+```{r, echo=FALSE}
+library(reshape2)
+library(ggplot2)
+ggplot(melt(presidents, id.vars=NULL), aes(x=value, fill=variable)) + 
+  geom_histogram(binwidth=10, col="black") + 
+  facet_wrap(~variable) +
+  theme_minimal()
+```
+
+
+```{r}
+presidents <- presidents %>% mutate(new_col=president-first_person)
+ggplot(presidents, aes(x=new_col)) + 
+  geom_histogram(binwidth=1, col="black", fill="gold2") +
+  theme_minimal()
+```
+
+**What tests can you use? (Hint: There's more than one, but one will give you better results in this case.)**
+
+#### Part (b)
+On Thursday mornings, an online shopper attempts to buy an item from the Supreme brand website. Say that probability of successfully purchasing an item on a given Thursday is 20%.
+
+**How many times per month do we expect the shopper to successfully order something?**  
+Your answer here.
+
+**What is the probability that the shopper will successfully order an item three Thursdays in a row?**  
+Your answer here.
+
+**Our shopper believes that it's getting even more difficult to purchase on item off of the Supreme brand website lately. He and 30 of his friends decide to all try to purchase an item. Out of his group of friends and himself, 10 of them are able to purchase an item. Does the shopper have evidence that the probability of purchasing an item on a given Thursday is still 20%?**  
+Your answer here.
+
+
+#### Part (c)
+We have conducted an ANOVA test between 5 different groups of friends and tested how quickly they could climb up a standard gym class rope. Our ANOVA test gave us a p-value of 0.0008.
+
+**How do we interpret the p-value?**  
+Your answer here.
+
+**Can we tell which groups over/under-performed?**  
+Your answer here.
+
+### Problem 7.
+Here are a bunch of "pop" questions to test your knowledge.  
+
+- True or false. If two events are independent, then they are mutually exclusive.
+
+- What are the two types of categorical variables? Give examples.
+
+- Is age continuous or discrete?  
+
+- True or false. If my null hypothesized value of $\mu$ is not within my confidence interval, then my p-value is less than my significance level $\alpha$.  
+
+- What do we always expect of our data in statistical inference?  
+
+- True or false. Correlation can be below 0.
+
+- Does correlation make a distinction between explanatory and response variables?  
+
+- Under what conditions would we use the plus-four method?  
+
+- In what ways can we increase the F statistic? (Theoretical is fine.)  
+
+
+
+
+### Problem 8.
+Do the Bill Nye question on page 3 of <a href="https://palautatan.github.io/ph142/notes/testing/ci-and-z.pdf">this document</a>.
+
