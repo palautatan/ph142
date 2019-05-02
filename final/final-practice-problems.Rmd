@@ -95,6 +95,9 @@ ggdag(dag, layout="linear") +
 Your answer here.
 
 **2. What is $Y$ in the study?**  
+Your answer here.  
+
+**3. What kind of study is this?**  
 Your answer here.
 
 
@@ -169,7 +172,7 @@ And here is another table from the study. Do you feel comfortable generalizing t
 Which Disney character does the DAG in Part (a) look like?
 
 ### Problem 3.
-For a challenge, listen to this song as you do the following problem. 
+Let's throw it back to 2002. 
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/H0fpuRPVVYY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
@@ -406,7 +409,7 @@ dim(presidents)
 library(reshape2)
 library(ggplot2)
 ggplot(melt(presidents, id.vars=NULL), aes(x=value, fill=variable)) + 
-  geom_histogram(binwidth=10, col="black") + 
+  geom_histogram(binwidth=10, col="black", lwd=0.2) + 
   facet_wrap(~variable) +
   theme_minimal()
 ```
@@ -415,7 +418,7 @@ ggplot(melt(presidents, id.vars=NULL), aes(x=value, fill=variable)) +
 ```{r}
 presidents <- presidents %>% mutate(new_col=president-first_person)
 ggplot(presidents, aes(x=new_col)) + 
-  geom_histogram(binwidth=1, col="black", fill="gold2") +
+  geom_histogram(binwidth=1, col="black", fill="gold2", lwd=0.2) +
   theme_minimal()
 ```
 
@@ -466,6 +469,8 @@ Here are a bunch of "pop" questions to test your knowledge.
 
 - Why do we learn 4 different methods to create CI for proportions? Which one would you use with small $n$?
 
+- Imagine we are doing a z-test for two proportions. What can be changed to make the confidence interval more narrow?
+
 
 ### Problem 8.
 Do the Bill Nye question on page 3 of <a href="https://palautatan.github.io/ph142/notes/testing/ci-and-z.pdf">this document</a>.
@@ -484,7 +489,23 @@ $$
 H_1: \mu < 10
 $$
 
-with data from an underlying normal distribution.
+with data from an underlying normal distribution. Your data are as follows.
+
+```{r, include=FALSE}
+data <- c(runif(n=5, min=0, max=10),
+          rnorm(n=10, mean=10, sd=0.5),
+          runif(n=10, min=5, max=15))
+data <- data.frame(data)
+head(data %>% sample_n(25, replace=FALSE) %>% mutate(data=round(data, 2)), 10)
+```
+
+```{r}
+dim(data)
+```
+
+```{r}
+data %>% summarize(mean=mean(data))
+```
 
 **Are we calculating a z or t statistic?**  
 Your answer here.
