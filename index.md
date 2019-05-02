@@ -47,7 +47,7 @@ vii. Lab 8, Tea-test <a href="lab-demos/lab-8/lab-8.html">boba / bubble tea exam
 ## Exam Material
 i. Midterm 1 <a href="midterm-1/midterm-1-review.pdf">review notes</a> and <a href="midterm-1/examples/example-problem.pdf">sample problems</a>  
 ii. Midterm 2 <a href="midterm-2/midterm-2-slides.html">review slides</a> and <a href="midterm-2/examples/sample-problems.html">sample problems</a>  
-iii. Final <a href="https://docs.google.com/presentation/d/1XqYZv0TfD-rED3sgnqNvolkojOhZL7HvkMushdpSks8/edit#slide=id.g35f391192_00">review slides</a> and <a href="final/final-practice-problems.html">sample problems</a>
+iii. Final <a href="https://docs.google.com/presentation/d/1XqYZv0TfD-rED3sgnqNvolkojOhZL7HvkMushdpSks8/edit#slide=id.g35f391192_00">review slides</a> and <a href="final/final-practice-problems.html">sample problems</a> and <a href="https://palautatan.github.io/ph142/final/final-practice-solutions.html">solutions</a>
 
 ## Resources
 ### Cheat sheets
