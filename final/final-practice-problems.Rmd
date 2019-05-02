@@ -250,7 +250,7 @@ We are interested in testing whether Arya's students or Brienne's students are m
 Write the relevant hypotheses.
 
 #### Part (d)
-Which tests can we **NOT** use to test these data?
+Which tests can we **NOT** use to test these hypotheses?
 
 $\square$ Two sample z-test
 

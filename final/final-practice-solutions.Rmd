@@ -135,7 +135,7 @@ $\bigcirc$ Goodness-of-fit
 
 Here are our observed values.
 
-```{r, include=FALSE}
+```{r, echo=FALSE}
 library(tibble)
 o_i <-  tibble(men   = c(5, 6, 8),
                women = c(2, 1, 4))
@@ -144,7 +144,7 @@ o_i
 
 We calculate the totals.
 
-```{r, include=FALSE}
+```{r, echo=FALSE}
 full_oi <- cbind(o_i, totals=rowSums(o_i))
 full_oi <- rbind(full_oi, totals=colSums(full_oi))
 full_oi
@@ -152,16 +152,18 @@ full_oi
 
 Now, calculate the expected values based on $RC/N$ where $R$ is the row total corresponding to the given cell, $C$ is the column total corresponding to the given cell, and $N$ is the full total.
 
-```{r, include=FALSE}
+```{r, echo=FALSE}
 e_i <- sapply(c(19,7), function(x) x*c(7,7,12)/26)
 e_i <- data.frame(e_i)
 names(e_i) <- names(o_i)
 e_i
 ```
 
+Notice that I did not round.
+
 Then, we build the $\chi^2$ statistic by using $\sum_{i=1}^{k}\frac{(O_i-E_i)^2}{E_i}$ where $k$ is number of cells.
 
-```{r, include=FALSE}
+```{r, echo=FALSE}
 contributions <- ((o_i-e_i)^2 / e_i)
 contributions
 ```
@@ -214,19 +216,19 @@ pchisq(stat, df=(3-1)*(2-1))
 
 
 #### Part (d)
-Recall the study used an ANOVA test to find results. After the ANOVA test, they conducted pairwise t-tests afterward. Why would they do that?  
+**Recall the study used an ANOVA test to find results. After the ANOVA test, they conducted pairwise t-tests afterward. Why would they do that?**  
 To understand the groups' pairwise difference / to see which group contributed to rejecting $H_0$.
 
 
 
 #### Part (e)
-After conducting corrected pairwise t-tests, the study found results that the (augmented) high dose 125 mg had significantly higher Clinician-Administered PTSD scale score results than the low dose group with a p-value of 0.01. Interpret this p-value. Is it statistically significant? What would you conclude?  
+**After conducting corrected pairwise t-tests, the study found results that the (augmented) high dose 125 mg had significantly higher Clinician-Administered PTSD scale score results than the low dose group with a p-value of 0.01. Interpret this p-value. Is it statistically significant? What would you conclude?**  
 Yes, at some significance level greater than 0.01. I would conclude that there is a difference in means PTSD scale score between those two said groups.
 
 
 
 #### Part (f)
-And here is another table from the study. Do you feel comfortable generalizing this study to all with PTSD?
+**And here is another table from the study. Do you feel comfortable generalizing this study to all with PTSD?**
 
 |                         | 30 mg         | 75 mg            | 125 mg         |
 |-------------------------|---------------|------------------|----------------|
@@ -238,7 +240,7 @@ And here is another table from the study. Do you feel comfortable generalizing t
 Not at all.
 
 #### Part (g)
-Which Disney character does the DAG in Part (a) look like?  
+**Which Disney character does the DAG in Part (a) look like?**  
 Baymax. Come on, give me some harder questions.
 
 ### Problem 3.
@@ -257,18 +259,32 @@ Stephen Curry is a basketball player on the Golden State Warriors (GSW) well-kno
 | Totals             | 153                            | z                            | x      |
 
 #### Part (a)
-Based on the above and per your calculations, how many points total did GSW score during these 4 games?
+Based on the above and per your calculations, how many points total did GSW score during these 4 games?  
+```{r}
+110+354
+```
 
 #### Part (b)
-What is the probability that Stephen Curry scored points from a 3 point shot?
+What is the probability that Stephen Curry scored points from a 3 point shot?  
+This is $P(\text{3 point shot}|\text{Steph})$.
+```{r}
+n_steph     <- 110
+n_steph_3pt <- 66
+
+n_steph_3pt / n_steph
+```
 
 #### Part (c)
-What is the probability of all other Warriors scoring points from a 3 point shot?
+What is the probability of all other Warriors scoring points from a 3 point shot?   
+```{r}
+87/354
+```
 
 #### Part (d)
-Which probability does the value of $y/z$ from the table represent? [1 pt]  
+Which probability does the value of $y/z$ from the table represent?  
 
-$\bigcirc \, \, \text{A.} \, \,$ Points were made by all other Warriors given the points were not scored from 3 point shots
+
+**ANSWER** $\, \, \text{A.} \, \,$ Points were made by all other Warriors given the points were not scored from 3 point shots
 
 $\bigcirc \, \, \text{B.} \, \,$ Points scored were not from 3 point shots and the points were scored by all other Warriors
 
@@ -293,7 +309,7 @@ knitr:::kable(got %>% sample_n(7))
 ```
 
 #### Part (a)
-What kind of plot is this?
+**What kind of plot is this?**
 
 ```{r, echo=FALSE}
 library(ggplot2)
@@ -302,9 +318,10 @@ ggplot(got, aes(x=value, fill=variable)) +
   theme_minimal()
 ```
 
+Histogram or overlapping histogram. (It's not dodged :P).
 
 #### Part (b)
-What kind of plot is this?
+**What kind of plot is this?**
 
 ```{r, echo=FALSE}
 ggplot(got, aes(y=value, fill=variable)) + 
@@ -312,43 +329,57 @@ ggplot(got, aes(y=value, fill=variable)) +
   theme_minimal()
 ```
 
-We are interested in testing whether Arya's students or Brienne's students are more combat competent.
+Dodged boxplot.
+
+**We are interested in testing whether Arya's students or Brienne's students are more combat competent.**
 
 #### Part (c)
-Write the relevant hypotheses.
+**Write the relevant hypotheses.**  
+$H_0$: The mean combat competency scores for Arya's students and Brienne's students are the same.  
+$H_0$: The mean combat competency scores for Arya's students and Brienne's students are not the same.  
+
 
 #### Part (d)
-Which tests can we **NOT** use to test these data?
+Which tests can we **NOT** use to test these hypotheses?
 
-$\square$ Two sample z-test
+**ANSWER** Two sample z-test  
+We don't have the population standard deviation.
 
 $\square$ Two sample t-test
 
-$\square$ Paired t-test
+**ANSWER** Paired t-test  
+We have no info on matched pairs.  
 
 $\square$ Permutation Test
 
 $\square$ Wilxocon Rank Sum Test
 
-$\square$ Wilxocon Rank Sign Test
+**ANSWER** Wilxocon Rank Sign Test  
+We have no info on matched pairs.  
 
 #### Part (e)
-We are going to use a permutation test to test these data. Do we have distributional assumptions to satisfy for this test?
+We are going to use a permutation test to test these data. Do we have distributional assumptions to satisfy for this test?  
+Nope. Nonparametrics require no distributional assumptions.
 
 
 #### Part (f)
-Permutation tests require you to ____________ labels on your dataset to simulate a __________ distribution. To make statistical conclusions based on this dataset, we calculate the p-value which can be interpreted as the probability of _______________________________________________________________________________.
+Permutation tests require you to **reshuffle or permute** labels on your dataset to simulate a **null (a distribution where the null is true)** distribution. To make statistical conclusions based on this dataset, we calculate the p-value which can be interpreted as the probability of **observing my data or more extreme given that the null is true**.
 
 
 #### Part (g)
-
-What is our observed difference between the groups?
+**What is our observed difference between the groups?**
 ```{r, echo=FALSE}
 means <- got %>% group_by(variable) %>% summarize(mean(value))
 means
 ```
 
-Based on this simulated distribution, what do you expect our p-value to be?
+```{r}
+91.42876-68.33121
+```
+
+Technically, this can also be written the other way, i.e. subtract Brienne from Arya.
+
+**Based on this simulated distribution, what do you expect our p-value to be?**
 
 ```{r, echo=FALSE}
 means    <- means %>% pull()
@@ -391,10 +422,20 @@ ggplot(data.frame(calculated_diffs), aes(x=calculated_diffs)) +
   theme_minimal()
 ```
 
+We expect it to be near 0.
+
+```{r}
+ggplot(data.frame(calculated_diffs), aes(x=calculated_diffs)) + 
+  geom_histogram(binwidth=0.7, fill="gold2", col="black", lwd=0.2) +
+  xlab("simulated distribution") +
+  theme_minimal() +
+  geom_vline(xintercept=obs_diff, lwd=3, alpha=0.7)
+```
+
 ### Problem 5.
 
 #### Part (a)
-Why would you use a bootstrap confidence interval instead of a normal-based confidence interval for testing the following hypotheses for any arbitrary dataset?
+**Why would you use a bootstrap confidence interval instead of a normal-based confidence interval for testing the following hypotheses for any arbitrary dataset?**
 
 $$
 H_0: m=100
@@ -409,22 +450,22 @@ $$
 where $m$ is the true median of our population.
 
 #### Part (b)
-Which of the following distributions do you simulate/estimate in order to create a bootstrap confidence interval?
+**Which of the following distributions do you simulate/estimate in order to create a bootstrap confidence interval?**
 
 
 $\bigcirc$ Distribution under the $H_0$
 
 $\bigcirc$ Distribution under the alternative hypothesis
 
-$\bigcirc$ Sampling distribution of $m$
+**ANSWER** Sampling distribution of $m$
 
 $\bigcirc$ Normal curve
 
 
 #### Part (c)
-Which of the functions is used when finding the upper and lower bound for a bootstrap confidence interval?
+**Which of the functions is used when finding the upper and lower bound for a bootstrap confidence interval?**
 
-$\bigcirc$ `quantile()`
+**ANSWER** `quantile()`
 
 $\bigcirc$ `bootstrap()`
 
@@ -434,10 +475,10 @@ $\bigcirc$ `summary()`
 
 
 ### Problem 6.
-Figure out the type of test you're going to use based on the problem. Then, carry out the test.
+**Figure out the type of test you're going to use based on the problem. Then, carry out the test.**
 
 #### Part (a)
-We have data on the birth years of US presidents and their first ladies. Here is a random sample of that data.
+**We have data on the birth years of US presidents and their first ladies. Here is a random sample of that data.**
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 library(tibble)
@@ -467,7 +508,7 @@ presidents %>% sample_n(10)
 ```
 
 **What kind of variables are in these columns?**  
-Your answer here.
+Year is like age to time (in this case). Time is continuous, age is continuous, year is continuous (in this case).  
 
 **We are interested in knowing whether the president tends to be older than their first person. What hypothesis might we test? It may be helpful to have the following output to answer the question.**  
 
@@ -492,58 +533,133 @@ ggplot(presidents, aes(x=new_col)) +
   theme_minimal()
 ```
 
-**What tests can you use? (Hint: There's more than one, but one will give you better results in this case.)**
+We are interested in testing  
+
+$H_0$: The differences between each president and that president's first person is 0.  
+$H_1$: The difference between each presdient at the president's first person is nonzero.  
+
+**What tests can you use? (Hint: There's more than one, but one will give you better results in this case.)**  
+
+Because we have $n=44$ for each of the groups, assume randomness, and have distributions of similar shapes, we'd opt for a paired t-test. The paired t-test will give you better results than a nonparametric test because we are able to use theoretical distributions as opposed to rankings (which lose information/power).
 
 #### Part (b)
-On Thursday mornings, an online shopper attempts to buy an item from the Supreme brand website. Say that probability of successfully purchasing an item on a given Thursday is 20%.
+**On Thursday mornings, an online shopper attempts to buy an item from the Supreme brand website. Say that probability of successfully purchasing an item on a given Thursday is 20%.**
 
 **How many times per month do we expect the shopper to successfully order something?**  
-Your answer here.
+Assuming all months have 4 Thursdays, then we would expect 0.8 successes per month. This is, in practical terms, 0 successes.
+
+```{r}
+0.2*4
+```
 
 **What is the probability that the shopper will successfully order an item three Thursdays in a row?**  
-Your answer here.
+```{r}
+0.2^3
+```
 
 **Our shopper believes that it's getting even more difficult to purchase on item off of the Supreme brand website lately. He and 30 of his friends decide to all try to purchase an item. Out of his group of friends and himself, 10 of them are able to purchase an item. Does the shopper have evidence that the probability of purchasing an item on a given Thursday is still 20%?**  
-Your answer here.
 
+A status-quo belief is that $P(\text{Success})=0.2$. A competing belief is that $P(\text{Success})=10/31$. We want to test the following hypotheses.
+
+$$
+H_0: p=0.2
+$$
+
+versus
+
+$$
+H_0: p \neq 0.2.
+$$
+
+Our $\hat{p}=10/31$. Do we meet assumptions for the large sample z-test for a population proportion? We assume that we have randomness. We have 10 successes and 21 failures. Let's try.
+
+```{r}
+n <- 31
+p_hat <- 10/31
+n*p_hat
+n*(1-p_hat)
+```
+
+Since these values are both $\geq$ 10, and we assume that our population is at least 20 times larger than 31, we'll go ahead and do a large sample z-test.
+
+```{r}
+p_0 <- 0.2
+se  <- sqrt(p_hat*(1-p_hat)/n)
+
+z   <- (p_hat - p_0) / se
+z
+```
+
+Then, we'll get our p-value.
+
+```{r}
+2*pnorm(1.46, lower.tail=FALSE)
+```
+
+```{r}
+2*(1-pnorm(1.46))
+```
+
+We **interpret** this p-value to mean if the true probability of success was really 0.2, then we would expect to see our data or more extreme 14.429% of the time just by random chance.
+
+Because this value is not so small (it is greater than 10%, greater than 5%, greater than 1%), we fail to reject the null hypothesis!
+
+To answer the question: No. There is no evidence.
 
 #### Part (c)
-We have conducted an ANOVA test between 5 different groups of friends and tested how quickly they could climb up a standard gym class rope. Our ANOVA test gave us a p-value of 0.0008.
+**We have conducted an ANOVA test between 5 different groups of friends and tested how quickly they could climb up a standard gym class rope. Our ANOVA test gave us a p-value of 0.0008.**
 
 **How do we interpret the p-value?**  
-Your answer here.
+Given that the mean rope times of the 5 different groups are truly the same, we would expect to see our observations or observations yielding more extreme results 0.08% of the time.
 
 **Can we tell which groups over/under-performed?**  
-Your answer here.
+Not just by an ANOVA test. We'd need to do post-hoc procedures to figure this out.  
 
 ### Problem 7.
-Here are a bunch of "pop" questions to test your knowledge.  
+**Here are a bunch of "pop" questions to test your knowledge.**  
 
-- True or false. If two events are independent, then they are mutually exclusive.
+**- True or false. If two events are independent, then they are mutually exclusive.**  
+False.  
 
-- What are the two types of categorical variables? Give examples.
+**- What are the two types of categorical variables? Give examples.**  
+Nominal and ordinal.  
 
-- Is age continuous or discrete?  
+**- Is age continuous or discrete?**  
+Continuous.
 
-- True or false. If my null hypothesized value of $\mu$ is not within my confidence interval, then my p-value is less than my significance level $\alpha$.  
+**- True or false. If my null hypothesized value of $\mu$ is not within my confidence interval, then my p-value is less than my significance level $\alpha$.**  
+False. If the null value is *within* our confidence interval, then p-value is less than significance level.
 
-- What do we always expect of our data in statistical inference?  
+**- What do we always expect of our data in statistical inference?**  
+To be pulled randomly.  
 
-- True or false. Correlation can be below 0.
+**- True or false. Correlation can be below 0.**  
+True.
 
-- Does correlation make a distinction between explanatory and response variables?  
+**- Does correlation make a distinction between explanatory and response variables?**  
+No.
 
-- Under what conditions would we use the plus-four method?  
+**- Under what conditions would we use the plus-four method?**  
+When normality doesn't kick-in. Short answer, $n$ is 20x smaller than population, $n\hat{p}$ and $n(1-\hat{p})$ are both at least 10.  
 
-- In what ways can we increase the F statistic? (Theoretical is fine.)  
+**- In what ways can we increase the F statistic? (Theoretical is fine.)**  
+- Decrease standard deviation within groups.   
+- Make the means of each of the groups further from each other.  
 
-- Why do we learn 4 different methods to create CI for proportions? Which one would you use with small $n$?
+(Not really an answer, but side note: to give our F statistic even more evidence, increase sample size.)  
 
-- Imagine we are doing a z-test for two proportions. What can be changed to make the confidence interval more narrow?
+**- Why do we learn 4 different methods to create CI for proportions? Which one would you use with small $n$?**  
+Because our sample size and prooportions don't always satisfy the large sample assumptions.
+
+**- Imagine we are doing a z-test for two proportions. What can be changed to make the confidence interval more narrow?**  
+- Your confidence level should decrease.  
+- Sample size increases.  
+- If SE were smaller (though we can't change this for real), then the CI would get smaller.
 
 
 ### Problem 8.
-Do the Bill Nye question on page 3 of <a href="https://palautatan.github.io/ph142/notes/testing/ci-and-z.pdf">this document</a>.
+**Do the Bill Nye question on page 3 of <a href="https://palautatan.github.io/ph142/notes/testing/ci-and-z.pdf">this document</a>.**  
+Solutions are provided on the document.
 
 
 ### Problem 9.
@@ -578,23 +694,45 @@ data %>% summarize(mean=mean(data))
 ```
 
 **Are we calculating a z or t statistic?**  
-Your answer here.
+t. We don't have $\sigma$.
 
 **What parameter(s) are relevant for the distribution that we plan to calcualte our p-value from? Give exact value(s).**  
-Your answer here.
+Degrees of freedom, i.e. $n-1$ for this case. That is $25-1$.
 
 
 ### Problem 10.
-You plan to ask a random sample of San Franciscans their opinion on whether coffee is the best beverage. 
+**You plan to ask a random sample of San Franciscans their opinion on whether coffee is the best beverage.** 
 
 **How many San Franciscans must be interviewed to estimate the population proportion to within 3 percentage points with 95% confidence? Use 0.5 as the conservative guess for $p$.**  
-Your answer here.
+Recall  
+
+$$
+n = \bigg(\frac{z^*}{m}\bigg)^2p^*(1-p^*)
+$$
+
+In this case, $z^*=2.96$, $m=0.03$, and we are using $p^*=0.5$. The "within" 3 percentage points mean that there would be 3% to each side of our estimate.  
+
+```{r}
+z_star <- 1.96
+m      <- 0.03
+p_star <- 0.5
+
+(z_star/m)^2*p_star*(1-p_star)
+```
+
+Therefore, the answer is 1068. Don't forget to round. 
 
 **Would the sample size have to increase or decrease if we changed the desired margin of error from 3 percentage points to 2 percentage points? You do not have to calculate your answer.**  
-Your answer here.
+The sample size would have to increase. Smaller margins of error call for larger samples. Notice that in the equation
+
+$$
+n = \bigg(\frac{z^*}{m}\bigg)^2p^*(1-p^*)
+$$
+
+$m$ is in the denominator. If we have $m$ be smaller, then we have an overall larger number. Smaller denominators give greater overall values. (For example, 1/2 is bigger than 1/1000.)
 
 **What would the sample size be if we wanted the width of our interval to be 6 percentage points?**  
-Your answer here.
+This has the same answer as the first problem. Within 3 percentages points is the same as saying the CI width is 6 percentage points (when dealing with symmetric CI's about the estimate).  
 
 ```{r, include=FALSE, echo=FALSE}
 link_to_solutions <- "https://docs.google.com/presentation/d/1roSMj1AcDzu7qr8JSs95dU41JIwoqmxTASn83y4o-0A/edit#slide=id.g472de4f86b_0_26"
