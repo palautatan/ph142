@@ -135,7 +135,7 @@ $\bigcirc$ Goodness-of-fit
 
 Here are our observed values.
 
-```{r, echo=FALSE}
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
 library(tibble)
 o_i <-  tibble(men   = c(5, 6, 8),
                women = c(2, 1, 4))
