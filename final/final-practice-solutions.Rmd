@@ -92,25 +92,25 @@ ggdag(dag, layout="linear") +
 ```
 
 **1. What is $A$ in the study?**  
-Your answer here.
+MDMA and psychotherapy.  
 
 **2. What is $Y$ in the study?**  
-Your answer here.  
+Clinician-Administrered PTSD scale score.    
 
 **3. What kind of study is this?**  
-Your answer here.
+This is an experiment / randomized controlled trial. The study collected its data in a prospective manner. We want to know if MDMA and psychotherapy causes an improved PTSD scale score (causative).
 
 **4. What test should this study use to test their hypotheses?**  
-Your answer here.
+An ANOVA F test.
 
 #### Part (b)
 Can you tell if the assumptions for this test completely satisfied? Choose an answer, then elaborate in the space below the answer.
 
 $\bigcirc$ Yes
 
-$\bigcirc$ No
+**ANSWER** No
 
-Elaborate here for part (a) here.  
+We cannot tell if the assumptions are completely satisfied. We have no information on the distributions of the PTSD scores' normality or if their standard deviations are similar between all three groups.
 
 
 #### Part (c)
@@ -128,33 +128,100 @@ Use a formal testing procedure to test whether the distribution of men and the d
 
 $\bigcirc$ Goodness-of-fit
 
-$\bigcirc$ Independence
+**ANSWER** Independence
 
 
 **Calculate the $\chi^2$ test statistic.**  
-Your answer here.
+
+Here are our observed values.
+
+```{r, include=FALSE}
+library(tibble)
+o_i <-  tibble(men   = c(5, 6, 8),
+               women = c(2, 1, 4))
+o_i
+```
+
+We calculate the totals.
+
+```{r, include=FALSE}
+full_oi <- cbind(o_i, totals=rowSums(o_i))
+full_oi <- rbind(full_oi, totals=colSums(full_oi))
+full_oi
+```
+
+Now, calculate the expected values based on $RC/N$ where $R$ is the row total corresponding to the given cell, $C$ is the column total corresponding to the given cell, and $N$ is the full total.
+
+```{r, include=FALSE}
+e_i <- sapply(c(19,7), function(x) x*c(7,7,12)/26)
+e_i <- data.frame(e_i)
+names(e_i) <- names(o_i)
+e_i
+```
+
+Then, we build the $\chi^2$ statistic by using $\sum_{i=1}^{k}\frac{(O_i-E_i)^2}{E_i}$ where $k$ is number of cells.
+
+```{r, include=FALSE}
+contributions <- ((o_i-e_i)^2 / e_i)
+contributions
+```
+
+We have to sum everything up now.
+
+```{r}
+stat <- sum(contributions)
+stat
+```
+
 
 **What are the degrees of freedom for this test?**  
-Your answer here.
+$(R-1) \cdot (C-1) = 2$.
 
 
 **Shade in your p-value.**  
-Your answer here.
+Draw some chi-squared distribution. (It doesn't necessarily have to look like this one perfectly.) Fill in the curve beyond the test statistic (to the right of). I didn't show the shade in.
+
+```{r, echo=FALSE}
+ggplot(data.frame(x = c(0, 5)), aes(x = x)) +
+  stat_function(fun = dchisq, args = list(df = 2), lwd=2, col="cornflowerblue", alpha=0.7) +
+  ggtitle("Chi-squared distribution") +
+  xlab("") + 
+  ylab("Density") +
+  geom_vline(xintercept=stat, lwd=2) +
+  theme_minimal()
+```
+
+You would get credit if your answer looked like this as well. Remember, you'd have to shade in all to the right of the vertical line.
+
+```{r, echo=FALSE}
+ggplot(data.frame(x = c(0, 10)), aes(x = x)) +
+  stat_function(fun = dchisq, args = list(df = 4), lwd=2, col="cornflowerblue", alpha=0.7) +
+  ggtitle("Chi-squared distribution") +
+  xlab("") +
+  ylab("Density") +
+  geom_vline(xintercept=stat, lwd=2) +
+  theme_minimal()
+```
 
 
 **Write code to calculate your p-value.**  
-Your answer here.
+
+```{r}
+pchisq(stat, df=(3-1)*(2-1))
+```
 
 
 
 
 #### Part (d)
-Recall the study used an ANOVA test to find results. After the ANOVA test, they conducted pairwise t-tests afterward. Why would they do that?
+Recall the study used an ANOVA test to find results. After the ANOVA test, they conducted pairwise t-tests afterward. Why would they do that?  
+To understand the groups' pairwise difference / to see which group contributed to rejecting $H_0$.
 
 
 
 #### Part (e)
-After conducting corrected pairwise t-tests, the study found results that the (augmented) high dose 125 mg had significantly higher Clinician-Administered PTSD scale score results than the low dose group with a p-value of 0.01. Interpret this p-value. Is it statistically significant? What would you conclude?
+After conducting corrected pairwise t-tests, the study found results that the (augmented) high dose 125 mg had significantly higher Clinician-Administered PTSD scale score results than the low dose group with a p-value of 0.01. Interpret this p-value. Is it statistically significant? What would you conclude?  
+Yes, at some significance level greater than 0.01. I would conclude that there is a difference in means PTSD scale score between those two said groups.
 
 
 
@@ -168,9 +235,11 @@ And here is another table from the study. Do you feel comfortable generalizing t
 | Native American         | 0             | 1                | 0              |
 | Native American & white | 0             | 1                | 0              |
 
+Not at all.
 
 #### Part (g)
-Which Disney character does the DAG in Part (a) look like?
+Which Disney character does the DAG in Part (a) look like?  
+Baymax. Come on, give me some harder questions.
 
 ### Problem 3.
 Let's throw it back to 2002. 
