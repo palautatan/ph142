@@ -366,7 +366,7 @@ Figure out the type of test you're going to use based on the problem. Then, carr
 #### Part (a)
 We have data on the birth years of US presidents and their first ladies. Here is a random sample of that data.
 
-```{r, echo=FALSE}
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
 library(tibble)
 presidents <- tibble(president = c(1732, 1735, 1743, 1751, 1758,
                            1767, 1767, 1782, 1773, 1790, 
@@ -464,9 +464,47 @@ Here are a bunch of "pop" questions to test your knowledge.
 
 - In what ways can we increase the F statistic? (Theoretical is fine.)  
 
-
+- Why do we learn 4 different methods to create CI for proportions? Which one would you use with small $n$?
 
 
 ### Problem 8.
 Do the Bill Nye question on page 3 of <a href="https://palautatan.github.io/ph142/notes/testing/ci-and-z.pdf">this document</a>.
 
+
+### Problem 9.
+You are testing 
+
+$$
+H_0: \mu = 10
+$$
+
+versus
+
+$$
+H_1: \mu < 10
+$$
+
+with data from an underlying normal distribution.
+
+**Are we calculating a z or t statistic?**  
+Your answer here.
+
+**What parameter(s) are relevant for the distribution that we plan to calcualte our p-value from? Give exact value(s).**  
+Your answer here.
+
+
+### Problem 10.
+You plan to ask a random sample of San Franciscans their opinion on whether coffee is the best beverage. 
+
+**How many San Franciscans must be interviewed to estimate the population proportion to within 3 percentage points with 95% confidence? Use 0.5 as the conservative guess for $p$.**  
+Your answer here.
+
+**Would the sample size have to increase or decrease if we changed the desired margin of error from 3 percentage points to 2 percentage points? You do not have to calculate your answer.**  
+Your answer here.
+
+**What would the sample size be if we wanted the width of our interval to be 6 percentage points?**  
+Your answer here.
+
+```{r, include=FALSE, echo=FALSE}
+link_to_solutions <- "https://docs.google.com/presentation/d/1roSMj1AcDzu7qr8JSs95dU41JIwoqmxTASn83y4o-0A/edit#slide=id.g472de4f86b_0_26"
+```
