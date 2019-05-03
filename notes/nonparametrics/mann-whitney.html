@@ -191,9 +191,10 @@ $(document).ready(function () {
 <p><em>This test is called the “Wilcoxon Rank-Sum Test” in lecture, but I prefer Mann-Whitney because using the name makes it more distinguishable (at least for me) than the “Wilcoxon Rank-Sign Test”.</em></p>
 <p>The Mann-Whitney test is the nonparametric cousin of the two sample t-test. That means in order to use the Mann-Whitney test, we don’t care for any distributional assumptions on our data. We still care, of course, about the randomness of our dataset!</p>
 <p>They hypotheses we are interested in testing are <span class="math display">\[
-H_0: \mu_1 = \mu_2 
-\text{  versus  }
-H_1: \mu_1 \neq \mu_2
+H_0: \text{The distributions of the two groups are the same.}
+\]</span> versus</p>
+<p><span class="math display">\[
+H_1: \text{The distributions of the two groups are NOT the same.}
 \]</span></p>
 <div id="deriving-our-question" class="section level2">
 <h2>Deriving our question</h2>
@@ -202,22 +203,22 @@ H_1: \mu_1 \neq \mu_2
 library(dplyr)
 modcloth_sample &lt;- read_csv(&quot;data/modcloth_sample.csv&quot;)[,-1] %&gt;% select(-user_name)
 head(modcloth_sample, 10)</code></pre>
-<pre><code>## # A tibble: 10 x 17
-##    item_id waist  size quality `cup size`  hips `bra size` category  bust
-##      &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;      &lt;dbl&gt;      &lt;dbl&gt; &lt;chr&gt;    &lt;dbl&gt;
-##  1  722362    NA    14       3 c             NA         36 bottoms     NA
-##  2  630114    NA     4       3 b             36         34 tops        NA
-##  3  520958    NA     4       5 c             36         34 tops        NA
-##  4  155572    NA     8       5 ddd/f         NA         38 wedding     NA
-##  5  539980    NA     4       5 b             32         32 tops        NA
-##  6  727560    NA     4       5 a             35         32 bottoms     34
-##  7  699784    NA     1       5 a             30         36 bottoms     20
-##  8  806479    NA     8       5 b             30         34 outerwe…    NA
-##  9  454764    NA    12       4 b             45         38 tops        NA
-## 10  402677    NA     8       4 c             34         36 new         NA
-## # … with 8 more variables: height &lt;chr&gt;, length &lt;chr&gt;, fit &lt;chr&gt;,
-## #   user_id &lt;dbl&gt;, `shoe size` &lt;dbl&gt;, `shoe width` &lt;chr&gt;,
-## #   review_summary &lt;chr&gt;, review_text &lt;chr&gt;</code></pre>
+<pre><code>## # A tibble: 10 x 16
+##    waist  size quality `cup size`  hips `bra size` category  bust height
+##    &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;      &lt;dbl&gt;      &lt;dbl&gt; &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt; 
+##  1    NA    14       3 c             NA         36 bottoms     NA 5ft 3…
+##  2    NA     4       3 b             36         34 tops        NA 5ft 3…
+##  3    NA     4       5 c             36         34 tops        NA 5ft 1…
+##  4    NA     8       5 ddd/f         NA         38 wedding     NA 5ft 5…
+##  5    NA     4       5 b             32         32 tops        NA 5ft 2…
+##  6    NA     4       5 a             35         32 bottoms     34 5ft 3…
+##  7    NA     1       5 a             30         36 bottoms     20 3ft 2…
+##  8    NA     8       5 b             30         34 outerwe…    NA 5ft 5…
+##  9    NA    12       4 b             45         38 tops        NA 5ft 2…
+## 10    NA     8       4 c             34         36 new         NA 5ft 4…
+## # … with 7 more variables: length &lt;chr&gt;, fit &lt;chr&gt;, user_id &lt;dbl&gt;, `shoe
+## #   size` &lt;dbl&gt;, `shoe width` &lt;chr&gt;, review_summary &lt;chr&gt;,
+## #   review_text &lt;chr&gt;</code></pre>
 <p>Here are the counts of clothing fits. We see that most of the clothes sent out fit (wow, that’s nice!) and the next largest group was that the clothing fit was large. However, the group who has a small fit had a count not too far from the large fit.</p>
 <pre class="r"><code>table(modcloth_sample$fit)</code></pre>
 <pre><code>## 
@@ -226,27 +227,30 @@ head(modcloth_sample, 10)</code></pre>
 <p>This leads me to try and understand the clothes that do not fit.</p>
 <pre class="r"><code>not_fit &lt;- modcloth_sample %&gt;% filter(fit != &quot;fit&quot;)
 head(not_fit, 10)</code></pre>
-<pre><code>## # A tibble: 10 x 17
-##    item_id waist  size quality `cup size`  hips `bra size` category  bust
-##      &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;      &lt;dbl&gt;      &lt;dbl&gt; &lt;chr&gt;    &lt;dbl&gt;
-##  1  722362    NA    14       3 c             NA         36 bottoms     NA
-##  2  630114    NA     4       3 b             36         34 tops        NA
-##  3  155572    NA     8       5 ddd/f         NA         38 wedding     NA
-##  4  699784    NA     1       5 a             30         36 bottoms     20
-##  5  402677    NA     8       4 c             34         36 new         NA
-##  6  376359    40    32       4 d             48         40 sale        NA
-##  7  546006    38    20       1 b             44         38 sale        NA
-##  8  752164    27     4       2 b             NA         36 bottoms     NA
-##  9  647235    NA    20       5 b             35         38 tops        NA
-## 10  502359    NA     8       4 a             38         34 tops        NA
-## # … with 8 more variables: height &lt;chr&gt;, length &lt;chr&gt;, fit &lt;chr&gt;,
-## #   user_id &lt;dbl&gt;, `shoe size` &lt;dbl&gt;, `shoe width` &lt;chr&gt;,
-## #   review_summary &lt;chr&gt;, review_text &lt;chr&gt;</code></pre>
+<pre><code>## # A tibble: 10 x 16
+##    waist  size quality `cup size`  hips `bra size` category  bust height
+##    &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;      &lt;dbl&gt;      &lt;dbl&gt; &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt; 
+##  1    NA    14       3 c             NA         36 bottoms     NA 5ft 3…
+##  2    NA     4       3 b             36         34 tops        NA 5ft 3…
+##  3    NA     8       5 ddd/f         NA         38 wedding     NA 5ft 5…
+##  4    NA     1       5 a             30         36 bottoms     20 3ft 2…
+##  5    NA     8       4 c             34         36 new         NA 5ft 4…
+##  6    40    32       4 d             48         40 sale        NA 5ft 9…
+##  7    38    20       1 b             44         38 sale        NA 5ft 8…
+##  8    27     4       2 b             NA         36 bottoms     NA 5ft 7…
+##  9    NA    20       5 b             35         38 tops        NA 5ft 9…
+## 10    NA     8       4 a             38         34 tops        NA 5ft 5…
+## # … with 7 more variables: length &lt;chr&gt;, fit &lt;chr&gt;, user_id &lt;dbl&gt;, `shoe
+## #   size` &lt;dbl&gt;, `shoe width` &lt;chr&gt;, review_summary &lt;chr&gt;,
+## #   review_text &lt;chr&gt;</code></pre>
 <p>While again there are many interesting questions that we may ask of this dataset, let’s study these hypotheses.</p>
 <p><span class="math display">\[
-H_0: \mu_L=\mu_S \text{  versus  } H_1: \mu_L \neq \mu_S
+H_0: \text{The distribution of hip size for &quot;small&quot; clothing fit and the distribution of &quot;large&quot; clothing fit are not the same.}
 \]</span></p>
-<p>where <span class="math inline">\(\mu\)</span> is the mean of the <code>hips</code> column.</p>
+<p>versus</p>
+<p><span class="math display">\[
+H_1: \text{The distribution of hip size for &quot;small&quot; clothing fit and the distribution of &quot;large&quot; clothing fit are not the same.}
+\]</span></p>
 </div>
 <div id="visualizing-our-data" class="section level2">
 <h2>Visualizing our data</h2>

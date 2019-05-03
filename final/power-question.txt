@@ -1,0 +1,56 @@
+https://www.statisticsteacher.org/2017/09/15/what-is-power/
+
+**What is statistical power?**
+It's the probability of rejecting the null hypothesis when, in fact, it is false. It is mathematically defined to be 1-$\beta$, where $\beta$ is the Type II error rate. (The probability of not making a Type II error.) If power is very close to 1, then it is very good at detecting a false null hypothesis.
+
+**How can you increase power?**
+You can increase sample size, the effect size, or increase your $\alpha$ (Type I Error rate).
+
+**It has been long recognized that there are only 2 elephant species: the Asian elephant and the African elephant. However, in recent years, scientists have concluded that African elephants have diverged into two different species. A wonderful scientific duo is driving their ComVee (communications vehicle) throughout Africa doing a documentary on the two African elephant species: the savanna elephants and forest elephants.  By previous research, savanna elephant weights are normally distributed with a mean of 8,000 kg and a standard deviation of 1000kg. They have reason to believe that forest elephants weigh less. We believe that their average weight is at least about 1000 kg less.**.
+
+
+**Write the relevant hypotheses on the curiosity of forest elephant weight**.
+$H_0$: Forest elephants have a mean weight of 8,000 kg.
+$H_1$: Forest elephants have a mean weight of less than 8,000 kg.
+
+
+**How many randomly sampled, independent elephants would need to be safely/ethically measured for your study if you wanted to have $\alpha=0.05$ and $\text{Power}=0.8$?**
+
+Draw out two distributions. We have a set effect size based on our null belief of 8,000 kg and our alternative believe of 5,500 kg. We also have set values for power (0.8) and $\alpha$. We want to calculate $n$ in order to make power and $\alpha$ "line up". That is, if we have a certain sample size, then our distributions will change to allow for our power and $\alpha$ to be of the size we desire. Recall that if you have a larger sample size, your sampling distribution shrinks in variance/standard deviation.
+
+Our null distribution is to the right of our alternative distribution.
+
+We can calculate the quantile corresponding to 20% of power on our normal alternative distribution by using
+
+```{r}
+qnorm(0.8)
+```
+
+and we can calculate the quantile corresponding to a 5% significance level $\alpha$ by using
+
+```{r}
+qnorm(0.05)
+```
+
+Now, we can use our formula to calculated sample size.
+
+$$
+n = \Big(\frac{(Z_{\alpha} + Z_{\beta}) * (\sigma)}{(\mu_{0} - \mu_{1})}\Big)^{2}
+$$
+
+
+> qnorm(0.8)
+[1] 0.8416212
+> qnorm(0.05)
+[1] -1.644854
+
+```{r}
+z_b   <- qnorm(0.8)
+z_a   <- qnorm(0.05)
+sigma <- 1000
+num   <- (abs(z_a) + abs(z_b))*sigma
+denom <- 7000-8000
+(num/denom)^2
+```{r}
+
+This says that we'd only need 7 elephants in our study. (Round up.) Why is this the case? Because the effect size is already so big. If this question was difficult, you had a question like this before (PS 8.1). Try to review that as well.

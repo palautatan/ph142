@@ -478,7 +478,7 @@ $\bigcirc$ `summary()`
 **Figure out the type of test you're going to use based on the problem. Then, carry out the test.**
 
 #### Part (a)
-**We have data on the birth years of US presidents and their first ladies. Here is a random sample of that data.**
+**We have data on the birth years of presidents and their first people. Here is a random sample of that data.**
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 library(tibble)
@@ -536,11 +536,11 @@ ggplot(presidents, aes(x=new_col)) +
 We are interested in testing  
 
 $H_0$: The differences between each president and that president's first person is 0.  
-$H_1$: The difference between each presdient at the president's first person is nonzero.  
+$H_1$: The difference between each presdient at the president's first person is greater than 0.  
 
 **What tests can you use? (Hint: There's more than one, but one will give you better results in this case.)**  
 
-Because we have $n=44$ for each of the groups, assume randomness, and have distributions of similar shapes, we'd opt for a paired t-test. The paired t-test will give you better results than a nonparametric test because we are able to use theoretical distributions as opposed to rankings (which lose information/power).
+Because we have $n=44$ for each of the groups, assume randomness, and have distributions of similar shapes, we'd opt for a one-sided paired t-test. The paired t-test will give you better results than a nonparametric test because we are able to use theoretical distributions as opposed to rankings (which lose information/power).
 
 #### Part (b)
 **On Thursday mornings, an online shopper attempts to buy an item from the Supreme brand website. Say that probability of successfully purchasing an item on a given Thursday is 20%.**
@@ -557,7 +557,13 @@ Assuming all months have 4 Thursdays, then we would expect 0.8 successes per mon
 0.2^3
 ```
 
-**Our shopper believes that it's getting even more difficult to purchase on item off of the Supreme brand website lately. He and 30 of his friends decide to all try to purchase an item. Out of his group of friends and himself, 10 of them are able to purchase an item. Does the shopper have evidence that the probability of purchasing an item on a given Thursday is still 20%?**  
+**What is the probability that the shopper will successfully order 2 items during the span of three Thursdays?**  
+
+```{r}
+choose(3,2)*(0.2)^3*(1-0.2)
+```
+
+**Our shopper believes that it's getting even more difficult to purchase an item off of the Supreme brand website lately. He and 30 of his friends decide to all try to purchase an item. Out of his group of friends and himself, 10 of them are able to purchase an item. Does the shopper have evidence that the probability of purchasing an item on a given Thursday is still 20%?**  
 
 A status-quo belief is that $P(\text{Success})=0.2$. A competing belief is that $P(\text{Success})=10/31$. We want to test the following hypotheses.
 
@@ -737,3 +743,60 @@ This has the same answer as the first problem. Within 3 percentages points is th
 ```{r, include=FALSE, echo=FALSE}
 link_to_solutions <- "https://docs.google.com/presentation/d/1roSMj1AcDzu7qr8JSs95dU41JIwoqmxTASn83y4o-0A/edit#slide=id.g472de4f86b_0_26"
 ```
+
+
+### Problem 11.
+**What is statistical power?**
+It's the probability of rejecting the null hypothesis when, in fact, it is false. It is mathematically defined to be 1-$\beta$, where $\beta$ is the Type II error rate. (The probability of not making a Type II error.) If power is very close to 1, then it is very good at detecting a false null hypothesis.
+
+**How can you increase power?**
+You can increase sample size, the effect size, or increase your $\alpha$ (Type I Error rate).
+
+**It has been long recognized that there are only 2 elephant species: the Asian elephant and the African elephant. However, in recent years, scientists have concluded that African elephants have diverged into two different species. A wonderful scientific duo (and their 3 interesting children Debbie, Eliza, and Donnie) is driving their ComVee (communications vehicle) throughout Africa doing a documentary on the two African elephant species: the savanna elephants and forest elephants.  By previous research, savanna elephant weights are normally distributed with a mean of 8,000 kg and a standard deviation of 1000kg. They have reason to believe that forest elephants weigh less. We believe that their average weight is at least about 1000 kg less**.
+
+
+**Write the relevant hypotheses on the curiosity of forest elephant weight**.
+$H_0$: Forest elephants have a mean weight of 8,000 kg.
+$H_1$: Forest elephants have a mean weight of less than 8,000 kg.
+
+
+**How many randomly sampled, independent elephants would need to be safely/ethically measured for your study if you wanted to have $\alpha=0.05$ and $\text{Power}=0.8$?**
+
+Draw out two distributions. We have a set effect size based on our null belief of 8,000 kg and our alternative believe of 5,500 kg. We also have set values for power (0.8) and $\alpha$. We want to calculate $n$ in order to make power and $\alpha$ "line up". That is, if we have a certain sample size, then our distributions will change to allow for our power and $\alpha$ to be of the size we desire. Recall that if you have a larger sample size, your sampling distribution shrinks in variance/standard deviation.
+
+Our null distribution is to the right of our alternative distribution.
+
+We can calculate the quantile corresponding to 20% of power on our normal alternative distribution by using
+
+```{r}
+qnorm(0.8)
+```
+
+and we can calculate the quantile corresponding to a 5% significance level $\alpha$ by using
+
+```{r}
+qnorm(0.05)
+```
+
+Now, we can use our formula to calculated sample size.
+
+$$
+n = \Big(\frac{(Z_{\alpha} + Z_{\beta}) * (\sigma)}{(\mu_{0} - \mu_{1})}\Big)^{2}
+$$
+
+
+```{r}
+z_b   <- qnorm(0.8)
+z_a   <- qnorm(0.05)
+sigma <- 1000
+num   <- (abs(z_a) + abs(z_b))*sigma
+denom <- 7000-8000
+(num/denom)^2
+```
+
+This says that we'd only need 7 elephants in our study. (Round up.) Why is this the case? Because the effect size is already so big. If this question was difficult, you had a question like this before (PS 8.1). Try to review that as well.
+
+```{r, include=FALSE}
+"https://www.statisticsteacher.org/2017/09/15/what-is-power/"
+```
+

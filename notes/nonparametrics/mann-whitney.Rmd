@@ -9,9 +9,12 @@ The Mann-Whitney test is the nonparametric cousin of the two sample t-test. That
 
 They hypotheses we are interested in testing are
 $$
-H_0: \mu_1 = \mu_2 
-\text{  versus  }
-H_1: \mu_1 \neq \mu_2
+H_0: \text{The distributions of the two groups are the same.}
+$$
+versus
+
+$$
+H_1: \text{The distributions of the two groups are NOT the same.}
 $$
 
 ## Deriving our question
@@ -40,10 +43,15 @@ head(not_fit, 10)
 While again there are many interesting questions that we may ask of this dataset, let's study these hypotheses.  
 
 $$
-H_0: \mu_L=\mu_S \text{  versus  } H_1: \mu_L \neq \mu_S
+H_0: \text{The distribution of hip size for "small" clothing fit and the distribution of "large" clothing fit are not the same.}
 $$
 
-where $\mu$ is the mean of the `hips` column.
+versus
+
+$$
+H_1: \text{The distribution of hip size for "small" clothing fit and the distribution of "large" clothing fit are not the same.}
+$$
+
 
 ## Visualizing our data
 ```{r histograms, message=FALSE, warning=FALSE}

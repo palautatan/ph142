@@ -10,6 +10,7 @@ MWF 8:00-9:00, 245 Li Ka Shing
 Before we get deep into the class, here are a few helper documents.  
 <a href="notes/formatting/formatting.html">i. Homework Formatting</a>  
 <a href="notes/knitting/knitting-issues.html"> ii. Knitting Issues</a>  
+<a href="notes/gradescope-tutorial/gradescope-tutorial.pdf">iii. Turning in your assignments on Gradescope</a>
 
 #### Part 1 | Exploring data
 In Part 1, we learn how to summarize, manipulate, and and visualize data. We also learn about how studies are designed so that they may collect representative data.  
