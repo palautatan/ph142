@@ -19,7 +19,7 @@ In Part 1, we learn how to summarize, manipulate, and and visualize data. We als
 <a href="notes/causal/causal.pdf">iii. Causal inference</a>  
 
 #### Part 2 | Probabilistic foundations
-<a href="https://docs.google.com/presentation/d/19UhUGQ52IAdhbgg2oLS8q5HJMnHYdrf8zkuF8CzcNUk/edit?usp=sharing">iv. Monty Hall Problem</a>
+<a href="https://docs.google.com/presentation/d/19UhUGQ52IAdhbgg2oLS8q5HJMnHYdrf8zkuF8CzcNUk/edit?usp=sharing">iv. Monty Hall Problem</a>  
 <a href="notes/probability/probability-intro.pdf">v. Probability introduction</a>  
 <a href="notes/distributions/distributions.pdf">vi. All distributions</a>  
 
