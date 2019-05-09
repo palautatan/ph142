@@ -62,7 +62,7 @@ If you need more information about topics, read these too. I wrote them to give 
 <a href="notes/rappers/code/02-rappers-regression.html">ii. Regression with rappers</a>  
 <a href="notes/rappers/code/03-categorical-data.html">ii. Rappers in categories</a>  
 
-## Past Material Material
+## Past Material
 
 ### Fall 2018
 Professor Corinne Riddell  
