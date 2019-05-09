@@ -634,7 +634,7 @@ Nominal and ordinal.
 Continuous.
 
 **- True or false. If my null hypothesized value of $\mu$ is not within my confidence interval, then my p-value is less than my significance level $\alpha$.**  
-False. If the null value is *within* our confidence interval, then p-value is less than significance level.
+True. If $\mu_0$ is not in our CI, then we are rejecting our null hypothesis. So, our p-value would be less $\alpha$ because when our p-value is small, we reject our null.
 
 **- What do we always expect of our data in statistical inference?**  
 To be pulled randomly.  
