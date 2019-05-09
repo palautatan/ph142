@@ -19,18 +19,19 @@ In Part 1, we learn how to summarize, manipulate, and and visualize data. We als
 <a href="notes/causal/causal.pdf">iii. Causal inference</a>  
 
 #### Part 2 | Probabilistic foundations
-<a href="notes/probability/probability-intro.pdf">iv. Probability introduction</a>  
-<a href="notes/distributions/distributions.pdf">v. All distributions</a>  
+<a href="https://docs.google.com/presentation/d/19UhUGQ52IAdhbgg2oLS8q5HJMnHYdrf8zkuF8CzcNUk/edit?usp=sharing">iv. Monty Hall Problem</a>
+<a href="notes/probability/probability-intro.pdf">v. Probability introduction</a>  
+<a href="notes/distributions/distributions.pdf">vi. All distributions</a>  
 
 #### Part 3.1 | Parametric testing  
-vi. CI's and the z-test <a href="notes/testing/intro-to-testing.pdf">slides</a> and example <a href="notes/testing/ci-pvalue-examples.pdf">set 1</a>  and <a href="notes/testing/ci-and-z.pdf">set 2</a>  
-vii. Bob the Builder (One sample t-test) <a href="notes/testing/bob-the-builder.pdf">prompt and solutions (pdf)</a> and <a href="notes/testing/bob-the-builder.html">solutions (html)</a>  
+vii. CI's and the z-test <a href="notes/testing/intro-to-testing.pdf">slides</a> and example <a href="notes/testing/ci-pvalue-examples.pdf">set 1</a>  and <a href="notes/testing/ci-and-z.pdf">set 2</a>  
+viii. Bob the Builder (One sample t-test) <a href="notes/testing/bob-the-builder.pdf">prompt and solutions (pdf)</a> and <a href="notes/testing/bob-the-builder.html">solutions (html)</a>  
 
 #### Part 3.2 | Nonparametric testing
-viii. Mann-Whitney (Rank Sum) <a href="notes/nonparametrics/mann-whitney.html">code walkthrough</a> (Clothing fit)   
-ix. Wilcoxon Rank Sign Test <a href="notes/nonparametrics/rank-sign.html">code walkthrough</a> (Exam scores)  
-x. Permutation test <a href="notes/nonparametrics/permutation.html">tutorial</a> (Theoretical examples and Spotify data)  
-xi. Bootstrap confidence intervals <a href="notes/nonparametrics/bootstrap.html">tutorial</a> (Mean versus median)
+ix. Mann-Whitney (Rank Sum) <a href="notes/nonparametrics/mann-whitney.html">code walkthrough</a> (Clothing fit)   
+x. Wilcoxon Rank Sign Test <a href="notes/nonparametrics/rank-sign.html">code walkthrough</a> (Exam scores)  
+xi. Permutation test <a href="notes/nonparametrics/permutation.html">tutorial</a> (Theoretical examples and Spotify data)  
+xii. Bootstrap confidence intervals <a href="notes/nonparametrics/bootstrap.html">tutorial</a> (Mean versus median)
 
 ## Lab Demos
 <a href="lab-demos/lab-1/lab-1.html">i. Lab 1, Crash course intro to R</a>  
